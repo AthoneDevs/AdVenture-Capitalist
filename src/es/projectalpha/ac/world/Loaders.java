@@ -20,8 +20,6 @@ import es.projectalpha.ac.org.jnbt.Tag;
 
 public class Loaders {
 
-	//Library-API from p000ison (https://bukkit.org/members/p000ison.84488/)
-
 	public static void putSchematic(Player p, String folder, String name){
 		try {
 			Schematic schematic = loadSchematic(new File(folder, name));
@@ -30,6 +28,8 @@ public class Loaders {
 			//TODO: Error
 		}
 	}
+
+	//Library-API from p000ison (https://bukkit.org/members/p000ison.84488/)
 
 	@SuppressWarnings("deprecation")
 	public static void pasteSchematic(World world, Location loc, Schematic schematic){
