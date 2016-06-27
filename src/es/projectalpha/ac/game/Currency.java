@@ -49,9 +49,31 @@ public class Currency {
 	}
 
 	public static String simpleCurrency(Player p){
-
-		//TODO: Double to String (Number + Amount)
-		//Amount = Million, Billion, etc.
+double g = 1000000;
+		
+		if(getCurrency(p) == g){
+			return NumberUtils.getMillions(getCurrency(p));
+		}
+		
+		if(getCurrency(p) > g){
+			return NumberUtils.getMillions(getCurrency(p)) + "s";
+		}
+		
+		if(getCurrency(p) == g*1000){
+			return NumberUtils.getBillions(getCurrency(p));
+		}
+		
+		if(getCurrency(p) > g*1000){
+			return NumberUtils.getBillions(getCurrency(p)) + "s";
+		}
+		
+		if(getCurrency(p) == g*100000){
+			return NumberUtils.getBillions(getCurrency(p));
+		}
+		
+		if(getCurrency(p) > g*100000){
+			return NumberUtils.getBillions(getCurrency(p)) + "s";
+		}
 
 		return String.valueOf(getCurrency(p));
 	}
