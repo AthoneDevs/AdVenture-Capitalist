@@ -9,7 +9,6 @@ import java.util.zip.GZIPInputStream;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
 
 import es.projectalpha.ac.org.jnbt.ByteArrayTag;
 import es.projectalpha.ac.org.jnbt.CompoundTag;
@@ -20,10 +19,10 @@ import es.projectalpha.ac.org.jnbt.Tag;
 
 public class Loaders {
 
-	public static void putSchematic(Player p, String folder, String name){
+	public static void putSchematic(Location l, String folder, String name){
 		try {
 			Schematic schematic = loadSchematic(new File(folder, name));
-			pasteSchematic(p.getWorld(), p.getLocation(), schematic);
+			pasteSchematic(l.getWorld(), l, schematic);
 		} catch (IOException e) {
 			//TODO: Error
 		}

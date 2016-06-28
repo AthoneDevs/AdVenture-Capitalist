@@ -13,21 +13,21 @@ public class NumberUtils {
 	public static double getTrillions(String amount){
 		return getBillions(amount) * 1000;
 	}
-	
+
 	public static String getMillions(double amount){
-		double money = amount/100000;
-		return String.valueOf(money) + " Million";	
+		double money = amount / 100000;
+		return String.valueOf(money) + " Million";
 	}
-	
+
 	public static String getBillions(double amount){
 		double money = getBillions(getMillions(amount)) / 1000;
 		return String.valueOf(money) + " Billion";
-		
+
 	}
-	
+
 	public static String getTrillions(double amount){
 		double money = getTrillions(getBillions(amount)) / 1000;
 		return String.valueOf(money) + " Trillion";
-		
+
 	}
 }

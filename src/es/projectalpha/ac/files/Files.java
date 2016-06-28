@@ -12,8 +12,11 @@ import es.projectalpha.ac.utils.Messages;
 
 public class Files {
 
-	public static File filePlayers = new File("plugins/AC", "players.yml");
+	public static File filePlayers = new File("plugins/AC/Data", "players.yml");
 	public static YamlConfiguration players = YamlConfiguration.loadConfiguration(filePlayers);
+
+	public static File fileLocs = new File("plugins/AC/Data", "players.yml");
+	public static YamlConfiguration locs = YamlConfiguration.loadConfiguration(fileLocs);
 
 	public static File fileSchema = new File("plugins/AC/Schematics");
 	public static YamlConfiguration schema = YamlConfiguration.loadConfiguration(fileSchema);
@@ -25,6 +28,10 @@ public class Files {
 		if (!fileSchema.exists()) {
 			fileSchema.mkdir();
 		}
+		if (!fileLocs.exists()) {
+			fileLocs.mkdir();
+			locs.set("num", 0);
+		}
 		saveFiles();
 	}
 
@@ -34,6 +41,8 @@ public class Files {
 			players.load(filePlayers);
 			schema.save(fileSchema);
 			schema.load(fileSchema);
+			locs.save(fileLocs);
+			locs.load(fileLocs);
 		} catch (IOException | InvalidConfigurationException e) {
 			Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.RED + "There are some errors on: ");
 			e.printStackTrace();

@@ -3,6 +3,7 @@ package es.projectalpha.ac.cmd;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,6 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import es.projectalpha.ac.AC;
+import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.utils.Messages;
 import es.projectalpha.ac.world.Loaders;
 
@@ -37,11 +39,62 @@ public class Help implements CommandExecutor {
 			}
 			if (args.length == 1) {
 				if (args[0].equalsIgnoreCase("play")) {
-					for (World w : Bukkit.getWorlds()) {
-						if (w.getName().equalsIgnoreCase("ac")) {
-							//TODO: Last Location
-							p.teleport(new Location(w, 0, 146, 0));
-							Loaders.putSchematic(p, "plugins/AC/Schematics", "build.schematic");
+					for (World world : Bukkit.getWorlds()) {
+						if (world.getName().equalsIgnoreCase("ac")) {
+							//TODO: Messages
+							if (Files.players.contains(p.getName())) {
+								int id = Files.players.getInt(p.getName());
+
+								double x = Files.locs.getDouble("id" + id + ".x");
+								double y = Files.locs.getDouble("id" + id + ".y");
+								double z = Files.locs.getDouble("id" + id + ".z");
+
+								Location l = new Location(world, x, y, z);
+
+								p.teleport(l.add(0, 2, 0));
+
+								return true;
+							}
+							int id = Files.locs.getInt("num");
+
+							if (id > 0) {
+								double x = Files.locs.getDouble("id" + id + ".x");
+								double y = Files.locs.getDouble("id" + id + ".y");
+								double z = Files.locs.getDouble("id" + id + ".z");
+
+								Location l = new Location(world, x, y, z);
+
+								Location loc = l.clone().add(100, 0, 0);
+
+								if (l.getWorld().getBlockAt(l.add(100, 0, 0)) != null || l.getWorld().getBlockAt(l.add(100, 0, 0)).getType() != Material.AIR) {
+									loc = l.clone().add(100, y, 100);
+								}
+
+								id++;
+
+								Files.locs.set("num", id);
+
+								Files.locs.set("id" + id + ".x", loc.getX());
+								Files.locs.set("id" + id + ".y", loc.getY());
+								Files.locs.set("id" + id + ".z", loc.getZ());
+								Files.saveFiles();
+
+								Loaders.putSchematic(loc, "plugins/AC/Schematics", "build.schematic");
+								p.teleport(loc.add(0, 2, 0));
+							} else {
+
+								id++;
+
+								Files.locs.set("num", id);
+
+								Files.locs.set("id" + id + ".x", p.getLocation().getX());
+								Files.locs.set("id" + id + ".y", p.getLocation().getY());
+								Files.locs.set("id" + id + ".z", p.getLocation().getZ());
+								Files.saveFiles();
+
+								Loaders.putSchematic(p.getLocation(), "plugins/AC/Schematics", "build.schematic");
+								p.teleport(p.getLocation().add(0, 2, 0));
+							}
 						}
 					}
 				}
