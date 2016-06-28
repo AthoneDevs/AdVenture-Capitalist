@@ -2,6 +2,7 @@ package es.projectalpha.ac;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -9,6 +10,7 @@ import es.projectalpha.ac.cmd.Help;
 import es.projectalpha.ac.events.BuildInteract;
 import es.projectalpha.ac.events.ProtectWorld;
 import es.projectalpha.ac.files.Files;
+import es.projectalpha.ac.game.Currency;
 import es.projectalpha.ac.game.Game;
 import es.projectalpha.ac.utils.Messages;
 import es.projectalpha.ac.utils.ServerVersion;
@@ -65,6 +67,14 @@ public class AC extends JavaPlugin {
 
 		Bukkit.getConsoleSender().sendMessage(" ");
 		Bukkit.getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "========================");
+	}
+
+	public void onDisable(){
+
+		for (Player p : Game.playing) {
+			Currency.saveCurrency(p);
+		}
+
 	}
 
 	private void regEvents(){

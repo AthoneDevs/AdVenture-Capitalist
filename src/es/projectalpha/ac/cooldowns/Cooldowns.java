@@ -81,7 +81,7 @@ public class Cooldowns {
 
 		for (Player p : Game.playing) {
 			for (Location l : Game.progressBar) {
-				HologramAPI holo = new HologramAPI(Messages.getXPBMsg(p, l));
+				HologramAPI holo = new HologramAPI(Messages.getProgress(p, l));
 				holo.show(p, l);
 				holos.add(holo);
 			}

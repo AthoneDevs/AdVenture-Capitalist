@@ -19,6 +19,7 @@ import es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI.RadioSongPlayer;
 import es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI.Song;
 import es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI.SongPlayer;
 import es.projectalpha.ac.files.Files;
+import es.projectalpha.ac.game.Currency;
 import es.projectalpha.ac.utils.Messages;
 import es.projectalpha.ac.world.Loaders;
 
@@ -56,7 +57,7 @@ public class Help implements CommandExecutor {
 							sp.setPlaying(true);
 
 							if (Files.players.contains(p.getName())) {
-								int id = Files.players.getInt(p.getName());
+								int id = Files.players.getInt(p.getName() + ".id");
 
 								double x = Files.locs.getDouble("id" + id + ".x");
 								double y = Files.locs.getDouble("id" + id + ".y");
@@ -65,6 +66,8 @@ public class Help implements CommandExecutor {
 								Location l = new Location(world, x, y, z);
 
 								p.teleport(l.add(0, 2, 0));
+
+								Currency.loadCurrency(p);
 
 								return true;
 							}

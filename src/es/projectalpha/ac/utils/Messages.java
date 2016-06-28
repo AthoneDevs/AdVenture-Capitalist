@@ -9,8 +9,10 @@ import es.projectalpha.ac.game.Game;
 
 public class Messages {
 
+	//Game
 	public static String prefix = ChatColor.GRAY + " || " + ChatColor.GREEN + "AC" + ChatColor.GRAY + " || ";
 
+	//Shops
 	public static String lemonade = "Lemonade Stand";
 	public static String newspaper = "Newspaper";
 	public static String car = "Car Wash";
@@ -22,7 +24,20 @@ public class Messages {
 	public static String bank = "Bank";
 	public static String oil = "Oil Company";
 
-	public static String getXPBMsg(Player p, Location l){
+	//Manager Names
+	public static String lemonadeManager = "Cabe Johnson";
+	public static String newspaperManager = "Perry Black";
+	public static String carManager = "W.W. Heisenbird";
+	public static String pizzaManager = "Mama Sean";
+	public static String donutManager = "SrJonh";
+	public static String boatManager = "Forest Trump";
+	public static String hockeyManager = "Dawn Cheri";
+	public static String movieManager = "Stefani Speilburger";
+	public static String bankManager = "Cadox8";
+	public static String oilManager = "Wikijito7";
+
+	//Progress Bar
+	public static String getProgress(Player p, Location l){
 		int time = 0;
 		String name = Game.shopLocation.get(l);
 

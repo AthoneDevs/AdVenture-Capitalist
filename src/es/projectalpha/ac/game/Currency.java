@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.bukkit.entity.Player;
 
+import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.utils.NumberUtils;
 
 public class Currency {
@@ -19,6 +20,15 @@ public class Currency {
 
 	public static void removeCurrency(Player p, double amount){
 		runningCurrency.put(p, parseCurrency(getCurrency(p) - amount));
+	}
+
+	public static void saveCurrency(Player p){
+		Files.players.set(p.getName() + ".money", getCurrency(p));
+		Files.saveFiles();
+	}
+
+	public static void loadCurrency(Player p){
+		runningCurrency.put(p, parseCurrency(Files.players.getDouble(p.getName() + ".money")));
 	}
 
 	public static double getCurrency(Player p){

@@ -8,6 +8,9 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
+import es.projectalpha.ac.managers.ManagerCore;
+import es.projectalpha.ac.utils.ShopRewards;
+
 public class Game {
 
 	public static ArrayList<Player> playing = new ArrayList<Player>();
@@ -17,6 +20,15 @@ public class Game {
 	public static void startTimer(Plugin plugin){
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 			public void run(){
+
+				//Managers
+
+				for (Player p : ManagerCore.lemonade) {
+					Currency.addCurrency(p, ShopRewards.getLimonade());
+				}
+				for (Player p : ManagerCore.news) {
+					Currency.addCurrency(p, ShopRewards.getNews());
+				}
 
 			}
 		}, 0L, 20L);
