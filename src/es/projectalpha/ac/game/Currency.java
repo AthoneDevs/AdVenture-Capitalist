@@ -14,11 +14,11 @@ public class Currency {
 	public static HashMap<Player, String> runningCurrency = new HashMap<Player, String>();
 
 	public static void addCurrency(Player p, double amount){
-		//runningCurrency.put(p, changeCurrency(p) + amount);
+		runningCurrency.put(p, parseCurrency(getCurrency(p) + amount));
 	}
 
 	public static void removeCurrency(Player p, double amount){
-		//runningCurrency.put(p, changeCurrency(p) - amount);
+		runningCurrency.put(p, parseCurrency(getCurrency(p) - amount));
 	}
 
 	public static double getCurrency(Player p){
@@ -76,5 +76,35 @@ public class Currency {
 		}
 
 		return String.valueOf(getCurrency(p));
+	}
+
+	public static String parseCurrency(double currency){
+		double g = 1000000;
+
+		if (currency == g) {
+			return NumberUtils.getMillions(currency);
+		}
+
+		if (currency > g) {
+			return NumberUtils.getMillions(currency) + "s";
+		}
+
+		if (currency == g * 1000) {
+			return NumberUtils.getBillions(currency);
+		}
+
+		if (currency > g * 1000) {
+			return NumberUtils.getBillions(currency) + "s";
+		}
+
+		if (currency == g * 100000) {
+			return NumberUtils.getTrillions(currency);
+		}
+
+		if (currency > g * 100000) {
+			return NumberUtils.getTrillions(currency) + "s";
+		}
+
+		return String.valueOf(currency);
 	}
 }
