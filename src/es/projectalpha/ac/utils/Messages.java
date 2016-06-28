@@ -11,6 +11,17 @@ public class Messages {
 
 	public static String prefix = ChatColor.GRAY + " || " + ChatColor.GREEN + "AC" + ChatColor.GRAY + " || ";
 
+	public static String lemonade = "Lemonade Stand";
+	public static String newspaper = "Newspaper";
+	public static String car = "Car Wash";
+	public static String pizza = "Pizza Delivery";
+	public static String donut = "Donut Shop";
+	public static String boat = "Shrimp Boat";
+	public static String hockey = "Hockey Team";
+	public static String movie = "Movie Studio";
+	public static String bank = "Bank";
+	public static String oil = "Oil Company";
+
 	public static String getXPBMsg(Player p, Location l){
 		int time = 0;
 		String name = Game.shopLocation.get(l);

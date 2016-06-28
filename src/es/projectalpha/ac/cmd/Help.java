@@ -28,7 +28,7 @@ public class Help implements CommandExecutor {
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 		final Player p;
-		if (cmd.getName().equalsIgnoreCase("lom") && ((sender instanceof Player))) {
+		if (cmd.getName().equalsIgnoreCase("ac") && ((sender instanceof Player))) {
 			p = (Player) sender;
 
 			if (args.length == 0) {
