@@ -21,13 +21,13 @@ public class AC extends JavaPlugin {
 		Bukkit.getConsoleSender().sendMessage(" ");
 
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Checking Server Version. . .");
-		if (!ServerVersion.isMC110() || !ServerVersion.isMC19()) {
+		if (!ServerVersion.isMC110() && !ServerVersion.isMC19()) {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Please, update your server to 1.9.X or 1.10.X to use this plugin");
 			Bukkit.getServer().getPluginManager().disablePlugin(this);
 			return;
 		}
 		if (ServerVersion.isMC18()) {
-			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Please, update your server to 1.9.X or 1.10.X to use this plugin");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Please, update your server to 1.9.X or 1.10.X to use this plugin, 1.8.X is not supported");
 			Bukkit.getServer().getPluginManager().disablePlugin(this);
 			return;
 		}

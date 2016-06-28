@@ -15,22 +15,22 @@ public class Files {
 	public static File filePlayers = new File("plugins/AC/Data", "players.yml");
 	public static YamlConfiguration players = YamlConfiguration.loadConfiguration(filePlayers);
 
-	public static File fileLocs = new File("plugins/AC/Data", "players.yml");
+	public static File fileLocs = new File("plugins/AC/Data", "locs.yml");
 	public static YamlConfiguration locs = YamlConfiguration.loadConfiguration(fileLocs);
 
-	public static File fileSchema = new File("plugins/AC/Schematics");
+	public static File fileSchema = new File("plugins/AC/Schematics", "delete.schematic");
 	public static YamlConfiguration schema = YamlConfiguration.loadConfiguration(fileSchema);
 
 	public static void setupFiles(){
 		if (!filePlayers.exists()) {
 			filePlayers.mkdir();
 		}
-		if (!fileSchema.exists()) {
-			fileSchema.mkdir();
-		}
 		if (!fileLocs.exists()) {
 			fileLocs.mkdir();
 			locs.set("num", 0);
+		}
+		if (!fileSchema.exists()) {
+			fileSchema.mkdir();
 		}
 		saveFiles();
 	}

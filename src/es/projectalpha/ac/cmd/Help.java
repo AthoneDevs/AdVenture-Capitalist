@@ -11,6 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import es.projectalpha.ac.AC;
+import es.projectalpha.ac.api.TitleAPI;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.utils.Messages;
 import es.projectalpha.ac.world.Loaders;
@@ -56,6 +57,8 @@ public class Help implements CommandExecutor {
 								return true;
 							}
 							int id = Files.locs.getInt("num");
+
+							TitleAPI.sendTitle(p, 0, 5, 0, ChatColor.RED + "Have Fun :D", "");
 
 							if (id > 0) {
 								double x = Files.locs.getDouble("id" + id + ".x");
