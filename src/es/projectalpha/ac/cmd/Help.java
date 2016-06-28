@@ -1,5 +1,7 @@
 package es.projectalpha.ac.cmd;
 
+import java.io.File;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -12,6 +14,10 @@ import org.bukkit.entity.Player;
 
 import es.projectalpha.ac.AC;
 import es.projectalpha.ac.api.TitleAPI;
+import es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI.NBSDecoder;
+import es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI.RadioSongPlayer;
+import es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI.Song;
+import es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI.SongPlayer;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.utils.Messages;
 import es.projectalpha.ac.world.Loaders;
@@ -43,6 +49,12 @@ public class Help implements CommandExecutor {
 					for (World world : Bukkit.getWorlds()) {
 						if (world.getName().equalsIgnoreCase("ac")) {
 							//TODO: Messages
+
+							Song song = NBSDecoder.parse(new File("/plugins/AC/ac.nbs"));
+							SongPlayer sp = new RadioSongPlayer(song);
+							sp.addPlayer(p);
+							sp.setPlaying(true);
+
 							if (Files.players.contains(p.getName())) {
 								int id = Files.players.getInt(p.getName());
 

@@ -16,9 +16,13 @@ import es.projectalpha.ac.world.Generator;
 
 public class AC extends JavaPlugin {
 
+	private static AC plugin;
+
 	public void onEnable(){
 		Bukkit.getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "========================");
 		Bukkit.getConsoleSender().sendMessage(" ");
+
+		plugin = this;
 
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Checking Server Version. . .");
 		if (!ServerVersion.isMC110() && !ServerVersion.isMC19()) {
@@ -70,6 +74,10 @@ public class AC extends JavaPlugin {
 
 	private void regCMDs(){
 		getCommand("ac").setExecutor(new Help(this));
+	}
+
+	public static AC getPlugin(){
+		return plugin;
 	}
 
 	//For Multiverse or Bukkit Settings
