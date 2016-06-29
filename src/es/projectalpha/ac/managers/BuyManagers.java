@@ -3,41 +3,22 @@ package es.projectalpha.ac.managers;
 import org.bukkit.entity.Player;
 
 import es.projectalpha.ac.game.Currency;
+import es.projectalpha.ac.utils.Messages;
 
 public class BuyManagers {
 
 	public static void buyManager(Player p, String manager){
-		if (hasManager(p, manager)) {
+		if (ManagerCore.hasManager(p, manager)) {
+			p.sendMessage(Messages.hasManager);
+			return;
+		}
+
+		if (Currency.getCurrency(p) <= ManagersPrice.getPrice(manager)) {
 			//TODO: Messages
 			return;
 		}
 
-		int price = 0; //TODO: Manager Price
-
-		if (Currency.getCurrency(p) <= price) {
-			//TODO: Messages
-			return;
-		}
-
-		Currency.removeCurrency(p, price);
+		Currency.removeCurrency(p, ManagersPrice.getPrice(manager));
 		//TODO: Messages
-	}
-
-	public static boolean hasManager(Player p, String manager){
-		switch (manager.toLowerCase()) {
-		case "lemonade":
-			if (ManagerCore.lemonade.contains(p)) {
-				return true;
-			}
-			return false;
-		case "news":
-			if (ManagerCore.news.contains(p)) {
-				return true;
-			}
-			return false;
-
-		default:
-			return false;
-		}
 	}
 }

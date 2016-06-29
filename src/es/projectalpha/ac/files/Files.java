@@ -15,6 +15,9 @@ public class Files {
 	public static File filePlayers = new File("plugins/AC/Data", "players.yml");
 	public static YamlConfiguration players = YamlConfiguration.loadConfiguration(filePlayers);
 
+	public static File fileAchie = new File("plugins/AC/Data", "achievemetns.yml");
+	public static YamlConfiguration achie = YamlConfiguration.loadConfiguration(fileAchie);
+
 	public static File fileManagers = new File("plugins/AC/Data", "managers.yml");
 	public static YamlConfiguration manager = YamlConfiguration.loadConfiguration(fileManagers);
 
@@ -38,6 +41,9 @@ public class Files {
 		if (!fileSchema.exists()) {
 			fileSchema.mkdir();
 		}
+		if (!fileAchie.exists()) {
+			fileAchie.mkdir();
+		}
 		saveFiles();
 	}
 
@@ -51,6 +57,8 @@ public class Files {
 			locs.load(fileLocs);
 			manager.save(fileManagers);
 			manager.load(fileManagers);
+			achie.save(fileAchie);
+			achie.load(fileAchie);
 		} catch (IOException | InvalidConfigurationException e) {
 			Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.RED + "There are some errors on: ");
 			e.printStackTrace();

@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import es.projectalpha.ac.files.Files;
+import es.projectalpha.ac.utils.Messages;
 
 public class ManagerCore {
 
@@ -28,8 +29,8 @@ public class ManagerCore {
 		manager = WordUtils.capitalizeFully(manager);
 		List<String> playersNames = Files.manager.getStringList(manager);
 
-		if (playersNames.contains(p.getName())) {
-			//TODO: Messages
+		if (hasManager(p, manager)) {
+			p.sendMessage(Messages.hasManager);
 			return;
 		}
 
@@ -43,8 +44,8 @@ public class ManagerCore {
 		manager = WordUtils.capitalizeFully(manager);
 		List<String> playersNames = Files.manager.getStringList(manager);
 
-		if (!playersNames.contains(p.getName())) {
-			//TODO: Messages
+		if (!hasManager(p, manager)) {
+			p.sendMessage(Messages.notHasManager);
 			return;
 		}
 
@@ -52,6 +53,24 @@ public class ManagerCore {
 
 		Files.manager.set(manager, playersNames);
 		Files.saveFiles();
+	}
+
+	public static boolean hasManager(Player p, String manager){
+		switch (manager.toLowerCase()) {
+		case "lemonade":
+			if (ManagerCore.lemonade.contains(p)) {
+				return true;
+			}
+			return false;
+		case "news":
+			if (ManagerCore.news.contains(p)) {
+				return true;
+			}
+			return false;
+
+		default:
+			return false;
+		}
 	}
 
 	public static void loadManagers(){

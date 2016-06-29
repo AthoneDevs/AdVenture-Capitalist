@@ -12,6 +12,7 @@ import es.projectalpha.ac.events.ProtectWorld;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.game.Currency;
 import es.projectalpha.ac.game.Game;
+import es.projectalpha.ac.managers.ManagerCore;
 import es.projectalpha.ac.utils.Messages;
 import es.projectalpha.ac.utils.ServerVersion;
 import es.projectalpha.ac.world.Generator;
@@ -55,6 +56,7 @@ public class AC extends JavaPlugin {
 		Bukkit.getConsoleSender().sendMessage(" ");
 
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Loading Game. . .");
+		ManagerCore.loadManagers();
 		Game.startTimer(this);
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Game Loaded");
 

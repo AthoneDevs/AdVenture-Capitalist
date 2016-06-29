@@ -13,6 +13,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import es.projectalpha.ac.AC;
+import es.projectalpha.ac.achievements.AchievementsCore;
+import es.projectalpha.ac.achievements.AchievementsType;
 import es.projectalpha.ac.api.TitleAPI;
 import es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI.NBSDecoder;
 import es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI.RadioSongPlayer;
@@ -74,6 +76,8 @@ public class Help implements CommandExecutor {
 							int id = Files.locs.getInt("num");
 
 							TitleAPI.sendTitle(p, 0, 5, 0, ChatColor.RED + "Have Fun :D", "");
+
+							AchievementsCore.addAchievement(p, AchievementsType.START);
 
 							if (id > 0) {
 								double x = Files.locs.getDouble("id" + id + ".x");

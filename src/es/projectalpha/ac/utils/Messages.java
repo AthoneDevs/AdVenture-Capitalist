@@ -11,6 +11,9 @@ public class Messages {
 
 	//Game
 	public static String prefix = ChatColor.GRAY + " || " + ChatColor.GREEN + "AC" + ChatColor.GRAY + " || ";
+	public static String hasManager = prefix + ChatColor.RED + "Sorry, but you have already this manager";
+	public static String notHasManager = prefix + ChatColor.RED + "Sorry, but you don't have this manager";
+	public static String noDatabase = prefix + ChatColor.RED + "Sorry, this player is not in the database";
 
 	//Shops
 	public static String lemonade = "Lemonade Stand";
