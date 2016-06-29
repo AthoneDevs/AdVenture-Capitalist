@@ -14,6 +14,8 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 
 import es.projectalpha.ac.AC;
+import es.projectalpha.ac.achievements.AchievementsCore;
+import es.projectalpha.ac.achievements.AchievementsType;
 import es.projectalpha.ac.game.Game;
 
 public class ProtectWorld implements Listener {
@@ -31,6 +33,7 @@ public class ProtectWorld implements Listener {
 
 		if (Game.playing.contains(p)) {
 			e.setCancelled(true);
+			AchievementsCore.addAchievement(p, AchievementsType.BREAK);
 		}
 	}
 

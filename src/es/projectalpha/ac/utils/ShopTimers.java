@@ -9,4 +9,8 @@ public class ShopTimers {
 	public static double newsMaxTime(){
 		return 3;
 	}
+
+	public static double carMaxTime(){
+		return 6;
+	}
 }

@@ -9,4 +9,8 @@ public class ShopRewards {
 	public static double getNews(){
 		return 60;
 	}
+
+	public static double getCar(){
+		return 60;
+	}
 }

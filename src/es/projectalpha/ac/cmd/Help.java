@@ -104,7 +104,6 @@ public class Help implements CommandExecutor {
 								Loaders.putSchematic(loc, "plugins/AC/Schematics", "build.schematic");
 								p.teleport(loc.add(0, 2, 0));
 							} else {
-
 								id++;
 
 								Files.locs.set("num", id);

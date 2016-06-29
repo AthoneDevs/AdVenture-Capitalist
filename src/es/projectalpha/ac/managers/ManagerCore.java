@@ -55,7 +55,7 @@ public class ManagerCore {
 		Files.saveFiles();
 	}
 
-	public static boolean hasManager(Player p, String manager){
+	static boolean hasManager(Player p, String manager){
 		switch (manager.toLowerCase()) {
 		case "lemonade":
 			if (ManagerCore.lemonade.contains(p)) {

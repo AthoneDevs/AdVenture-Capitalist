@@ -2,17 +2,18 @@ package es.projectalpha.ac.world;
 
 import java.util.Random;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
 
 public class Generator extends ChunkGenerator {
 
-	//		world.getBlockAt(new Location(world, 0, 126, 0)).setType(Material.GLASS);
-
 	@SuppressWarnings("deprecation")
 	public byte[][] generateBlockSections(World world, Random random, int chunkX, int chunkZ, BiomeGrid biomeGrid){
 		byte[][] result = new byte[world.getMaxHeight() / 16][];
+
+		world.getBlockAt(new Location(world, 0, 126, 0)).setType(Material.GLASS);
 
 		for (int x = 0; x < 16; x++) {
 			for (int z = 0; z < 16; z++) {

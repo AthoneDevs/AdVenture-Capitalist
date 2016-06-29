@@ -22,12 +22,14 @@ public class Game {
 			public void run(){
 
 				//Managers
-
 				for (Player p : ManagerCore.lemonade) {
 					Currency.addCurrency(p, ShopRewards.getLimonade());
 				}
 				for (Player p : ManagerCore.news) {
 					Currency.addCurrency(p, ShopRewards.getNews());
+				}
+				for (Player p : ManagerCore.car) {
+					Currency.addCurrency(p, ShopRewards.getCar());
 				}
 
 			}
