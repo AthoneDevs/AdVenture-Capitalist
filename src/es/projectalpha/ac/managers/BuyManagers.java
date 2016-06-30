@@ -14,11 +14,11 @@ public class BuyManagers {
 		}
 
 		if (Currency.getCurrency(p) <= ManagersPrice.getPrice(manager)) {
-			//TODO: Messages
+			p.sendMessage(Messages.notEnoughMoney);
 			return;
 		}
 
 		Currency.removeCurrency(p, ManagersPrice.getPrice(manager));
-		//TODO: Messages
+		p.sendMessage(Messages.buyManager);
 	}
 }

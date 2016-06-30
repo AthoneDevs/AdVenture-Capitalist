@@ -58,16 +58,55 @@ public class ManagerCore {
 	static boolean hasManager(Player p, String manager){
 		switch (manager.toLowerCase()) {
 		case "lemonade":
-			if (ManagerCore.lemonade.contains(p)) {
+			if (lemonade.contains(p)) {
 				return true;
 			}
 			return false;
 		case "news":
-			if (ManagerCore.news.contains(p)) {
+			if (news.contains(p)) {
 				return true;
 			}
 			return false;
-
+		case "car":
+			if (car.contains(p)) {
+				return true;
+			}
+			return false;
+		case "pizza":
+			if (pizza.contains(p)) {
+				return true;
+			}
+			return false;
+		case "donut":
+			if (donut.contains(p)) {
+				return true;
+			}
+			return false;
+		case "boat":
+			if (boats.contains(p)) {
+				return true;
+			}
+			return false;
+		case "hockey":
+			if (hockey.contains(p)) {
+				return true;
+			}
+			return false;
+		case "movie":
+			if (movie.contains(p)) {
+				return true;
+			}
+			return false;
+		case "banks":
+			if (banks.contains(p)) {
+				return true;
+			}
+			return false;
+		case "oil":
+			if (oil.contains(p)) {
+				return true;
+			}
+			return false;
 		default:
 			return false;
 		}

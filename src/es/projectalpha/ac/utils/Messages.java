@@ -14,6 +14,8 @@ public class Messages {
 	public static String hasManager = prefix + ChatColor.RED + "Sorry, but you have already this manager";
 	public static String notHasManager = prefix + ChatColor.RED + "Sorry, but you don't have this manager";
 	public static String noDatabase = prefix + ChatColor.RED + "Sorry, this player is not in the database";
+	public static String notEnoughMoney = prefix + ChatColor.RED + "Sorry, but you don't have enough money";
+	public static String buyManager = prefix + ChatColor.GREEN + "You have been bought the manager of " + ChatColor.YELLOW;
 
 	//Shops
 	public static String lemonade = "Lemonade Stand";
