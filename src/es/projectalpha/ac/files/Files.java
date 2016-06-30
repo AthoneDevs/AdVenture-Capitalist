@@ -24,7 +24,7 @@ public class Files {
 	public static File fileLocs = new File("plugins/AC/Data", "locs.yml");
 	public static YamlConfiguration locs = YamlConfiguration.loadConfiguration(fileLocs);
 
-	public static File fileSchema = new File("plugins/AC/Schematics", "delete.schematic");
+	public static File fileSchema = new File("plugins/AC", "Utils");
 	public static YamlConfiguration schema = YamlConfiguration.loadConfiguration(fileSchema);
 
 	public static void setupFiles(){
@@ -39,7 +39,7 @@ public class Files {
 			locs.set("num", 0);
 		}
 		if (!fileSchema.exists()) {
-			fileSchema.mkdir();
+			fileSchema.mkdirs();
 		}
 		if (!fileAchie.exists()) {
 			fileAchie.mkdir();

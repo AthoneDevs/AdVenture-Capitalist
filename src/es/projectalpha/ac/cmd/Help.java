@@ -53,7 +53,7 @@ public class Help implements CommandExecutor {
 						if (world.getName().equalsIgnoreCase("ac")) {
 							//TODO: Messages
 
-							Song song = NBSDecoder.parse(new File("/plugins/AC/ac.nbs"));
+							Song song = NBSDecoder.parse(new File("/plugins/AC/Utils/ac.nbs"));
 							SongPlayer sp = new RadioSongPlayer(song);
 							sp.addPlayer(p);
 							sp.setPlaying(true);
@@ -101,7 +101,7 @@ public class Help implements CommandExecutor {
 								Files.locs.set("id" + id + ".z", loc.getZ());
 								Files.saveFiles();
 
-								Loaders.putSchematic(loc, "plugins/AC/Schematics", "build.schematic");
+								Loaders.putSchematic(loc, "plugins/AC/Utils", "build.schematic");
 								p.teleport(loc.add(0, 2, 0));
 							} else {
 								id++;
@@ -113,7 +113,7 @@ public class Help implements CommandExecutor {
 								Files.locs.set("id" + id + ".z", p.getLocation().getZ());
 								Files.saveFiles();
 
-								Loaders.putSchematic(p.getLocation(), "plugins/AC/Schematics", "build.schematic");
+								Loaders.putSchematic(p.getLocation(), "plugins/AC/Utils", "build.schematic");
 								p.teleport(p.getLocation().add(0, 2, 0));
 							}
 						}

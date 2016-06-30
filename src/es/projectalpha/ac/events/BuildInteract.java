@@ -32,13 +32,13 @@ public class BuildInteract implements Listener {
 				String name = v.getCustomName();
 
 				switch (name) {
-				case "Limonade": //TODO: Villager's name in Messages
-					if (Cooldowns.isCooling(p.getName(), "limonade")) {
-						Cooldowns.coolDurMessage(p, "limonade");
+				case "Lemonade": //TODO: Villager's name in Messages
+					if (Cooldowns.isCooling(p.getName(), "lemonade")) {
+						Cooldowns.coolDurMessage(p, "lemonade");
 						return;
 					}
 					Game.progressBar.add(v.getLocation().add(0, 3, 0));
-					Cooldowns.add(p.getName(), "limonade", 60L, System.currentTimeMillis());
+					Cooldowns.add(p.getName(), "lemonade", 60L, System.currentTimeMillis());
 					break;
 
 				default:

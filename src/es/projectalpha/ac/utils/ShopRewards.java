@@ -2,7 +2,7 @@ package es.projectalpha.ac.utils;
 
 public class ShopRewards {
 
-	public static double getLimonade(){
+	public static double getLemonade(){
 		return 2;
 	}
 

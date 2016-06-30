@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 
 import es.projectalpha.ac.cooldowns.Cooldowns;
 import es.projectalpha.ac.game.Game;
+import es.projectalpha.ac.shops.Shops;
 
 public class Messages {
 
@@ -42,12 +43,12 @@ public class Messages {
 	public static String oilManager = "Wikijito7";
 
 	//Progress Bar
-	public static String getProgress(Player p, Location l){
+	public static String getProgress(Player p, Location l, Shops shop){
 		int time = 0;
 		String name = Game.shopLocation.get(l);
 
-		if (ShopTimers.limonadeMaxTime() >= 100) {
-			time = (int) ((Cooldowns.getRemaining(p.getName(), name) * 100) / ShopTimers.limonadeMaxTime());
+		if (shop.getTimer() >= 100) {
+			time = (int) ((Cooldowns.getRemaining(p.getName(), name) * 100) / shop.getTimer());
 		} else {
 			time = (int) (Cooldowns.getRemaining(p.getName(), name) * 0.2);
 		}

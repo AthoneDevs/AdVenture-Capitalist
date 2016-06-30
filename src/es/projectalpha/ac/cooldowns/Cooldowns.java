@@ -1,21 +1,16 @@
 package es.projectalpha.ac.cooldowns;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import es.projectalpha.ac.api.HologramAPI;
 import es.projectalpha.ac.game.Currency;
-import es.projectalpha.ac.game.Game;
+import es.projectalpha.ac.shops.ShopsCore;
 import es.projectalpha.ac.utils.Messages;
-import es.projectalpha.ac.utils.ShopRewards;
 
 public class Cooldowns {
 
@@ -68,23 +63,13 @@ public class Cooldowns {
 		Player cPlayer = Bukkit.getPlayer(player);
 		if (player != null) {
 			cPlayer.sendMessage(Messages.prefix + ChatColor.GRAY + "Complete: " + ChatColor.AQUA + WordUtils.capitalizeFully(ability));
-			Currency.addCurrency(Bukkit.getPlayer(player), ShopRewards.getLimonade());
+			Currency.addCurrency(Bukkit.getPlayer(player), ShopsCore.getReward(ability));
 		}
 	}
 
 	public static void handleCooldowns(){
-		List<HologramAPI> holos = new ArrayList<HologramAPI>();
-
 		if (cooldownPlayers.isEmpty()) {
 			return;
-		}
-
-		for (Player p : Game.playing) {
-			for (Location l : Game.progressBar) {
-				HologramAPI holo = new HologramAPI(Messages.getProgress(p, l));
-				holo.show(p, l);
-				holos.add(holo);
-			}
 		}
 
 		for (Iterator<String> it = cooldownPlayers.keySet().iterator(); it.hasNext();) {
@@ -95,9 +80,6 @@ public class Cooldowns {
 					removeCooldown(key, name);
 				}
 			}
-		}
-		for (HologramAPI h : holos) {
-			h.destroy();
 		}
 	}
 }

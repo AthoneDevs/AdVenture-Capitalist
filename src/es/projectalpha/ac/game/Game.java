@@ -11,7 +11,7 @@ import org.bukkit.plugin.Plugin;
 import es.projectalpha.ac.api.HologramAPI;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.managers.ManagerCore;
-import es.projectalpha.ac.utils.ShopRewards;
+import es.projectalpha.ac.shops.Shops;
 
 public class Game {
 
@@ -43,13 +43,13 @@ public class Game {
 
 				//Managers
 				for (Player p : ManagerCore.lemonade) {
-					Currency.addCurrency(p, ShopRewards.getLimonade());
+					Currency.addCurrency(p, Shops.LEMONADE.getReward());
 				}
 				for (Player p : ManagerCore.news) {
-					Currency.addCurrency(p, ShopRewards.getNews());
+					Currency.addCurrency(p, Shops.NEWS.getReward());
 				}
 				for (Player p : ManagerCore.car) {
-					Currency.addCurrency(p, ShopRewards.getCar());
+					Currency.addCurrency(p, Shops.CAR.getReward());
 				}
 
 			}
