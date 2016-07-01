@@ -1,5 +1,7 @@
 package es.projectalpha.ac.api;
 
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
@@ -50,6 +52,42 @@ public class BossBarAPI {
 		}
 	}
 
+	public static void sendMessageToPlayerRecurring(final String message, double seconds, final BarColor barColor, final BarStyle barStyle, final Player... p){
+		Bukkit.getScheduler().cancelTask(taskID);
+		final double perTime;
+		if (perTick) {
+			currentTime = seconds * 20.0D;
+			perTime = 1.0D / (seconds * 20.0D);
+		} else {
+			currentTime = seconds;
+			perTime = 1.0D / seconds;
+		}
+		Runnable runnable = new Runnable() {
+			public void run(){
+				if (BossBarAPI.currentTime < 0.0D) {
+					List<Player> g = globalBossBar.getPlayers();
+					for (Player pl : p) {
+						if (g.contains(pl)) {
+							g.remove(pl);
+						}
+					}
+					globalBossBar.removeAll();
+					for (Player pl : g) {
+						globalBossBar.addPlayer(pl);
+					}
+					Bukkit.getScheduler().cancelTask(BossBarAPI.taskID);
+					return;
+				}
+				BossBarAPI.sendMessageToPlayer(message, BossBarAPI.currentTime * perTime, barColor, barStyle);
+			}
+		};
+		if (perTick) {
+			taskID = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, runnable, 0L, 1L).getTaskId();
+		} else {
+			taskID = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, runnable, 0L, 20L).getTaskId();
+		}
+	}
+
 	public static void sendMessageToAllPlayers(String message, double progress, BarColor barColor, BarStyle barStyle){
 		if (globalBossBar == null) {
 			globalBossBar = Bukkit.createBossBar(message, barColor, barStyle, new BarFlag[0]);
@@ -64,6 +102,38 @@ public class BossBarAPI {
 		}
 		globalBossBar.setProgress(progress);
 		globalBossBar.setVisible(true);
+	}
+
+	public static void sendMessageToPlayer(String message, double progress, BarColor barColor, BarStyle barStyle, Player... p){
+		if (globalBossBar == null) {
+			globalBossBar = Bukkit.createBossBar(message, barColor, barStyle, new BarFlag[0]);
+		} else {
+			globalBossBar.setTitle(message);
+			globalBossBar.setColor(barColor);
+			globalBossBar.setStyle(barStyle);
+		}
+		globalBossBar.removeAll();
+		for (Player pl : p) {
+			globalBossBar.addPlayer(pl);
+		}
+		globalBossBar.setProgress(progress);
+		globalBossBar.setVisible(true);
+	}
+
+	public static void clearPlayer(Player... p){
+		Bukkit.getScheduler().cancelTask(taskID);
+		globalBossBar.setVisible(false);
+		List<Player> g = globalBossBar.getPlayers();
+		for (Player pl : p) {
+			if (g.contains(pl)) {
+				g.remove(pl);
+			}
+		}
+		globalBossBar.removeAll();
+		for (Player pl : g) {
+			globalBossBar.addPlayer(pl);
+		}
+		globalBossBar.setTitle("");
 	}
 
 	public static void clearAllPlayers(){

@@ -10,6 +10,8 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import es.projectalpha.ac.AC;
 import es.projectalpha.ac.cooldowns.Cooldowns;
 import es.projectalpha.ac.game.Game;
+import es.projectalpha.ac.managers.ManagerCore;
+import es.projectalpha.ac.shops.Shops;
 
 public class BuildInteract implements Listener {
 
@@ -31,18 +33,17 @@ public class BuildInteract implements Listener {
 				Villager v = (Villager) en;
 				String name = v.getCustomName();
 
-				switch (name) {
-				case "Lemonade": //TODO: Villager's name in Messages
-					if (Cooldowns.isCooling(p.getName(), "lemonade")) {
-						Cooldowns.coolDurMessage(p, "lemonade");
-						return;
-					}
-					Game.progressBar.add(v.getLocation().add(0, 3, 0));
-					Cooldowns.add(p.getName(), "lemonade", 60L, System.currentTimeMillis());
-					break;
+				for (String managerName : ManagerCore.managersNames) {
+					if (name.equalsIgnoreCase(managerName)) {
+						String s = ManagerCore.parseManager(managerName);
 
-				default:
-					break;
+						if (Cooldowns.isCooling(p.getName(), s)) {
+							Cooldowns.coolDurMessage(p, s);
+							return;
+						}
+						Game.progressBar.add(v.getLocation().add(0, 3, 0));
+						Cooldowns.add(p.getName(), s, (long) Shops.valueOf(s).getTimer(), System.currentTimeMillis());
+					}
 				}
 			}
 		}

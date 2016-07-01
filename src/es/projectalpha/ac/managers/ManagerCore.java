@@ -12,7 +12,9 @@ import es.projectalpha.ac.utils.Messages;
 
 public class ManagerCore {
 
+	//Data
 	public static ArrayList<String> managers = new ArrayList<String>();
+	public static ArrayList<String> managersNames = new ArrayList<String>();
 
 	public static ArrayList<Player> lemonade = new ArrayList<Player>();
 	public static ArrayList<Player> news = new ArrayList<Player>();
@@ -112,6 +114,41 @@ public class ManagerCore {
 		}
 	}
 
+	public static String parseManager(String managerName){
+		if (managerName.equalsIgnoreCase(Messages.lemonadeManager)) {
+			return "lemonade";
+		}
+		if (managerName.equalsIgnoreCase(Messages.newspaperManager)) {
+			return "news";
+		}
+		if (managerName.equalsIgnoreCase(Messages.carManager)) {
+			return "car";
+		}
+		if (managerName.equalsIgnoreCase(Messages.pizzaManager)) {
+			return "pizza";
+		}
+		if (managerName.equalsIgnoreCase(Messages.donutManager)) {
+			return "donut";
+		}
+		if (managerName.equalsIgnoreCase(Messages.boatManager)) {
+			return "boat";
+		}
+		if (managerName.equalsIgnoreCase(Messages.hockeyManager)) {
+			return "hockey";
+		}
+		if (managerName.equalsIgnoreCase(Messages.movieManager)) {
+			return "movie";
+		}
+		if (managerName.equalsIgnoreCase(Messages.bankManager)) {
+			return "bank";
+		}
+		if (managerName.equalsIgnoreCase(Messages.oilManager)) {
+			return "oil";
+		}
+
+		return "";
+	}
+
 	public static void loadManagers(){
 		managers.clear();
 
@@ -120,11 +157,24 @@ public class ManagerCore {
 		managers.add("car");
 		managers.add("pizza");
 		managers.add("donut");
-		managers.add("boats");
+		managers.add("boat");
 		managers.add("hockey");
 		managers.add("movie");
-		managers.add("banks");
+		managers.add("bank");
 		managers.add("oil");
+
+		managersNames.clear();
+
+		managersNames.add(Messages.lemonadeManager);
+		managersNames.add(Messages.newspaperManager);
+		managersNames.add(Messages.carManager);
+		managersNames.add(Messages.pizzaManager);
+		managersNames.add(Messages.donutManager);
+		managersNames.add(Messages.boatManager);
+		managersNames.add(Messages.hockeyManager);
+		managersNames.add(Messages.movieManager);
+		managersNames.add(Messages.bankManager);
+		managersNames.add(Messages.oilManager);
 
 		for (String s : Files.manager.getStringList("Lemonade")) {
 			lemonade.add(Bukkit.getPlayer(s));
