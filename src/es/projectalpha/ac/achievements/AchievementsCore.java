@@ -2,11 +2,16 @@ package es.projectalpha.ac.achievements;
 
 import java.util.List;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
+import es.projectalpha.ac.api.FireworkAPI;
+import es.projectalpha.ac.api.TitleAPI;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.game.Currency;
 import es.projectalpha.ac.game.Game;
+import es.projectalpha.ac.utils.Messages;
 
 public class AchievementsCore {
 
@@ -19,25 +24,30 @@ public class AchievementsCore {
 			Files.achie.set(at.toString(), players);
 			Files.saveFiles();
 
-		} else {
-			//TODO: Messages
+			Messages.newAchievement(at, p);
+			TitleAPI.sendTitle(p, 0, 3, 0, "", ChatColor.GREEN + "New Achievement!");
+			p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 5.0F, 5.0F);
+
+			for (int g = 0; g < 4; g++) {
+				FireworkAPI.spawnFirework(p);
+			}
 		}
+		//If have achievement do not do nothing
 	}
 
 	public static void remAchievement(Player p, AchievementsType at){
 		if (hasAchievement(p, at)) {
 			List<String> players = Files.achie.getStringList(at.toString());
 
-			players.add(p.getName());
+			players.remove(p.getName());
 
 			Files.achie.set(at.toString(), players);
 			Files.saveFiles();
-		} else {
-			//TODO: Messages
 		}
+		//If not have achievement do not do nothing
 	}
 
-	private static boolean hasAchievement(Player p, AchievementsType at){
+	public static boolean hasAchievement(Player p, AchievementsType at){
 		if (Files.achie.getStringList(at.toString()).contains(p)) {
 			return true;
 		}

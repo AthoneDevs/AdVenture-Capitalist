@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import es.projectalpha.ac.achievements.AchievementsType;
 import es.projectalpha.ac.cooldowns.Cooldowns;
 import es.projectalpha.ac.game.Game;
 import es.projectalpha.ac.shops.Shops;
@@ -41,6 +42,27 @@ public class Messages {
 	public static String movieManager = "Stefani Speilburger";
 	public static String bankManager = "Cadox8";
 	public static String oilManager = "Wikijito7";
+
+	//New Achievement
+	public static void newAchievement(AchievementsType at, Player p){
+		p.sendMessage(" ");
+		p.sendMessage(ChatColor.LIGHT_PURPLE + "===========================");
+
+		p.sendMessage(ChatColor.AQUA + "------ " + prefix + ChatColor.RED + "New Achievement!" + ChatColor.AQUA + " ------");
+		p.sendMessage(" ");
+
+		p.sendMessage(ChatColor.AQUA + "- Name: " + at.getDispName());
+		if (!at.getMessage().equalsIgnoreCase("")) {
+			p.sendMessage(ChatColor.AQUA + "- Message: " + at.getMessage());
+		}
+		if (at.getReward() != 0) {
+			p.sendMessage(ChatColor.AQUA + "- Reward: " + at.getDispName());
+		}
+
+		p.sendMessage(" ");
+		p.sendMessage(ChatColor.LIGHT_PURPLE + "===========================");
+		p.sendMessage(" ");
+	}
 
 	//Progress Bar
 	public static String getProgress(Player p, Location l, Shops shop){

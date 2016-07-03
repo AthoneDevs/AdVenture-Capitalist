@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 
 import es.projectalpha.ac.AC;
 import es.projectalpha.ac.achievements.AchievementsCore;
+import es.projectalpha.ac.achievements.AchievementsGUI;
 import es.projectalpha.ac.achievements.AchievementsType;
 import es.projectalpha.ac.api.TitleAPI;
 import es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI.NBSDecoder;
@@ -45,9 +46,13 @@ public class Help implements CommandExecutor {
 				p.sendMessage(" ");
 				p.sendMessage(Messages.prefix + ChatColor.AQUA + "AC Help");
 				p.sendMessage(ChatColor.DARK_GREEN + "/ac play" + f + ChatColor.YELLOW + "Play AC");
+				p.sendMessage(ChatColor.DARK_GREEN + "/ac achievements" + f + ChatColor.YELLOW + "View your achievements");
 				p.sendMessage(" ");
 			}
 			if (args.length == 1) {
+				if (args[0].equalsIgnoreCase("achievements")) {
+					AchievementsGUI.openAchievementsGUI(p);
+				}
 				if (args[0].equalsIgnoreCase("play")) {
 					for (World world : Bukkit.getWorlds()) {
 						if (world.getName().equalsIgnoreCase("ac")) {
