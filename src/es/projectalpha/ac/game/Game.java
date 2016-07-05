@@ -65,6 +65,27 @@ public class Game {
 				for (Player p : ManagerCore.car) {
 					Currency.addCurrency(p, Shops.CAR.getReward());
 				}
+				for (Player p : ManagerCore.pizza) {
+					Currency.addCurrency(p, Shops.PIZZA.getReward());
+				}
+				for (Player p : ManagerCore.donut) {
+					Currency.addCurrency(p, Shops.DONUT.getReward());
+				}
+				for (Player p : ManagerCore.boats) {
+					Currency.addCurrency(p, Shops.BOATS.getReward());
+				}
+				for (Player p : ManagerCore.hockey) {
+					Currency.addCurrency(p, Shops.HOCKEY.getReward());
+				}
+				for (Player p : ManagerCore.movie) {
+					Currency.addCurrency(p, Shops.MOVIE.getReward());
+				}
+				for (Player p : ManagerCore.banks) {
+					Currency.addCurrency(p, Shops.BANKS.getReward());
+				}
+				for (Player p : ManagerCore.oil) {
+					Currency.addCurrency(p, Shops.OIL.getReward());
+				}
 
 			}
 		}, 0L, 20L);

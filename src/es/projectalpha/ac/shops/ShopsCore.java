@@ -15,13 +15,13 @@ public class ShopsCore {
 		case "donut":
 			return Shops.DONUT.getReward();
 		case "ship":
-			return Shops.SHIP.getReward();
+			return Shops.BOATS.getReward();
 		case "hockey":
 			return Shops.HOCKEY.getReward();
 		case "cinema":
-			return Shops.CINEMA.getReward();
+			return Shops.MOVIE.getReward();
 		case "bank":
-			return Shops.BANK.getReward();
+			return Shops.BANKS.getReward();
 		case  "oil":
 			return Shops.OIL.getReward();
 		default:
