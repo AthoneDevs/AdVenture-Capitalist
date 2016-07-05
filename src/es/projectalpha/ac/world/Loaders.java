@@ -22,9 +22,14 @@ public class Loaders {
 	public static void putSchematic(Location l, String folder, String name){
 		try {
 			Schematic schematic = loadSchematic(new File(folder, name));
+
+			System.out.println(schematic);
+
 			pasteSchematic(l.getWorld(), l, schematic);
+
+			System.out.println("Done");
 		} catch (IOException e) {
-			//TODO: Error
+			e.printStackTrace();
 		}
 	}
 

@@ -51,14 +51,14 @@ public class Files {
 		try {
 			players.save(filePlayers);
 			players.load(filePlayers);
-			schema.save(fileSchema);
-			schema.load(fileSchema);
 			locs.save(fileLocs);
 			locs.load(fileLocs);
 			manager.save(fileManagers);
 			manager.load(fileManagers);
 			achie.save(fileAchie);
 			achie.load(fileAchie);
+			//			schema.save(fileSchema);
+			//			schema.load(fileSchema);
 		} catch (IOException | InvalidConfigurationException e) {
 			Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.RED + "There are some errors on: ");
 			e.printStackTrace();

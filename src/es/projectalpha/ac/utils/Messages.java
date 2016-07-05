@@ -46,7 +46,7 @@ public class Messages {
 	//New Achievement
 	public static void newAchievement(AchievementsType at, Player p){
 		p.sendMessage(" ");
-		p.sendMessage(ChatColor.LIGHT_PURPLE + "===========================");
+		p.sendMessage(ChatColor.LIGHT_PURPLE + "==================================================");
 
 		p.sendMessage(ChatColor.AQUA + "------ " + prefix + ChatColor.RED + "New Achievement!" + ChatColor.AQUA + " ------");
 		p.sendMessage(" ");
@@ -60,7 +60,7 @@ public class Messages {
 		}
 
 		p.sendMessage(" ");
-		p.sendMessage(ChatColor.LIGHT_PURPLE + "===========================");
+		p.sendMessage(ChatColor.LIGHT_PURPLE + "==================================================");
 		p.sendMessage(" ");
 	}
 
