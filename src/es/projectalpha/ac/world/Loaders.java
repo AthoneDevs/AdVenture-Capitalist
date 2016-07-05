@@ -30,6 +30,7 @@ public class Loaders {
 			System.out.println("Done");
 		} catch (IOException e) {
 			e.printStackTrace();
+			//TODO: GZIP bug
 		}
 	}
 
