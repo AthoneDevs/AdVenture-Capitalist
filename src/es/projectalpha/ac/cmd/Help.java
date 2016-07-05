@@ -104,6 +104,9 @@ public class Help implements CommandExecutor {
 								Files.locs.set("id" + id + ".x", loc.getX());
 								Files.locs.set("id" + id + ".y", loc.getY());
 								Files.locs.set("id" + id + ".z", loc.getZ());
+
+								Files.players.set(p.getName() + ".id", id);
+
 								Files.saveFiles();
 
 								Loaders.putSchematic(loc, "plugins/AC/Utils", "build.schematic");
@@ -116,6 +119,9 @@ public class Help implements CommandExecutor {
 								Files.locs.set("id" + id + ".x", p.getLocation().getX());
 								Files.locs.set("id" + id + ".y", p.getLocation().getY());
 								Files.locs.set("id" + id + ".z", p.getLocation().getZ());
+
+								Files.players.set(p.getName() + ".id", id);
+
 								Files.saveFiles();
 
 								Loaders.putSchematic(p.getLocation(), "plugins/AC/Utils", "build.schematic");
