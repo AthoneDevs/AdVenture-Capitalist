@@ -6,7 +6,7 @@ import org.bukkit.Location;
 
 public class ShopsCore {
 
-	public static HashMap<Float, Location> idVillagers = new HashMap<Float, Location>();
+	public static HashMap<Long, Location> idVillagers = new HashMap<Long, Location>();
 
 	public static double getReward(String shop){
 		switch (shop.toLowerCase()) {
