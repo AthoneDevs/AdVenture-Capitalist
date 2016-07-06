@@ -1,5 +1,6 @@
 package es.projectalpha.ac.shops;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -49,6 +50,16 @@ public class VillagerShops {
 			Files.vill.set("v_" + id + ".y", l.getY());
 			Files.vill.set("v_" + id + ".z", l.getZ());
 
+			List<Long> ids = Files.vill.getLongList("allIDs");
+
+			if (ids == null || ids.isEmpty()) {
+				ids = new ArrayList<Long>();
+			}
+
+			ids.add(id);
+
+			Files.vill.set("allIDs", ids);
+
 			Files.saveFiles();
 
 			//Data
@@ -58,6 +69,10 @@ public class VillagerShops {
 
 	public static void loadVillagers(){
 		List<Long> ids = Files.vill.getLongList("allIDs");
+
+		if (ids.isEmpty() || ids == null) {
+			return;
+		}
 
 		for (long id : ids) {
 

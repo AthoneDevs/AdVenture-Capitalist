@@ -22,7 +22,7 @@ public class LocationUtils {
 
 		for (int x = -area; x < area; x++) {
 			for (int z = area; z < -area; z--) {
-				blocks.add(l.add(x, 0, z).getBlock());
+				blocks.add(l.add(x, 1, z).getBlock());
 			}
 		}
 		getLocation();

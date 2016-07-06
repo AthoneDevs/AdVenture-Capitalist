@@ -2,8 +2,6 @@ package es.projectalpha.ac.files;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -46,13 +44,11 @@ public class Files {
 		if (!fileSchema.exists()) {
 			fileSchema.mkdirs();
 		}
-		if (!fileVill.exists()) {
-			fileVill.mkdirs();
-			List<Long> l = new ArrayList<Long>();
-			vill.set("allIDs", l);
-		}
 		if (!fileAchie.exists()) {
 			fileAchie.mkdir();
+		}
+		if (!fileVill.exists()) {
+			fileVill.mkdir();
 		}
 		saveFiles();
 	}
@@ -65,10 +61,10 @@ public class Files {
 			locs.load(fileLocs);
 			manager.save(fileManagers);
 			manager.load(fileManagers);
-			achie.save(fileAchie);
-			achie.load(fileAchie);
 			vill.save(fileVill);
 			vill.load(fileVill);
+			achie.save(fileAchie);
+			achie.load(fileAchie);
 		} catch (IOException | InvalidConfigurationException e) {
 			Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.RED + "There are some errors on: ");
 			e.printStackTrace();

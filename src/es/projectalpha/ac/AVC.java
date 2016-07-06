@@ -2,6 +2,8 @@ package es.projectalpha.ac;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.World.Environment;
+import org.bukkit.WorldCreator;
 import org.bukkit.entity.Player;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -48,6 +50,16 @@ public class AVC extends JavaPlugin {
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Setup Files Complete");
 
 		Bukkit.getConsoleSender().sendMessage(" ");
+
+		if (!Bukkit.getWorlds().contains(Bukkit.getWorld("ac"))) {
+
+			Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Creating World. . .");
+			Bukkit.createWorld(new WorldCreator("ac").generator(getDefaultWorldGenerator("ac", "ac")).environment(Environment.NORMAL));
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "World Created");
+
+			Bukkit.getConsoleSender().sendMessage(" ");
+
+		}
 
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Registering Commands and Events. . .");
 		regCMDs();
