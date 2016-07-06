@@ -1,8 +1,8 @@
 name: AdVenture-Capitalist
-main: es.projectalpha.ac.AC
-version: 0.0.9
+main: es.projectalpha.ac.AVC
+version: 0.3.7
 authors: [cadox8, Wikijito7]
 
 commands:
-  ac:
+   avc:
     description: Main Command

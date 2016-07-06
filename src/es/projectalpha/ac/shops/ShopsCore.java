@@ -1,6 +1,12 @@
 package es.projectalpha.ac.shops;
 
+import java.util.HashMap;
+
+import org.bukkit.Location;
+
 public class ShopsCore {
+
+	public static HashMap<Float, Location> idVillagers = new HashMap<Float, Location>();
 
 	public static double getReward(String shop){
 		switch (shop.toLowerCase()) {
@@ -22,7 +28,7 @@ public class ShopsCore {
 			return Shops.MOVIE.getReward();
 		case "bank":
 			return Shops.BANKS.getReward();
-		case  "oil":
+		case "oil":
 			return Shops.OIL.getReward();
 		default:
 			return 0;

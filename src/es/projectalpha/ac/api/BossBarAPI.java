@@ -9,13 +9,13 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 
-import es.projectalpha.ac.AC;
+import es.projectalpha.ac.AVC;
 
 public class BossBarAPI {
 
-	private static AC plugin;
+	private static AVC plugin;
 
-	public BossBarAPI(AC Main){
+	public BossBarAPI(AVC Main){
 		BossBarAPI.plugin = Main;
 	}
 

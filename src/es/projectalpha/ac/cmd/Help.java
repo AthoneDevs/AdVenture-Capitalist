@@ -12,26 +12,22 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import es.projectalpha.ac.AC;
+import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.achievements.AchievementsCore;
 import es.projectalpha.ac.achievements.AchievementsGUI;
 import es.projectalpha.ac.achievements.AchievementsType;
 import es.projectalpha.ac.api.TitleAPI;
-import es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI.NBSDecoder;
-import es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI.RadioSongPlayer;
-import es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI.Song;
-import es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI.SongPlayer;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.game.Currency;
 import es.projectalpha.ac.utils.Messages;
-import es.projectalpha.ac.world.Loaders;
+import es.projectalpha.ac.world.Schematic;
 
 public class Help implements CommandExecutor {
 
 	@SuppressWarnings("unused")
-	private AC plugin;
+	private AVC plugin;
 
-	public Help(AC Main){
+	public Help(AVC Main){
 		this.plugin = Main;
 	}
 
@@ -39,7 +35,7 @@ public class Help implements CommandExecutor {
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 		final Player p;
-		if (cmd.getName().equalsIgnoreCase("ac") && ((sender instanceof Player))) {
+		if (cmd.getName().equalsIgnoreCase("avc") && ((sender instanceof Player))) {
 			p = (Player) sender;
 
 			if (args.length == 0) {
@@ -58,10 +54,10 @@ public class Help implements CommandExecutor {
 						if (world.getName().equalsIgnoreCase("ac")) {
 							//TODO: Messages
 
-							Song song = NBSDecoder.parse(new File("/plugins/AC/Utils/ac.nbs"));
-							SongPlayer sp = new RadioSongPlayer(song);
-							sp.addPlayer(p);
-							sp.setPlaying(true);
+							//							Song song = NBSDecoder.parse(new File("/plugins/AC/Utils/ac.nbs"));
+							//							SongPlayer sp = new RadioSongPlayer(song);
+							//							sp.addPlayer(p);
+							//							sp.setPlaying(true);
 
 							if (Files.players.contains(p.getName())) {
 								int id = Files.players.getInt(p.getName() + ".id");
@@ -109,7 +105,7 @@ public class Help implements CommandExecutor {
 
 								Files.saveFiles();
 
-								Loaders.putSchematic(loc, "plugins/AC/Utils", "build.schematic");
+								Schematic.pasteSchematic(new File("plugins/AC/Utils/build.schematic"), loc);
 								p.teleport(loc.add(0, 2, 0));
 							} else {
 								id++;
@@ -124,7 +120,7 @@ public class Help implements CommandExecutor {
 
 								Files.saveFiles();
 
-								Loaders.putSchematic(p.getLocation(), "plugins/AC/Utils", "build.schematic");
+								Schematic.pasteSchematic(new File("plugins/AC/Utils/build.schematic"), p.getLocation());
 								p.teleport(p.getLocation().add(0, 2, 0));
 							}
 						}

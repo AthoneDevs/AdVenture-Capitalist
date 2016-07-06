@@ -17,9 +17,9 @@ import es.projectalpha.ac.utils.Messages;
 import es.projectalpha.ac.utils.ServerVersion;
 import es.projectalpha.ac.world.Generator;
 
-public class AC extends JavaPlugin {
+public class AVC extends JavaPlugin {
 
-	private static AC plugin;
+	private static AVC plugin;
 
 	public void onEnable(){
 		Bukkit.getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "========================");
@@ -85,10 +85,10 @@ public class AC extends JavaPlugin {
 	}
 
 	private void regCMDs(){
-		getCommand("ac").setExecutor(new Help(this));
+		getCommand("avc").setExecutor(new Help(this));
 	}
 
-	public static AC getPlugin(){
+	public static AVC getPlugin(){
 		return plugin;
 	}
 

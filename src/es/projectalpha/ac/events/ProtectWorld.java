@@ -13,16 +13,16 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 
-import es.projectalpha.ac.AC;
+import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.achievements.AchievementsCore;
 import es.projectalpha.ac.achievements.AchievementsType;
 import es.projectalpha.ac.game.Game;
 
 public class ProtectWorld implements Listener {
 
-	private AC plugin;
+	private AVC plugin;
 
-	public ProtectWorld(AC Main){
+	public ProtectWorld(AVC Main){
 		this.plugin = Main;
 		this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
 	}

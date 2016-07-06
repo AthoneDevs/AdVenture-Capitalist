@@ -7,7 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 
-import es.projectalpha.ac.AC;
+import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.cooldowns.Cooldowns;
 import es.projectalpha.ac.game.Game;
 import es.projectalpha.ac.managers.ManagerCore;
@@ -15,9 +15,9 @@ import es.projectalpha.ac.shops.Shops;
 
 public class BuildInteract implements Listener {
 
-	private AC plugin;
+	private AVC plugin;
 
-	public BuildInteract(AC Main){
+	public BuildInteract(AVC Main){
 		this.plugin = Main;
 		this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
 	}

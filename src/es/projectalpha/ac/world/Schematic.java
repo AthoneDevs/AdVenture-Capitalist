@@ -1,40 +1,35 @@
 package es.projectalpha.ac.world;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.bukkit.Location;
+
+import com.sk89q.worldedit.CuboidClipboard;
+import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.MaxChangedBlocksException;
+import com.sk89q.worldedit.bukkit.BukkitUtil;
+import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.data.DataException;
+import com.sk89q.worldedit.schematic.SchematicFormat;
+
+@SuppressWarnings("deprecation")
 public class Schematic {
 
 	//Library-API from p000ison (https://bukkit.org/members/p000ison.84488/)
 
-	private byte[] blocks;
-	private byte[] data;
-	private short width;
-	private short lenght;
-	private short height;
-
-	public Schematic(byte[] blocks, byte[] data, short width, short lenght, short height){
-		this.blocks = blocks;
-		this.data = data;
-		this.width = width;
-		this.lenght = lenght;
-		this.height = height;
-	}
-
-	public byte[] getBlocks(){
-		return blocks;
-	}
-
-	public byte[] getData(){
-		return data;
-	}
-
-	public short getWidth(){
-		return width;
-	}
-
-	public short getLenght(){
-		return lenght;
-	}
-
-	public short getHeight(){
-		return height;
+	public static void pasteSchematic(File dir, Location pasteLoc){
+		try {
+			EditSession editSession = new EditSession(new BukkitWorld(pasteLoc.getWorld()), 999999999);
+			editSession.enableQueue();
+			SchematicFormat schematic = SchematicFormat.getFormat(dir);
+			CuboidClipboard clipboard = schematic.load(dir);
+			clipboard.paste(editSession, BukkitUtil.toVector(pasteLoc), true);
+			editSession.flushQueue();
+		} catch (DataException | IOException ex) {
+			ex.printStackTrace();
+		} catch (MaxChangedBlocksException ex) {
+			ex.printStackTrace();
+		}
 	}
 }
