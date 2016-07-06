@@ -34,4 +34,31 @@ public class ShopsCore {
 			return 0;
 		}
 	}
+	
+	public static double getTimer(String shop){
+		switch (shop.toLowerCase()) {
+		case "lemonade":
+			return Shops.LEMONADE.getTimer();
+		case "news":
+			return Shops.NEWS.getTimer();
+		case "car":
+			return Shops.CAR.getTimer();
+		case "pizza":
+			return Shops.PIZZA.getTimer();
+		case "donut":
+			return Shops.DONUT.getTimer();
+		case "ship":
+			return Shops.BOATS.getTimer();
+		case "hockey":
+			return Shops.HOCKEY.getTimer();
+		case "cinema":
+			return Shops.MOVIE.getTimer();
+		case "bank":
+			return Shops.BANKS.getTimer();
+		case "oil":
+			return Shops.OIL.getTimer();
+		default:
+			return 0;
+		}
+	}
 }
