@@ -20,11 +20,11 @@ public class ShopsCore {
 			return Shops.PIZZA.getReward();
 		case "donut":
 			return Shops.DONUT.getReward();
-		case "ship":
+		case "boat":
 			return Shops.BOATS.getReward();
 		case "hockey":
 			return Shops.HOCKEY.getReward();
-		case "cinema":
+		case "movie":
 			return Shops.MOVIE.getReward();
 		case "bank":
 			return Shops.BANKS.getReward();

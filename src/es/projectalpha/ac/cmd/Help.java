@@ -19,6 +19,8 @@ import es.projectalpha.ac.achievements.AchievementsType;
 import es.projectalpha.ac.api.TitleAPI;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.game.Currency;
+import es.projectalpha.ac.shops.VillagerShops;
+import es.projectalpha.ac.utils.LocationUtils;
 import es.projectalpha.ac.utils.Messages;
 import es.projectalpha.ac.world.Schematic;
 
@@ -81,6 +83,8 @@ public class Help implements CommandExecutor {
 
 							AchievementsCore.addAchievement(p, AchievementsType.START);
 
+							Location lData;
+
 							if (id > 0) {
 								double x = Files.locs.getDouble("id" + id + ".x");
 								double y = Files.locs.getDouble("id" + id + ".y");
@@ -108,6 +112,8 @@ public class Help implements CommandExecutor {
 
 								Schematic.pasteSchematic(new File("plugins/AC/Utils/build.schematic"), loc);
 								p.teleport(loc.add(0, 2, 0));
+
+								lData = loc;
 							} else {
 								id++;
 
@@ -123,7 +129,12 @@ public class Help implements CommandExecutor {
 
 								Schematic.pasteSchematic(new File("plugins/AC/Utils/build.schematic"), p.getLocation());
 								p.teleport(p.getLocation().add(0, 2, 0));
+
+								lData = p.getLocation();
 							}
+
+							LocationUtils.searchBlocks(lData, 50);
+							VillagerShops.spawnVillagers();
 						}
 					}
 				}

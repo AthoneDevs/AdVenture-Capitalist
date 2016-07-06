@@ -2,6 +2,8 @@ package es.projectalpha.ac.files;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -24,6 +26,9 @@ public class Files {
 	public static File fileLocs = new File("plugins/AC/Data", "locs.yml");
 	public static YamlConfiguration locs = YamlConfiguration.loadConfiguration(fileLocs);
 
+	public static File fileVill = new File("plugins/AC/Data", "villagers.yml");
+	public static YamlConfiguration vill = YamlConfiguration.loadConfiguration(fileVill);
+
 	public static File fileSchema = new File("plugins/AC", "Utils");
 	public static YamlConfiguration schema = YamlConfiguration.loadConfiguration(fileSchema);
 
@@ -41,6 +46,11 @@ public class Files {
 		if (!fileSchema.exists()) {
 			fileSchema.mkdirs();
 		}
+		if (!fileVill.exists()) {
+			fileVill.mkdirs();
+			List<Long> l = new ArrayList<Long>();
+			vill.set("allIDs", l);
+		}
 		if (!fileAchie.exists()) {
 			fileAchie.mkdir();
 		}
@@ -57,8 +67,8 @@ public class Files {
 			manager.load(fileManagers);
 			achie.save(fileAchie);
 			achie.load(fileAchie);
-			//			schema.save(fileSchema);
-			//			schema.load(fileSchema);
+			vill.save(fileVill);
+			vill.load(fileVill);
 		} catch (IOException | InvalidConfigurationException e) {
 			Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.RED + "There are some errors on: ");
 			e.printStackTrace();
