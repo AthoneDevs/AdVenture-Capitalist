@@ -43,6 +43,7 @@ public class Help implements CommandExecutor {
 				p.sendMessage(Messages.prefix + ChatColor.AQUA + "AC Help");
 				p.sendMessage(ChatColor.DARK_GREEN + "/ac play" + f + ChatColor.YELLOW + "Play AC");
 				p.sendMessage(ChatColor.DARK_GREEN + "/ac achievements" + f + ChatColor.YELLOW + "View your achievements");
+				p.sendMessage(ChatColor.DARK_GREEN + "/ac angel" + f + ChatColor.YELLOW + "View your angels");
 				p.sendMessage(" ");
 			}
 			if (args.length == 1) {
