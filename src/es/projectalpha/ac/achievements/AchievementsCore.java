@@ -16,7 +16,9 @@ import es.projectalpha.ac.utils.Messages;
 public class AchievementsCore {
 
 	public static void addAchievement(Player p, AchievementsType at){
-		if (!hasAchievement(p, at)) {
+		if (hasAchievement(p, at)) {
+			return;
+		} else {
 			List<String> players = Files.achie.getStringList(at.toString());
 
 			players.add(p.getName());
@@ -32,7 +34,6 @@ public class AchievementsCore {
 				FireworkAPI.spawnFirework(p);
 			}
 		}
-		//If have achievement do not do nothing
 	}
 
 	public static void remAchievement(Player p, AchievementsType at){

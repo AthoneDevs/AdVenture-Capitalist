@@ -8,7 +8,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.plugin.Plugin;
@@ -19,7 +18,6 @@ import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.managers.ManagerCore;
 import es.projectalpha.ac.managers.ManagersPrice;
 import es.projectalpha.ac.shops.Shops;
-import es.projectalpha.ac.shops.ShopsCore;
 import es.projectalpha.ac.shops.VillagerShops;
 
 public class Game {
@@ -40,12 +38,8 @@ public class Game {
 					}
 
 					//TP Villagers
-					for (Entity en : p.getWorld().getEntities()) {
-						if (en instanceof Villager) {
-							Villager v = (Villager) en;
-
-							v.teleport(ShopsCore.idVillagers.get(VillagerShops.getVillagerID(v)));
-						}
+					for (Villager v : VillagerShops.villagerUtils) {
+						v.teleport(VillagerShops.villagerLocs.get(v));
 					}
 
 					//Show Money

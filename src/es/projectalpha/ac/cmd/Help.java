@@ -7,6 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,11 +17,10 @@ import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.achievements.AchievementsCore;
 import es.projectalpha.ac.achievements.AchievementsGUI;
 import es.projectalpha.ac.achievements.AchievementsType;
-import es.projectalpha.ac.api.TitleAPI;
+import es.projectalpha.ac.api.ActionBarAPI;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.game.Currency;
 import es.projectalpha.ac.shops.VillagerShops;
-import es.projectalpha.ac.utils.LocationUtils;
 import es.projectalpha.ac.utils.Messages;
 import es.projectalpha.ac.world.Schematic;
 
@@ -33,10 +33,12 @@ public class Help implements CommandExecutor {
 		this.plugin = Main;
 	}
 
+	private boolean debug = false;
+
 	private String f = ChatColor.GRAY + " => ";
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
-		final Player p;
+		Player p;
 		if (cmd.getName().equalsIgnoreCase("avc") && ((sender instanceof Player))) {
 			p = (Player) sender;
 
@@ -51,6 +53,19 @@ public class Help implements CommandExecutor {
 			if (args.length == 1) {
 				if (args[0].equalsIgnoreCase("achievements")) {
 					AchievementsGUI.openAchievementsGUI(p);
+				}
+				if (args[0].equalsIgnoreCase("debug")) {
+					if (p.hasPermission("avc.admin")) {
+						if (debug) {
+							debug = false;
+							p.sendMessage(Messages.prefix + "Debug: " + ChatColor.RED + debug);
+							return true;
+						}
+						debug = true;
+						p.sendMessage(Messages.prefix + "Debug: " + ChatColor.RED + debug);
+					} else {
+						//TODO: Messages
+					}
 				}
 				if (args[0].equalsIgnoreCase("play")) {
 					for (World world : Bukkit.getWorlds()) {
@@ -79,12 +94,11 @@ public class Help implements CommandExecutor {
 							}
 							int id = Files.locs.getInt("num");
 
-							TitleAPI.sendTitle(p, 0, 5, 0, ChatColor.RED + "Have Fun :D", "");
+							ActionBarAPI.sendActionBar(p, ChatColor.RED + "Have Fun :D");
 
 							AchievementsCore.addAchievement(p, AchievementsType.START);
 
-							Location lData;
-
+							//Others
 							if (id > 0) {
 								double x = Files.locs.getDouble("id" + id + ".x");
 								double y = Files.locs.getDouble("id" + id + ".y");
@@ -92,49 +106,83 @@ public class Help implements CommandExecutor {
 
 								Location l = new Location(world, x, y, z);
 
-								Location loc = l.clone().add(100, 0, 0);
+								Location loc = l.clone().add(150, 0, 0);
 
-								if (l.getWorld().getBlockAt(l.add(100, 0, 0)) != null || l.getWorld().getBlockAt(l.add(100, 0, 0)).getType() != Material.AIR) {
-									loc = l.clone().add(100, y, 100);
+								if (l.getWorld().getBlockAt(l.add(150, 0, 0)) != null || l.getWorld().getBlockAt(l.add(150, 0, 0)).getType() != Material.AIR) {
+									loc = l.clone().add(150, y, 150);
 								}
 
 								id++;
 
 								Files.locs.set("num", id);
 
-								Files.locs.set("id" + id + ".x", loc.getX());
-								Files.locs.set("id" + id + ".y", loc.getY());
-								Files.locs.set("id" + id + ".z", loc.getZ());
-
 								Files.players.set(p.getName() + ".id", id);
+
+								Schematic.pasteSchematic(new File("plugins/AC/Utils/build.schematic"), p.getLocation());
+
+								Block b;
+								for (int g = 0; g < 30; g++) {
+
+									if (debug) {
+										System.out.println(loc.getWorld().getBlockAt((int) (x + 28), (int) y - 1, (int) (z - g)) + "");
+
+										if (loc.getWorld().getBlockAt((int) (x + 28), (int) y - 1, (int) (z - g)).getType() == Material.STAINED_GLASS) {
+											System.out.print("Found Block!");
+										}
+									}
+
+									b = loc.getWorld().getBlockAt((int) (x + 28), (int) y - 1, (int) (z - g));
+									if (b.getType() == Material.STAINED_GLASS) {
+
+										Files.locs.set("id" + id + ".x", b.getLocation().getX());
+										Files.locs.set("id" + id + ".y", b.getLocation().getY() + 1);
+										Files.locs.set("id" + id + ".z", b.getLocation().getZ());
+
+										p.teleport(new Location(b.getWorld(), b.getLocation().getX(), b.getLocation().getY() + 1, b.getLocation().getZ()));
+
+										break;
+									}
+								}
 
 								Files.saveFiles();
 
-								Schematic.pasteSchematic(new File("plugins/AC/Utils/build.schematic"), loc);
-								p.teleport(loc.add(0, 2, 0));
-
-								lData = loc;
+								//Firts Company
 							} else {
 								id++;
 
 								Files.locs.set("num", id);
 
-								Files.locs.set("id" + id + ".x", p.getLocation().getX());
-								Files.locs.set("id" + id + ".y", p.getLocation().getY());
-								Files.locs.set("id" + id + ".z", p.getLocation().getZ());
+								Schematic.pasteSchematic(new File("plugins/AC/Utils/build.schematic"), p.getLocation());
+
+								Block b;
+								for (int g = 0; g < 30; g++) {
+
+									if (debug) {
+										System.out.println(p.getWorld().getBlockAt((int) (p.getLocation().getX() + 28), (int) p.getLocation().getY() - 1, (int) (p.getLocation().getZ() - g)) + "");
+
+										if (p.getWorld().getBlockAt((int) (p.getLocation().getX() + 28), (int) p.getLocation().getY() - 1, (int) (p.getLocation().getZ() - g)).getType() == Material.STAINED_GLASS) {
+											System.out.print("Found Block!");
+										}
+									}
+
+									b = p.getWorld().getBlockAt((int) (p.getLocation().getX() + 28), (int) p.getLocation().getY() - 1, (int) (p.getLocation().getZ() - g));
+									if (b.getType() == Material.STAINED_GLASS) {
+
+										Files.locs.set("id" + id + ".x", b.getLocation().getX());
+										Files.locs.set("id" + id + ".y", b.getLocation().getY() + 1);
+										Files.locs.set("id" + id + ".z", b.getLocation().getZ());
+
+										p.teleport(new Location(b.getWorld(), b.getLocation().getX(), b.getLocation().getY() + 1, b.getLocation().getZ()));
+
+										break;
+									}
+								}
 
 								Files.players.set(p.getName() + ".id", id);
 
 								Files.saveFiles();
-
-								Schematic.pasteSchematic(new File("plugins/AC/Utils/build.schematic"), p.getLocation());
-								p.teleport(p.getLocation().add(0, 2, 0));
-
-								lData = p.getLocation();
 							}
-
-							LocationUtils.searchBlocks(lData, 50);
-							VillagerShops.spawnVillagers();
+							VillagerShops.loadVillagers();
 						}
 					}
 				}
