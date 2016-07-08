@@ -16,54 +16,54 @@ public class Cooldowns {
 
 	public static HashMap<String, ShopCooldown> cooldownPlayers = new HashMap<String, ShopCooldown>();
 
-	public static void add(String player, String ability, long seconds, long systime){
+	public static void add(String player, String manager, long seconds, long systime){
 		if (!cooldownPlayers.containsKey(player)) {
 			cooldownPlayers.put(player, new ShopCooldown(player));
 		}
-		if (isCooling(player, ability)) {
+		if (isCooling(player, manager)) {
 			return;
 		}
-		cooldownPlayers.get(player).cooldownMap.put(ability, new ShopCooldown(player, seconds * 1000, System.currentTimeMillis()));
+		cooldownPlayers.get(player).cooldownMap.put(manager, new ShopCooldown(player, seconds * 1000, System.currentTimeMillis()));
 	}
 
-	public static boolean isCooling(String player, String ability){
+	public static boolean isCooling(String player, String manager){
 		if (!cooldownPlayers.containsKey(player))
 			return false;
-		if (!cooldownPlayers.get(player).cooldownMap.containsKey(ability))
+		if (!cooldownPlayers.get(player).cooldownMap.containsKey(manager))
 			return false;
 		return true;
 	}
 
-	public static double getRemaining(String player, String ability){
+	public static double getRemaining(String player, String manager){
 		if (!cooldownPlayers.containsKey(player))
 			return 0.0;
-		if (!cooldownPlayers.get(player).cooldownMap.containsKey(ability))
+		if (!cooldownPlayers.get(player).cooldownMap.containsKey(manager))
 			return 0.0;
-		return UTime.convert((cooldownPlayers.get(player).cooldownMap.get(ability).seconds + cooldownPlayers.get(player).cooldownMap.get(ability).systime) - System.currentTimeMillis(), UTime.SECONDS, 1);
+		return UTime.convert((cooldownPlayers.get(player).cooldownMap.get(manager).seconds + cooldownPlayers.get(player).cooldownMap.get(manager).systime) - System.currentTimeMillis(), UTime.SECONDS, 1);
 	}
 
-	public static void coolDurMessage(Player player, String ability){
+	public static void coolDurMessage(Player player, String manager){
 		if (player == null) {
 			return;
 		}
-		if (!isCooling(player.getName(), ability)) {
+		if (!isCooling(player.getName(), manager)) {
 			return;
 		}
-		player.sendMessage(Messages.prefix + ChatColor.RED + WordUtils.capitalizeFully(ability) + ChatColor.GRAY + ": " + ChatColor.AQUA + getRemaining(player.getName(), ability));
+		player.sendMessage(Messages.prefix + ChatColor.RED + WordUtils.capitalizeFully(manager) + ChatColor.GRAY + ": " + ChatColor.AQUA + getRemaining(player.getName(), manager));
 	}
 
-	public static void removeCooldown(String player, String ability){
+	public static void removeCooldown(String player, String manager){
 		if (!cooldownPlayers.containsKey(player)) {
 			return;
 		}
-		if (!cooldownPlayers.get(player).cooldownMap.containsKey(ability)) {
+		if (!cooldownPlayers.get(player).cooldownMap.containsKey(manager)) {
 			return;
 		}
-		cooldownPlayers.get(player).cooldownMap.remove(ability);
+		cooldownPlayers.get(player).cooldownMap.remove(manager);
 		Player cPlayer = Bukkit.getPlayer(player);
 		if (player != null) {
-			cPlayer.sendMessage(Messages.prefix + ChatColor.GRAY + "Complete: " + ChatColor.AQUA + WordUtils.capitalizeFully(ability));
-			Currency.addCurrency(Bukkit.getPlayer(player), ShopsCore.getReward(ability));
+			cPlayer.sendMessage(Messages.prefix + ChatColor.GRAY + "Complete: " + ChatColor.AQUA + WordUtils.capitalizeFully(manager));
+			Currency.addCurrency(Bukkit.getPlayer(player), ShopsCore.getReward(manager));
 		}
 	}
 

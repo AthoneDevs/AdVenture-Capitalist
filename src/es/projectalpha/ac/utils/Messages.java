@@ -11,37 +11,18 @@ import es.projectalpha.ac.shops.Shops;
 
 public class Messages {
 
-	//Game
+	//Utils
 	public static String prefix = ChatColor.GRAY + " || " + ChatColor.GREEN + "AC" + ChatColor.GRAY + " || ";
+	public static String noPerms = prefix + ChatColor.RED + "You don't have permissions to do this";
+
+	//Game
+	public static String newCompany = prefix + ChatColor.GREEN + "You have been created your own company";
+	public static String tpCompany = prefix + ChatColor.GREEN + "You has been teleported to your Company";
 	public static String hasManager = prefix + ChatColor.RED + "Sorry, but you have already this manager";
 	public static String notHasManager = prefix + ChatColor.RED + "Sorry, but you don't have this manager";
 	public static String noDatabase = prefix + ChatColor.RED + "Sorry, this player is not in the database";
 	public static String notEnoughMoney = prefix + ChatColor.RED + "Sorry, but you don't have enough money";
 	public static String buyManager = prefix + ChatColor.GREEN + "You have been bought the manager of " + ChatColor.YELLOW;
-
-	//Shops
-	public static String lemonade = "Lemonade Stand";
-	public static String newspaper = "Newspaper";
-	public static String car = "Car Wash";
-	public static String pizza = "Pizza Delivery";
-	public static String donut = "Donut Shop";
-	public static String boat = "Shrimp Boat";
-	public static String hockey = "Hockey Team";
-	public static String movie = "Movie Studio";
-	public static String bank = "Bank";
-	public static String oil = "Oil Company";
-
-	//Manager Names
-	public static String lemonadeManager = "Cabe Johnson";
-	public static String newspaperManager = "Perry Black";
-	public static String carManager = "W.W. Heisenbird";
-	public static String pizzaManager = "Mama Sean";
-	public static String donutManager = "SrJonh";
-	public static String boatManager = "Forest Trump";
-	public static String hockeyManager = "Dawn Cheri";
-	public static String movieManager = "Stefani Speilburger";
-	public static String bankManager = "Cadox8";
-	public static String oilManager = "Wikijito7";
 
 	//New Achievement
 	public static void newAchievement(AchievementsType at, Player p){

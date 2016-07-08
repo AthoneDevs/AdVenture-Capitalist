@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.cooldowns.Cooldowns;
 import es.projectalpha.ac.game.Game;
-import es.projectalpha.ac.managers.ManagerCore;
+import es.projectalpha.ac.managers.Managers;
 import es.projectalpha.ac.shops.Shops;
 
 public class BuildInteract implements Listener {
@@ -29,20 +29,19 @@ public class BuildInteract implements Listener {
 
 		if (Game.playing.contains(p)) {
 			if (en instanceof Villager) {
-				//Villager ATM, Next NPC?
 				Villager v = (Villager) en;
 				String name = v.getCustomName();
 
-				for (String managerName : ManagerCore.managersNames) {
-					if (name.equalsIgnoreCase(managerName)) {
-						String s = ManagerCore.parseManager(managerName);
+				for (int g = 0; g < Managers.values().length; g++) {
+					Managers m = Managers.values()[g];
 
-						if (Cooldowns.isCooling(p.getName(), s)) {
-							Cooldowns.coolDurMessage(p, s);
+					if (name.equalsIgnoreCase(m.getManagerName())) {
+						if (Cooldowns.isCooling(p.getName(), m.getName())) {
+							Cooldowns.coolDurMessage(p, m.getName());
 							return;
 						}
 						Game.progressBar.add(v.getLocation().add(0, 3, 0));
-						Cooldowns.add(p.getName(), s, (long) Shops.valueOf(s).getTimer(), System.currentTimeMillis());
+						Cooldowns.add(p.getName(), m.getName(), (long) Shops.valueOf(m.getName().toLowerCase()).getTimer(), System.currentTimeMillis());
 					}
 				}
 			}

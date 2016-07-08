@@ -31,6 +31,10 @@ public class Currency {
 		runningCurrency.put(p, parseCurrency(Files.players.getDouble(p.getName() + ".money")));
 	}
 
+	public static void newPlayerCurrency(Player p){
+		runningCurrency.put(p, parseCurrency(0));
+	}
+
 	public static double getCurrency(Player p){
 		String currency = runningCurrency.get(p);
 		String[] subString;

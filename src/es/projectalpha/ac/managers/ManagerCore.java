@@ -3,19 +3,16 @@ package es.projectalpha.ac.managers;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import es.projectalpha.ac.files.Files;
+import es.projectalpha.ac.game.Currency;
 import es.projectalpha.ac.utils.Messages;
 
 public class ManagerCore {
 
 	//Data
-	public static ArrayList<String> managers = new ArrayList<String>();
-	public static ArrayList<String> managersNames = new ArrayList<String>();
-
 	public static ArrayList<Player> lemonade = new ArrayList<Player>();
 	public static ArrayList<Player> news = new ArrayList<Player>();
 	public static ArrayList<Player> car = new ArrayList<Player>();
@@ -27,192 +24,110 @@ public class ManagerCore {
 	public static ArrayList<Player> banks = new ArrayList<Player>();
 	public static ArrayList<Player> oil = new ArrayList<Player>();
 
-	public static void addManager(Player p, String manager){
-		manager = WordUtils.capitalizeFully(manager);
-		List<String> playersNames = Files.manager.getStringList(manager);
+	public static void addManager(Player p, Managers m){
+		List<String> playersNames = Files.manager.getStringList(m.getdataName());
 
-		if (hasManager(p, manager)) {
+		if (hasManager(p, m)) {
 			p.sendMessage(Messages.hasManager);
 			return;
 		}
 
 		playersNames.add(p.getName());
 
-		Files.manager.set(manager, playersNames);
+		Files.manager.set(m.getdataName(), playersNames);
 		Files.saveFiles();
+
+		loadManagers();
 	}
 
-	public static void removeManager(Player p, String manager){
-		manager = WordUtils.capitalizeFully(manager);
-		List<String> playersNames = Files.manager.getStringList(manager);
+	public static void removeManager(Player p, Managers m){
+		List<String> playersNames = Files.manager.getStringList(m.getdataName());
 
-		if (!hasManager(p, manager)) {
+		if (!hasManager(p, m)) {
 			p.sendMessage(Messages.notHasManager);
 			return;
 		}
 
 		playersNames.remove(p.getName());
 
-		Files.manager.set(manager, playersNames);
+		Files.manager.set(m.getdataName(), playersNames);
 		Files.saveFiles();
+
+		loadManagers();
 	}
 
-	static boolean hasManager(Player p, String manager){
-		switch (manager.toLowerCase()) {
-		case "lemonade":
-			if (lemonade.contains(p)) {
-				return true;
-			}
-			return false;
-		case "news":
-			if (news.contains(p)) {
-				return true;
-			}
-			return false;
-		case "car":
-			if (car.contains(p)) {
-				return true;
-			}
-			return false;
-		case "pizza":
-			if (pizza.contains(p)) {
-				return true;
-			}
-			return false;
-		case "donut":
-			if (donut.contains(p)) {
-				return true;
-			}
-			return false;
-		case "boat":
-			if (boats.contains(p)) {
-				return true;
-			}
-			return false;
-		case "hockey":
-			if (hockey.contains(p)) {
-				return true;
-			}
-			return false;
-		case "movie":
-			if (movie.contains(p)) {
-				return true;
-			}
-			return false;
-		case "banks":
-			if (banks.contains(p)) {
-				return true;
-			}
-			return false;
-		case "oil":
-			if (oil.contains(p)) {
-				return true;
-			}
-			return false;
-		default:
-			return false;
+	public static void buyManager(Player p, Managers m){
+		if (ManagerCore.hasManager(p, m)) {
+			p.sendMessage(Messages.hasManager);
+			return;
 		}
+
+		if (Currency.getCurrency(p) <= m.getPrize()) {
+			p.sendMessage(Messages.notEnoughMoney);
+			return;
+		}
+
+		Currency.removeCurrency(p, m.getPrize());
+		ManagerCore.addManager(p, m);
+		p.sendMessage(Messages.buyManager);
 	}
 
-	public static String parseManager(String managerName){
-		if (managerName.equalsIgnoreCase(Messages.lemonadeManager)) {
-			return "lemonade";
+	public static boolean hasManager(Player p, Managers m){
+		if (Files.achie.getStringList(m.getdataName()).contains(p)) {
+			return true;
 		}
-		if (managerName.equalsIgnoreCase(Messages.newspaperManager)) {
-			return "news";
-		}
-		if (managerName.equalsIgnoreCase(Messages.carManager)) {
-			return "car";
-		}
-		if (managerName.equalsIgnoreCase(Messages.pizzaManager)) {
-			return "pizza";
-		}
-		if (managerName.equalsIgnoreCase(Messages.donutManager)) {
-			return "donut";
-		}
-		if (managerName.equalsIgnoreCase(Messages.boatManager)) {
-			return "boat";
-		}
-		if (managerName.equalsIgnoreCase(Messages.hockeyManager)) {
-			return "hockey";
-		}
-		if (managerName.equalsIgnoreCase(Messages.movieManager)) {
-			return "movie";
-		}
-		if (managerName.equalsIgnoreCase(Messages.bankManager)) {
-			return "bank";
-		}
-		if (managerName.equalsIgnoreCase(Messages.oilManager)) {
-			return "oil";
-		}
-
-		return "";
+		return false;
 	}
 
 	public static void loadManagers(){
-		managers.clear();
+		lemonade.clear();
+		news.clear();
+		car.clear();
+		pizza.clear();
+		donut.clear();
+		boats.clear();
+		hockey.clear();
+		movie.clear();
+		banks.clear();
+		oil.clear();
 
-		managers.add("lemonade");
-		managers.add("news");
-		managers.add("car");
-		managers.add("pizza");
-		managers.add("donut");
-		managers.add("boat");
-		managers.add("hockey");
-		managers.add("movie");
-		managers.add("bank");
-		managers.add("oil");
-
-		managersNames.clear();
-
-		managersNames.add(Messages.lemonadeManager);
-		managersNames.add(Messages.newspaperManager);
-		managersNames.add(Messages.carManager);
-		managersNames.add(Messages.pizzaManager);
-		managersNames.add(Messages.donutManager);
-		managersNames.add(Messages.boatManager);
-		managersNames.add(Messages.hockeyManager);
-		managersNames.add(Messages.movieManager);
-		managersNames.add(Messages.bankManager);
-		managersNames.add(Messages.oilManager);
-
-		for (String s : Files.manager.getStringList("Lemonade")) {
+		for (String s : Files.manager.getStringList(Managers.LEMONADE.getdataName())) {
 			lemonade.add(Bukkit.getPlayer(s));
 		}
 
-		for (String s : Files.manager.getStringList("News")) {
+		for (String s : Files.manager.getStringList(Managers.NEWS.getdataName())) {
 			news.add(Bukkit.getPlayer(s));
 		}
 
-		for (String s : Files.manager.getStringList("Car")) {
+		for (String s : Files.manager.getStringList(Managers.CAR.getdataName())) {
 			car.add(Bukkit.getPlayer(s));
 		}
 
-		for (String s : Files.manager.getStringList("Pizza")) {
+		for (String s : Files.manager.getStringList(Managers.PIZZA.getdataName())) {
 			pizza.add(Bukkit.getPlayer(s));
 		}
 
-		for (String s : Files.manager.getStringList("Donut")) {
+		for (String s : Files.manager.getStringList(Managers.DONUT.getdataName())) {
 			donut.add(Bukkit.getPlayer(s));
 		}
 
-		for (String s : Files.manager.getStringList("Boats")) {
+		for (String s : Files.manager.getStringList(Managers.BOAT.getdataName())) {
 			boats.add(Bukkit.getPlayer(s));
 		}
 
-		for (String s : Files.manager.getStringList("Hockey")) {
+		for (String s : Files.manager.getStringList(Managers.HOCKEY.getdataName())) {
 			hockey.add(Bukkit.getPlayer(s));
 		}
 
-		for (String s : Files.manager.getStringList("Movie")) {
+		for (String s : Files.manager.getStringList(Managers.MOVIE.getdataName())) {
 			movie.add(Bukkit.getPlayer(s));
 		}
 
-		for (String s : Files.manager.getStringList("Banks")) {
+		for (String s : Files.manager.getStringList(Managers.BANK.getdataName())) {
 			banks.add(Bukkit.getPlayer(s));
 		}
 
-		for (String s : Files.manager.getStringList("Oil")) {
+		for (String s : Files.manager.getStringList(Managers.OIL.getdataName())) {
 			oil.add(Bukkit.getPlayer(s));
 		}
 	}

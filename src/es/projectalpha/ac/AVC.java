@@ -11,6 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import es.projectalpha.ac.cmd.Help;
 import es.projectalpha.ac.events.BuildInteract;
 import es.projectalpha.ac.events.ProtectWorld;
+import es.projectalpha.ac.events.invs.IAchievements;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.game.Currency;
 import es.projectalpha.ac.game.Game;
@@ -96,6 +97,7 @@ public class AVC extends JavaPlugin {
 	private void regEvents(){
 		new BuildInteract(this);
 		new ProtectWorld(this);
+		new IAchievements(this);
 	}
 
 	private void regCMDs(){

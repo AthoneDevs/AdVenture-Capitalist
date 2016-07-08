@@ -45,7 +45,6 @@ public class AchievementsCore {
 			Files.achie.set(at.toString(), players);
 			Files.saveFiles();
 		}
-		//If not have achievement do not do nothing
 	}
 
 	public static boolean hasAchievement(Player p, AchievementsType at){

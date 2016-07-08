@@ -16,7 +16,7 @@ import es.projectalpha.ac.api.BossBarAPI;
 import es.projectalpha.ac.api.HoloAPI;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.managers.ManagerCore;
-import es.projectalpha.ac.managers.ManagersPrice;
+import es.projectalpha.ac.managers.Managers;
 import es.projectalpha.ac.shops.Shops;
 import es.projectalpha.ac.shops.VillagerShops;
 
@@ -55,9 +55,11 @@ public class Game {
 					holo.display(p);
 
 					//Check if Enough Money
-					for (String manager : ManagerCore.managers) {
-						if (Currency.getCurrency(p) >= ManagersPrice.getPrice(manager)) {
-							BossBarAPI.sendMessageToPlayerRecurring(ChatColor.GREEN + "You can buy " + ChatColor.RED + manager, 8, BarColor.WHITE, BarStyle.SOLID, p);
+					for (int g = 0; g < Managers.values().length; g++) {
+						Managers m = Managers.values()[g];
+
+						if (Currency.getCurrency(p) >= m.getPrize()) {
+							BossBarAPI.sendMessageToPlayerRecurring(ChatColor.GREEN + "You can buy " + ChatColor.RED + m.getName() + ChatColor.GREEN + " manager", 8, BarColor.WHITE, BarStyle.SOLID, p);
 						}
 					}
 				}

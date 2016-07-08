@@ -13,7 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class AchievementsGUI {
 
 	public static void openAchievementsGUI(Player p){
-		Inventory inv = Bukkit.createInventory(null, 54, ChatColor.GREEN + "Achievements " + ChatColor.AQUA + "1/2");
+		Inventory inv = Bukkit.createInventory(null, 54, ChatColor.GREEN + "Achievements");
 
 		for (int g = 0; g < AchievementsType.values().length; g++) {
 			AchievementsType at = AchievementsType.values()[g];
@@ -36,12 +36,12 @@ public class AchievementsGUI {
 			}
 		}
 
-		ItemStack i = new ItemStack(Material.BOW);
-		ItemMeta im = i.getItemMeta();
-		im.setDisplayName("Next Page");
-		i.setItemMeta(im);
-
-		inv.setItem(49, i);
+		//		ItemStack i = new ItemStack(Material.BOW);
+		//		ItemMeta im = i.getItemMeta();
+		//		im.setDisplayName("Next Page");
+		//		i.setItemMeta(im);
+		//
+		//		inv.setItem(49, i);
 
 		p.openInventory(inv);
 	}

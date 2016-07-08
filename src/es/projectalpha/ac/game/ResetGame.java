@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.managers.ManagerCore;
+import es.projectalpha.ac.managers.Managers;
 import es.projectalpha.ac.utils.Messages;
 
 public class ResetGame {
@@ -16,8 +17,8 @@ public class ResetGame {
 
 		Files.players.set(p.getName(), null);
 
-		for (String manager : ManagerCore.managers) {
-			ManagerCore.removeManager(p, manager);
+		for (int g = 0; g < Managers.values().length; g++) {
+			ManagerCore.removeManager(p, Managers.values()[g]);
 		}
 
 		//TODO: Add Angels
