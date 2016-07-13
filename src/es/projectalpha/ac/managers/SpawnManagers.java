@@ -6,6 +6,8 @@ import java.util.HashMap;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 
+import es.projectalpha.ac.AVC;
+import es.projectalpha.ac.api.NPCAPI;
 
 public class SpawnManagers {
 
@@ -24,6 +26,7 @@ public class SpawnManagers {
 			loc.put(npc, l.add(m.getDistX(), 0, m.getDistZ()));
 			npcs.add(npc);
 
+			if (AVC.getDebug()) {
 				System.out.println(npc.getName());
 				System.out.println(npc);
 				System.out.println(npc.getLocation());

@@ -20,7 +20,7 @@ import es.projectalpha.ac.achievements.AchievementsType;
 import es.projectalpha.ac.api.ActionBarAPI;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.game.Currency;
-import es.projectalpha.ac.shops.VillagerShops;
+import es.projectalpha.ac.managers.SpawnManagers;
 import es.projectalpha.ac.utils.Messages;
 import es.projectalpha.ac.world.Schematic;
 
@@ -32,8 +32,6 @@ public class Help implements CommandExecutor {
 	public Help(AVC Main){
 		this.plugin = Main;
 	}
-
-	private boolean debug = false;
 
 	private String f = ChatColor.GRAY + " => ";
 
@@ -57,13 +55,13 @@ public class Help implements CommandExecutor {
 
 				if (args[0].equalsIgnoreCase("debug")) {
 					if (p.hasPermission("avc.admin")) {
-						if (debug) {
-							debug = false;
-							p.sendMessage(Messages.prefix + "Debug: " + ChatColor.RED + debug);
+						if (AVC.getDebug()) {
+							AVC.setDebug(false);
+							p.sendMessage(Messages.prefix + "Debug: " + ChatColor.RED + AVC.getDebug());
 							return true;
 						}
-						debug = true;
-						p.sendMessage(Messages.prefix + "Debug: " + ChatColor.RED + debug);
+						AVC.setDebug(true);
+						p.sendMessage(Messages.prefix + "Debug: " + ChatColor.RED + AVC.getDebug());
 					} else {
 						p.sendMessage(Messages.noPerms);
 					}
@@ -105,6 +103,8 @@ public class Help implements CommandExecutor {
 
 					Currency.newPlayerCurrency(p);
 
+					Messages.sendMapInfo(p);
+
 					//Others
 					if (id > 0) {
 						double x = Files.locs.getDouble("id" + id + ".x");
@@ -130,7 +130,7 @@ public class Help implements CommandExecutor {
 						Block b;
 						for (int g = 0; g < 30; g++) {
 
-							if (debug) {
+							if (AVC.getDebug()) {
 								System.out.println(loc.getWorld().getBlockAt((int) (x + 28), (int) y - 1, (int) (z - g)) + "");
 
 								if (loc.getWorld().getBlockAt((int) (x + 28), (int) y - 1, (int) (z - g)).getType() == Material.STAINED_GLASS) {
@@ -144,6 +144,8 @@ public class Help implements CommandExecutor {
 								Files.locs.set("id" + id + ".x", b.getLocation().getX());
 								Files.locs.set("id" + id + ".y", b.getLocation().getY() + 1);
 								Files.locs.set("id" + id + ".z", b.getLocation().getZ());
+
+								SpawnManagers.spawnManager(b.getLocation().add(0, 1, 0));
 
 								p.teleport(new Location(b.getWorld(), b.getLocation().getX(), b.getLocation().getY() + 1, b.getLocation().getZ()));
 
@@ -164,7 +166,7 @@ public class Help implements CommandExecutor {
 						Block b;
 						for (int g = 0; g < 30; g++) {
 
-							if (debug) {
+							if (AVC.getDebug()) {
 								System.out.println(p.getWorld().getBlockAt((int) (p.getLocation().getX() + 28), (int) p.getLocation().getY() - 1, (int) (p.getLocation().getZ() - g)) + "");
 
 								if (p.getWorld().getBlockAt((int) (p.getLocation().getX() + 28), (int) p.getLocation().getY() - 1, (int) (p.getLocation().getZ() - g)).getType() == Material.STAINED_GLASS) {
@@ -179,6 +181,8 @@ public class Help implements CommandExecutor {
 								Files.locs.set("id" + id + ".y", b.getLocation().getY() + 1);
 								Files.locs.set("id" + id + ".z", b.getLocation().getZ());
 
+								SpawnManagers.spawnManager(b.getLocation().add(0, 1, 0));
+
 								p.teleport(new Location(b.getWorld(), b.getLocation().getX(), b.getLocation().getY() + 1, b.getLocation().getZ()));
 
 								break;
@@ -189,7 +193,7 @@ public class Help implements CommandExecutor {
 
 						Files.saveFiles();
 					}
-					VillagerShops.loadVillagers();
+					//VillagerShops.loadVillagers();
 				}
 			}
 		}

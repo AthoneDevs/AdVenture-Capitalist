@@ -9,7 +9,8 @@ import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import es.projectalpha.ac.cmd.Help;
-import es.projectalpha.ac.events.BuildInteract;
+import es.projectalpha.ac.events.ChairInteract;
+import es.projectalpha.ac.events.ManagerInteract;
 import es.projectalpha.ac.events.ProtectWorld;
 import es.projectalpha.ac.events.invs.IAchievements;
 import es.projectalpha.ac.files.Files;
@@ -24,6 +25,8 @@ import es.projectalpha.ac.world.Generator;
 public class AVC extends JavaPlugin {
 
 	private static AVC plugin;
+
+	private static boolean debug = false;
 
 	public void onEnable(){
 		Bukkit.getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "========================");
@@ -95,9 +98,10 @@ public class AVC extends JavaPlugin {
 	}
 
 	private void regEvents(){
-		new BuildInteract(this);
+		new ManagerInteract(this);
 		new ProtectWorld(this);
 		new IAchievements(this);
+		new ChairInteract(this);
 	}
 
 	private void regCMDs(){
@@ -106,6 +110,14 @@ public class AVC extends JavaPlugin {
 
 	public static AVC getPlugin(){
 		return plugin;
+	}
+
+	public static boolean getDebug(){
+		return debug;
+	}
+
+	public static void setDebug(boolean debug){
+		AVC.debug = debug;
 	}
 
 	//For Multiverse or Bukkit Settings
