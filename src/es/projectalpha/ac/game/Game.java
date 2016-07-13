@@ -14,9 +14,11 @@ import org.bukkit.plugin.Plugin;
 
 import es.projectalpha.ac.api.BossBarAPI;
 import es.projectalpha.ac.api.HoloAPI;
+import es.projectalpha.ac.api.NPCAPI;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.managers.ManagerCore;
 import es.projectalpha.ac.managers.Managers;
+import es.projectalpha.ac.managers.SpawnManagers;
 import es.projectalpha.ac.shops.Shops;
 import es.projectalpha.ac.shops.VillagerShops;
 
@@ -32,6 +34,12 @@ public class Game {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 			public void run(){
 				for (Player p : playing) {
+
+					//Show NPCs
+					for (NPCAPI npc : SpawnManagers.npcs) {
+						npc.show(p);
+					}
+
 					//Destroy Hologram
 					for (HoloAPI holo : holos) {
 						holo.destroy(p);

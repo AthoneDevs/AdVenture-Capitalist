@@ -24,6 +24,19 @@ public class Messages {
 	public static String notEnoughMoney = prefix + ChatColor.RED + "Sorry, but you don't have enough money";
 	public static String buyManager = prefix + ChatColor.GREEN + "You have been bought the manager of " + ChatColor.YELLOW;
 
+	//Map Info
+	public static void sendMapInfo(Player p){
+		p.sendMessage(" ");
+		p.sendMessage(ChatColor.LIGHT_PURPLE + "==================================================");
+		p.sendMessage(" ");
+
+		p.sendMessage(ChatColor.GREEN + "Map created by " + ChatColor.RED + "SrJonh");
+
+		p.sendMessage(" ");
+		p.sendMessage(ChatColor.LIGHT_PURPLE + "==================================================");
+		p.sendMessage(" ");
+	}
+
 	//New Achievement
 	public static void newAchievement(AchievementsType at, Player p){
 		p.sendMessage(" ");

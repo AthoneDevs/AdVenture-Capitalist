@@ -13,11 +13,11 @@ import es.projectalpha.ac.game.Game;
 import es.projectalpha.ac.managers.Managers;
 import es.projectalpha.ac.shops.Shops;
 
-public class BuildInteract implements Listener {
+public class ManagerInteract implements Listener {
 
 	private AVC plugin;
 
-	public BuildInteract(AVC Main){
+	public ManagerInteract(AVC Main){
 		this.plugin = Main;
 		this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
 	}
