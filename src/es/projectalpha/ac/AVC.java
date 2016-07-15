@@ -8,6 +8,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.chasechocolate.portablebuildings.building.BuildingUtils;
+import com.chasechocolate.portablebuildings.schematic.SchematicUtils;
+
 import es.projectalpha.ac.cmd.Help;
 import es.projectalpha.ac.events.ChairInteract;
 import es.projectalpha.ac.events.ManagerInteract;
@@ -17,6 +20,8 @@ import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.game.Currency;
 import es.projectalpha.ac.game.Game;
 import es.projectalpha.ac.managers.ManagerCore;
+import es.projectalpha.ac.mysql.Data;
+import es.projectalpha.ac.mysql.MySQL;
 import es.projectalpha.ac.shops.VillagerShops;
 import es.projectalpha.ac.utils.Messages;
 import es.projectalpha.ac.utils.ServerVersion;
@@ -25,6 +30,9 @@ import es.projectalpha.ac.world.Generator;
 public class AVC extends JavaPlugin {
 
 	private static AVC plugin;
+
+	private MySQL mysql;
+	private Data data;
 
 	private static boolean debug = false;
 
@@ -51,6 +59,10 @@ public class AVC extends JavaPlugin {
 
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Checking and Creating files. . .");
 		Files.setupFiles();
+		SchematicUtils.initFile(Files.fileSchema);
+		SchematicUtils.initSchematics();
+
+		BuildingUtils.initBuildings();
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Setup Files Complete");
 
 		Bukkit.getConsoleSender().sendMessage(" ");
@@ -63,6 +75,13 @@ public class AVC extends JavaPlugin {
 
 			Bukkit.getConsoleSender().sendMessage(" ");
 
+		}
+
+		if (Files.cfg.getBoolean("MySQL.enabled")) {
+			Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Connecting to MySQL. . .");
+			this.mysql = new MySQL(this);
+			this.data = new Data(this);
+			Bukkit.getConsoleSender().sendMessage(" ");
 		}
 
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Registering Commands and Events. . .");
@@ -110,6 +129,14 @@ public class AVC extends JavaPlugin {
 
 	public static AVC getPlugin(){
 		return plugin;
+	}
+
+	public MySQL getMySQL(){
+		return this.mysql;
+	}
+
+	public Data getData(){
+		return this.data;
 	}
 
 	public static boolean getDebug(){

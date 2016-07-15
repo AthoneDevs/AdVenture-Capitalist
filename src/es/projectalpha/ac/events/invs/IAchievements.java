@@ -7,7 +7,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import es.projectalpha.ac.AVC;
+import es.projectalpha.ac.achievements.AchievementsCore;
 import es.projectalpha.ac.achievements.AchievementsType;
+import es.projectalpha.ac.utils.Messages;
 
 public class IAchievements implements Listener {
 
@@ -38,21 +40,25 @@ public class IAchievements implements Listener {
 					e.setCancelled(true);
 					p.closeInventory();
 
-					p.sendMessage(" ");
-					p.sendMessage(ChatColor.LIGHT_PURPLE + "==================================================");
-					p.sendMessage(" ");
+					if (AchievementsCore.hasAchievement(p, at)) {
+						p.sendMessage(" ");
+						p.sendMessage(ChatColor.WHITE + "==================================================");
+						p.sendMessage(" ");
 
-					p.sendMessage(ChatColor.AQUA + "- Name: " + ChatColor.GOLD + at.getDispName());
-					if (!at.getMessage().equalsIgnoreCase("")) {
-						p.sendMessage(ChatColor.AQUA + "- Message: " + ChatColor.GREEN + at.getMessage());
-					}
-					if (at.getReward() != 0) {
-						p.sendMessage(ChatColor.AQUA + "- Reward: " + ChatColor.YELLOW + at.getReward());
-					}
+						p.sendMessage(ChatColor.AQUA + "- Name: " + ChatColor.GOLD + at.getDispName());
+						if (!at.getMessage().equalsIgnoreCase("")) {
+							p.sendMessage(ChatColor.AQUA + "- Message: " + ChatColor.GREEN + at.getMessage());
+						}
+						if (at.getReward() != 0) {
+							p.sendMessage(ChatColor.AQUA + "- Reward: " + ChatColor.YELLOW + at.getReward());
+						}
 
-					p.sendMessage(" ");
-					p.sendMessage(ChatColor.LIGHT_PURPLE + "==================================================");
-					p.sendMessage(" ");
+						p.sendMessage(" ");
+						p.sendMessage(ChatColor.WHITE + "==================================================");
+						p.sendMessage(" ");
+					} else {
+						p.sendMessage(Messages.prefix + ChatColor.RED + "You must have the achievement to see it");
+					}
 				}
 			}
 		}

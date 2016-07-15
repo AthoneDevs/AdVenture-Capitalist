@@ -1,7 +1,5 @@
 package es.projectalpha.ac.cmd;
 
-import java.io.File;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -13,6 +11,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.chasechocolate.portablebuildings.building.Building;
+import com.chasechocolate.portablebuildings.building.BuildingUtils;
+
 import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.achievements.AchievementsCore;
 import es.projectalpha.ac.achievements.AchievementsGUI;
@@ -22,7 +23,6 @@ import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.game.Currency;
 import es.projectalpha.ac.managers.SpawnManagers;
 import es.projectalpha.ac.utils.Messages;
-import es.projectalpha.ac.world.Schematic;
 
 public class Help implements CommandExecutor {
 
@@ -125,7 +125,13 @@ public class Help implements CommandExecutor {
 
 						Files.players.set(p.getName() + ".id", id);
 
-						Schematic.pasteSchematic(new File("plugins/AC/Utils/build.schematic"), p.getLocation());
+						BuildingUtils.setBuilding(p, BuildingUtils.getBuilding("build.schematic"));
+
+						Building building = BuildingUtils.getPlayerBuilding(p);
+
+						building.build(p.getLocation());
+
+						//Schematic.pasteSchematic(new File("plugins/AC/Utils/build.schematic"), p.getLocation());
 
 						Block b;
 						for (int g = 0; g < 30; g++) {
@@ -161,7 +167,13 @@ public class Help implements CommandExecutor {
 
 						Files.locs.set("num", id);
 
-						Schematic.pasteSchematic(new File("plugins/AC/Utils/build.schematic"), p.getLocation());
+						BuildingUtils.setBuilding(p, BuildingUtils.getBuilding("build.schematic"));
+
+						Building building = BuildingUtils.getPlayerBuilding(p);
+
+						building.build(p.getLocation());
+
+						//	Schematic.pasteSchematic(new File("plugins/AC/Utils/build.schematic"), p.getLocation());
 
 						Block b;
 						for (int g = 0; g < 30; g++) {

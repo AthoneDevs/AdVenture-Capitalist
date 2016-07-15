@@ -40,22 +40,9 @@ public class Messages {
 	//New Achievement
 	public static void newAchievement(AchievementsType at, Player p){
 		p.sendMessage(" ");
-		p.sendMessage(ChatColor.LIGHT_PURPLE + "==================================================");
-		p.sendMessage(" ");
 
-		p.sendMessage(ChatColor.AQUA + "         ------ " + prefix + ChatColor.RED + "New Achievement!" + ChatColor.AQUA + " ------");
-		p.sendMessage(" ");
+		p.sendMessage(Messages.prefix + ChatColor.GREEN + "You have get a new achievement: " + ChatColor.YELLOW + at.getDispName());
 
-		p.sendMessage(ChatColor.AQUA + "- Name: " + ChatColor.GOLD + at.getDispName());
-		if (!at.getMessage().equalsIgnoreCase("")) {
-			p.sendMessage(ChatColor.AQUA + "- Message: " + ChatColor.GREEN + at.getMessage());
-		}
-		if (at.getReward() != 0) {
-			p.sendMessage(ChatColor.AQUA + "- Reward: " + ChatColor.YELLOW + at.getReward());
-		}
-
-		p.sendMessage(" ");
-		p.sendMessage(ChatColor.LIGHT_PURPLE + "==================================================");
 		p.sendMessage(" ");
 	}
 
