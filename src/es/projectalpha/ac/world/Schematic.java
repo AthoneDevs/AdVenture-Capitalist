@@ -3,10 +3,7 @@ package es.projectalpha.ac.world;
 import java.io.File;
 import java.io.IOException;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-
-import me.fromgate.scload.ScLoad;
 
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.MaxChangedBlocksException;
@@ -22,8 +19,6 @@ public class Schematic {
 	public synchronized static void pasteSchematic(File dir, Location pasteLoc){
 
 		try {
-
-			ScLoad s = (ScLoad) Bukkit.getPluginManager().getPlugin("SCLoad");
 
 			EditSession editSession = new EditSession(new BukkitWorld(pasteLoc.getWorld()), Integer.MAX_VALUE);
 			editSession.enableQueue();
