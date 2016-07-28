@@ -9,7 +9,7 @@ import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import es.projectalpha.ac.cmd.Help;
-import es.projectalpha.ac.events.ChairInteract;
+import es.projectalpha.ac.events.Fancy;
 import es.projectalpha.ac.events.ManagerInteract;
 import es.projectalpha.ac.events.ProtectWorld;
 import es.projectalpha.ac.events.invs.IAchievements;
@@ -19,7 +19,7 @@ import es.projectalpha.ac.game.Game;
 import es.projectalpha.ac.managers.ManagerCore;
 import es.projectalpha.ac.mysql.Data;
 import es.projectalpha.ac.mysql.MySQL;
-import es.projectalpha.ac.shops.VillagerShops;
+import es.projectalpha.ac.shops.ShopsCore;
 import es.projectalpha.ac.utils.Messages;
 import es.projectalpha.ac.utils.ServerVersion;
 import es.projectalpha.ac.world.Generator;
@@ -86,7 +86,7 @@ public class AVC extends JavaPlugin {
 
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Loading Game. . .");
 		ManagerCore.loadManagers();
-		VillagerShops.loadVillagers();
+		ShopsCore.loadShops();
 		Game.startTimer(this);
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Game Loaded");
 
@@ -113,7 +113,7 @@ public class AVC extends JavaPlugin {
 		new ManagerInteract(this);
 		new ProtectWorld(this);
 		new IAchievements(this);
-		new ChairInteract(this);
+		new Fancy(this);
 	}
 
 	private void regCMDs(){

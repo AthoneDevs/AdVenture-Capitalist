@@ -66,12 +66,13 @@ public class Game {
 					for (int g = 0; g < Managers.values().length; g++) {
 						Managers m = Managers.values()[g];
 
-						if (Currency.getMoney(p) >= m.getPrize()) {
+						if (Currency.getMoney(p) >= m.getPrice()) {
 							BossBarAPI.sendMessageToPlayerRecurring(ChatColor.GREEN + "You can buy " + ChatColor.RED + m.getName() + ChatColor.GREEN + " manager", 8, BarColor.WHITE, BarStyle.SOLID, p);
 						}
 					}
 				}
 
+				//TODO: Real cooldown
 				//Managers
 				for (Player p : ManagerCore.lemonade) {
 					Currency.addMoney(p, Shops.LEMONADE.getReward());
@@ -89,7 +90,7 @@ public class Game {
 					Currency.addMoney(p, Shops.DONUT.getReward());
 				}
 				for (Player p : ManagerCore.boats) {
-					Currency.addMoney(p, Shops.BOATS.getReward());
+					Currency.addMoney(p, Shops.BOAT.getReward());
 				}
 				for (Player p : ManagerCore.hockey) {
 					Currency.addMoney(p, Shops.HOCKEY.getReward());
@@ -98,7 +99,7 @@ public class Game {
 					Currency.addMoney(p, Shops.MOVIE.getReward());
 				}
 				for (Player p : ManagerCore.banks) {
-					Currency.addMoney(p, Shops.BANKS.getReward());
+					Currency.addMoney(p, Shops.BANK.getReward());
 				}
 				for (Player p : ManagerCore.oil) {
 					Currency.addMoney(p, Shops.OIL.getReward());

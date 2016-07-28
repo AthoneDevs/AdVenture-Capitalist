@@ -12,16 +12,16 @@ public enum Managers {
 	private String dataName;
 	private String name;
 	private String managerName;
-	private double prize;
+	private double price;
 	private int distX;
 	private int distZ;
 	private Material mat;
 
-	Managers(String dataName, String name, String managerName, double prize, int distX, int distZ, Material mat){
+	Managers(String dataName, String name, String managerName, double price, int distX, int distZ, Material mat){
 		this.dataName = dataName;
 		this.name = name;
 		this.managerName = managerName;
-		this.prize = prize;
+		this.price = price;
 		this.distX = distX;
 		this.distZ = distZ;
 		this.mat = mat;
@@ -39,8 +39,8 @@ public enum Managers {
 		return this.managerName;
 	}
 
-	public double getPrize(){
-		return this.prize;
+	public double getPrice(){
+		return this.price;
 	}
 
 	public int getDistX(){

@@ -18,9 +18,12 @@ import es.projectalpha.ac.achievements.AchievementsCore;
 import es.projectalpha.ac.achievements.AchievementsGUI;
 import es.projectalpha.ac.achievements.AchievementsType;
 import es.projectalpha.ac.api.ActionBarAPI;
+import es.projectalpha.ac.api.AttackSpeedAPI;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.game.Currency;
 import es.projectalpha.ac.managers.SpawnManagers;
+import es.projectalpha.ac.shops.Shops;
+import es.projectalpha.ac.shops.ShopsCore;
 import es.projectalpha.ac.utils.Messages;
 import es.projectalpha.ac.world.Schematic;
 
@@ -70,6 +73,8 @@ public class Help implements CommandExecutor {
 				if (args[0].equalsIgnoreCase("play")) {
 					World world = Bukkit.getWorld("ac");
 
+					AttackSpeedAPI.setAttackSpeed(p, 16.0D);
+
 					p.setFlying(true);
 					p.setNoDamageTicks(Integer.MAX_VALUE);
 
@@ -104,6 +109,8 @@ public class Help implements CommandExecutor {
 					Currency.newPlayerMoney(p, 0);
 
 					Messages.sendMapInfo(p);
+
+					ShopsCore.addShop(p, Shops.LEMONADE);
 
 					//Others
 					if (id > 0) {

@@ -57,23 +57,23 @@ public class ManagerCore {
 	}
 
 	public static void buyManager(Player p, Managers m){
-		if (ManagerCore.hasManager(p, m)) {
+		if (hasManager(p, m)) {
 			p.sendMessage(Messages.hasManager);
 			return;
 		}
 
-		if (Currency.getMoney(p) <= m.getPrize()) {
+		if (Currency.getMoney(p) <= m.getPrice()) {
 			p.sendMessage(Messages.notEnoughMoney);
 			return;
 		}
 
-		Currency.removeMoney(p, m.getPrize());
-		ManagerCore.addManager(p, m);
+		Currency.removeMoney(p, m.getPrice());
+		addManager(p, m);
 		p.sendMessage(Messages.buyManager);
 	}
 
 	public static boolean hasManager(Player p, Managers m){
-		if (Files.achie.getStringList(m.getdataName()).contains(p)) {
+		if (Files.manager.getStringList(m.getdataName()).contains(p)) {
 			return true;
 		}
 		return false;

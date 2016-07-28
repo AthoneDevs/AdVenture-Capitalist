@@ -19,10 +19,13 @@ public class Messages {
 	public static String newCompany = prefix + ChatColor.GREEN + "You have been created your own company";
 	public static String tpCompany = prefix + ChatColor.GREEN + "You has been teleported to your Company";
 	public static String hasManager = prefix + ChatColor.RED + "Sorry, but you have already this manager";
+	public static String hasShop = prefix + ChatColor.RED + "Sorry, but you have already this shop";
 	public static String notHasManager = prefix + ChatColor.RED + "Sorry, but you don't have this manager";
+	public static String notHasShop = prefix + ChatColor.RED + "Sorry, but you don't have this shop";
 	public static String noDatabase = prefix + ChatColor.RED + "Sorry, this player is not in the database";
 	public static String notEnoughMoney = prefix + ChatColor.RED + "Sorry, but you don't have enough money";
 	public static String buyManager = prefix + ChatColor.GREEN + "You have been bought the manager of " + ChatColor.YELLOW;
+	public static String buyShop = prefix + ChatColor.GREEN + "You have been bought the shop of " + ChatColor.YELLOW;
 
 	//Map Info
 	public static void sendMapInfo(Player p){

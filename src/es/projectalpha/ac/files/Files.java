@@ -33,8 +33,8 @@ public class Files {
 	public static File fileLocs = new File("plugins/AC/Data", "locs.yml");
 	public static YamlConfiguration locs = YamlConfiguration.loadConfiguration(fileLocs);
 
-	public static File fileVill = new File("plugins/AC/Data", "villagers.yml");
-	public static YamlConfiguration vill = YamlConfiguration.loadConfiguration(fileVill);
+	public static File fileShops = new File("plugins/AC/Data", "shops.yml");
+	public static YamlConfiguration shops = YamlConfiguration.loadConfiguration(fileShops);
 
 	public static void setupFiles(){
 		if (!fileConfig.exists()) {
@@ -45,7 +45,6 @@ public class Files {
 			cfg.set("MySQL.db", "avc");
 			cfg.set("MySQL.user", "root");
 			cfg.set("MySQL.pass", "123456");
-			cfg.set("Schematic.delay", 4);
 		}
 		if (!filePlayers.exists()) {
 			filePlayers.mkdir();
@@ -63,8 +62,8 @@ public class Files {
 		if (!fileAchie.exists()) {
 			fileAchie.mkdir();
 		}
-		if (!fileVill.exists()) {
-			fileVill.mkdir();
+		if (!fileShops.exists()) {
+			fileShops.mkdir();
 		}
 		saveFiles();
 	}
@@ -79,8 +78,8 @@ public class Files {
 			locs.load(fileLocs);
 			manager.save(fileManagers);
 			manager.load(fileManagers);
-			vill.save(fileVill);
-			vill.load(fileVill);
+			shops.save(fileShops);
+			shops.load(fileShops);
 			achie.save(fileAchie);
 			achie.load(fileAchie);
 		} catch (IOException | InvalidConfigurationException e) {
