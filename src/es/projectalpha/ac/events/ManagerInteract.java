@@ -32,9 +32,7 @@ public class ManagerInteract implements Listener {
 				Villager v = (Villager) en;
 				String name = v.getCustomName();
 
-				for (int g = 0; g < Managers.values().length; g++) {
-					Managers m = Managers.values()[g];
-
+				for (Managers m : Managers.values()) {
 					if (name.equalsIgnoreCase(m.getManagerName())) {
 						if (Cooldowns.isCooling(p.getName(), m.getName())) {
 							Cooldowns.coolDurMessage(p, m.getName());

@@ -51,7 +51,7 @@ public class Data {
 
 			preparedStatement.setString(1, uuid.toString());
 			preparedStatement.setString(2, p.getName());
-			preparedStatement.setString(3, Currency.simpleCurrency(p));
+			preparedStatement.setString(3, Currency.getSMoney(p));
 
 			preparedStatement.executeUpdate();
 			return true;

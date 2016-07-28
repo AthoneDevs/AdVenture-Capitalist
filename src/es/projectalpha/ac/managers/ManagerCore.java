@@ -62,12 +62,12 @@ public class ManagerCore {
 			return;
 		}
 
-		if (Currency.getCurrency(p) <= m.getPrize()) {
+		if (Currency.getMoney(p) <= m.getPrize()) {
 			p.sendMessage(Messages.notEnoughMoney);
 			return;
 		}
 
-		Currency.removeCurrency(p, m.getPrize());
+		Currency.removeMoney(p, m.getPrize());
 		ManagerCore.addManager(p, m);
 		p.sendMessage(Messages.buyManager);
 	}

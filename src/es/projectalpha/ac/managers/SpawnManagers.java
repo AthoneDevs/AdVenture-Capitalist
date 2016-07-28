@@ -3,8 +3,10 @@ package es.projectalpha.ac.managers;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.api.NPCAPI;
@@ -22,6 +24,11 @@ public class SpawnManagers {
 			npc.destroy();
 			npc.spawn();
 			npc.setGameMode(GameMode.CREATIVE);
+			npc.setLocation(l.add(m.getDistX(), 0, m.getDistZ()));
+
+			for (Player p : Bukkit.getOnlinePlayers()) {
+				npc.show(p);
+			}
 
 			loc.put(npc, l.add(m.getDistX(), 0, m.getDistZ()));
 			npcs.add(npc);

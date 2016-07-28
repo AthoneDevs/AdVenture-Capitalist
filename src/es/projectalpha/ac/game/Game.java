@@ -9,7 +9,6 @@ import org.bukkit.Location;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Villager;
 import org.bukkit.plugin.Plugin;
 
 import es.projectalpha.ac.api.BossBarAPI;
@@ -20,7 +19,6 @@ import es.projectalpha.ac.managers.ManagerCore;
 import es.projectalpha.ac.managers.Managers;
 import es.projectalpha.ac.managers.SpawnManagers;
 import es.projectalpha.ac.shops.Shops;
-import es.projectalpha.ac.shops.VillagerShops;
 
 public class Game {
 
@@ -37,6 +35,8 @@ public class Game {
 
 					//Show NPCs
 					for (NPCAPI npc : SpawnManagers.npcs) {
+						npc.destroy();
+						npc.spawn();
 						npc.show(p);
 					}
 
@@ -46,9 +46,9 @@ public class Game {
 					}
 
 					//TP Villagers
-					for (Villager v : VillagerShops.villagerUtils) {
-						v.teleport(VillagerShops.villagerLocs.get(v));
-					}
+					//					for (Villager v : VillagerShops.villagerUtils) {
+					//						v.teleport(VillagerShops.villagerLocs.get(v));
+					//					}
 
 					//Show Money
 					int id = Files.players.getInt(p.getName() + ".id");
@@ -59,14 +59,14 @@ public class Game {
 
 					Location l = new Location(Bukkit.getWorld("ac"), x, y + 3, z);
 
-					HoloAPI holo = new HoloAPI(l, "$ " + Currency.getCurrency(p));
+					HoloAPI holo = new HoloAPI(l, "$ " + Currency.getMoney(p));
 					holo.display(p);
 
 					//Check if Enough Money
 					for (int g = 0; g < Managers.values().length; g++) {
 						Managers m = Managers.values()[g];
 
-						if (Currency.getCurrency(p) >= m.getPrize()) {
+						if (Currency.getMoney(p) >= m.getPrize()) {
 							BossBarAPI.sendMessageToPlayerRecurring(ChatColor.GREEN + "You can buy " + ChatColor.RED + m.getName() + ChatColor.GREEN + " manager", 8, BarColor.WHITE, BarStyle.SOLID, p);
 						}
 					}
@@ -74,34 +74,34 @@ public class Game {
 
 				//Managers
 				for (Player p : ManagerCore.lemonade) {
-					Currency.addCurrency(p, Shops.LEMONADE.getReward());
+					Currency.addMoney(p, Shops.LEMONADE.getReward());
 				}
 				for (Player p : ManagerCore.news) {
-					Currency.addCurrency(p, Shops.NEWS.getReward());
+					Currency.addMoney(p, Shops.NEWS.getReward());
 				}
 				for (Player p : ManagerCore.car) {
-					Currency.addCurrency(p, Shops.CAR.getReward());
+					Currency.addMoney(p, Shops.CAR.getReward());
 				}
 				for (Player p : ManagerCore.pizza) {
-					Currency.addCurrency(p, Shops.PIZZA.getReward());
+					Currency.addMoney(p, Shops.PIZZA.getReward());
 				}
 				for (Player p : ManagerCore.donut) {
-					Currency.addCurrency(p, Shops.DONUT.getReward());
+					Currency.addMoney(p, Shops.DONUT.getReward());
 				}
 				for (Player p : ManagerCore.boats) {
-					Currency.addCurrency(p, Shops.BOATS.getReward());
+					Currency.addMoney(p, Shops.BOATS.getReward());
 				}
 				for (Player p : ManagerCore.hockey) {
-					Currency.addCurrency(p, Shops.HOCKEY.getReward());
+					Currency.addMoney(p, Shops.HOCKEY.getReward());
 				}
 				for (Player p : ManagerCore.movie) {
-					Currency.addCurrency(p, Shops.MOVIE.getReward());
+					Currency.addMoney(p, Shops.MOVIE.getReward());
 				}
 				for (Player p : ManagerCore.banks) {
-					Currency.addCurrency(p, Shops.BANKS.getReward());
+					Currency.addMoney(p, Shops.BANKS.getReward());
 				}
 				for (Player p : ManagerCore.oil) {
-					Currency.addCurrency(p, Shops.OIL.getReward());
+					Currency.addMoney(p, Shops.OIL.getReward());
 				}
 
 			}

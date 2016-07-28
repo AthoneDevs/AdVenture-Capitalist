@@ -14,30 +14,48 @@ public class Currency {
 
 	public static HashMap<Player, String> runningCurrency = new HashMap<Player, String>();
 
-	public static void addCurrency(Player p, double amount){
-		runningCurrency.put(p, parseCurrency(getCurrency(p) + amount));
+	public static boolean existPlayer(Player p){
+		if (Files.players.contains(p.getName())) {
+			return true;
+		}
+		return false;
 	}
 
-	public static void removeCurrency(Player p, double amount){
-		runningCurrency.put(p, parseCurrency(getCurrency(p) - amount));
+	public static void addMoney(Player p, double amount){
+		if (existPlayer(p)) {
+			runningCurrency.put(p, parseMoney(getMoney(p) + amount));
+		}
 	}
 
-	public static void saveCurrency(Player p){
-		Files.players.set(p.getName() + ".money", getCurrency(p));
+	public static void removeMoney(Player p, double amount){
+		if (existPlayer(p)) {
+			runningCurrency.put(p, parseMoney(getMoney(p) - amount));
+		}
+	}
+
+	public static void saveMoney(Player p){
+		Files.players.set(p.getName() + ".money", getMoney(p));
 		Files.saveFiles();
 	}
 
-	public static void loadCurrency(Player p){
-		runningCurrency.put(p, parseCurrency(Files.players.getDouble(p.getName() + ".money")));
+	public static void loadMoney(Player p){
+		if (existPlayer(p)) {
+			runningCurrency.put(p, parseMoney(Files.players.getDouble(p.getName() + ".money")));
+		}
 	}
 
-	public static void newPlayerCurrency(Player p){
-		runningCurrency.put(p, parseCurrency(0));
+	public static void newPlayerMoney(Player p, double amount){
+		runningCurrency.put(p, parseMoney(amount));
+		saveMoney(p);
 	}
 
-	public static double getCurrency(Player p){
+	public static double getMoney(Player p){
 		String currency = runningCurrency.get(p);
 		String[] subString;
+
+		if (!runningCurrency.containsKey(p)) {
+			return 0;
+		}
 
 		if (currency.contains("Million")) {
 			subString = currency.split(" ");
@@ -62,37 +80,37 @@ public class Currency {
 		return Double.parseDouble(subString[0]);
 	}
 
-	public static String simpleCurrency(Player p){
+	public static String getSMoney(Player p){
 		double g = 1000000;
 
-		if (getCurrency(p) == g) {
-			return NumberUtils.getMillions(getCurrency(p));
+		if (getMoney(p) == g) {
+			return NumberUtils.getMillions(getMoney(p));
 		}
 
-		if (getCurrency(p) > g) {
-			return NumberUtils.getMillions(getCurrency(p)) + "s";
+		if (getMoney(p) > g) {
+			return NumberUtils.getMillions(getMoney(p)) + "s";
 		}
 
-		if (getCurrency(p) == g * 1000) {
-			return NumberUtils.getBillions(getCurrency(p));
+		if (getMoney(p) == g * 1000) {
+			return NumberUtils.getBillions(getMoney(p));
 		}
 
-		if (getCurrency(p) > g * 1000) {
-			return NumberUtils.getBillions(getCurrency(p)) + "s";
+		if (getMoney(p) > g * 1000) {
+			return NumberUtils.getBillions(getMoney(p)) + "s";
 		}
 
-		if (getCurrency(p) == g * 100000) {
-			return NumberUtils.getTrillions(getCurrency(p));
+		if (getMoney(p) == g * 100000) {
+			return NumberUtils.getTrillions(getMoney(p));
 		}
 
-		if (getCurrency(p) > g * 100000) {
-			return NumberUtils.getTrillions(getCurrency(p)) + "s";
+		if (getMoney(p) > g * 100000) {
+			return NumberUtils.getTrillions(getMoney(p)) + "s";
 		}
 
-		return String.valueOf(getCurrency(p));
+		return String.valueOf(getMoney(p));
 	}
 
-	public static String parseCurrency(double currency){
+	public static String parseMoney(double currency){
 		double g = 1000000;
 
 		if (currency == g) {

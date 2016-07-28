@@ -8,6 +8,7 @@ public enum Shops {
 
 	private double reward;
 	private double timer;
+	private double price;
 	private Material mat;
 
 	Shops(double reward, double timer, Material mat){
@@ -22,6 +23,10 @@ public enum Shops {
 
 	public double getTimer(){
 		return this.timer;
+	}
+
+	public double getPrice(){
+		return this.price;
 	}
 
 	public Material getMaterial(){

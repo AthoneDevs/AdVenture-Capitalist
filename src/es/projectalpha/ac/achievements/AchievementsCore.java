@@ -56,7 +56,7 @@ public class AchievementsCore {
 
 	public static void checkAchievements(){
 		for (Player p : Game.playing) {
-			if (Currency.getCurrency(p) >= 5000) {
+			if (Currency.getMoney(p) >= 5000) {
 				AchievementsCore.addAchievement(p, AchievementsType.PC);
 			}
 		}

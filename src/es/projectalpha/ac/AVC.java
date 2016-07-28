@@ -8,9 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.chasechocolate.portablebuildings.building.BuildingUtils;
-import com.chasechocolate.portablebuildings.schematic.SchematicUtils;
-
 import es.projectalpha.ac.cmd.Help;
 import es.projectalpha.ac.events.ChairInteract;
 import es.projectalpha.ac.events.ManagerInteract;
@@ -59,10 +56,6 @@ public class AVC extends JavaPlugin {
 
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Checking and Creating files. . .");
 		Files.setupFiles();
-		SchematicUtils.initFile(Files.fileSchema);
-		SchematicUtils.initSchematics();
-
-		BuildingUtils.initBuildings();
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Setup Files Complete");
 
 		Bukkit.getConsoleSender().sendMessage(" ");
@@ -111,7 +104,7 @@ public class AVC extends JavaPlugin {
 	public void onDisable(){
 
 		for (Player p : Game.playing) {
-			Currency.saveCurrency(p);
+			Currency.saveMoney(p);
 		}
 
 	}

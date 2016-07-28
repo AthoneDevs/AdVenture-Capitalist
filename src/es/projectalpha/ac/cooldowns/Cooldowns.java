@@ -63,7 +63,7 @@ public class Cooldowns {
 		Player cPlayer = Bukkit.getPlayer(player);
 		if (player != null) {
 			cPlayer.sendMessage(Messages.prefix + ChatColor.GRAY + "Complete: " + ChatColor.AQUA + WordUtils.capitalizeFully(manager));
-			Currency.addCurrency(Bukkit.getPlayer(player), ShopsCore.getReward(manager));
+			Currency.addMoney(Bukkit.getPlayer(player), ShopsCore.getReward(manager));
 		}
 	}
 
