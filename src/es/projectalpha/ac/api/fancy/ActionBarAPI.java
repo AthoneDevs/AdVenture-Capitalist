@@ -1,8 +1,10 @@
-package es.projectalpha.ac.api;
+package es.projectalpha.ac.api.fancy;
 
 import java.lang.reflect.Constructor;
 
 import org.bukkit.entity.Player;
+
+import es.projectalpha.ac.api.ReflectionAPI;
 
 public class ActionBarAPI {
 	private static Class<?> packetClass = null;

@@ -47,60 +47,43 @@ public class FireworkAPI {
 	}
 
 	private static Color getColor(int i){
-		//TODO: Change this to switch
-		Color c = null;
-		if (i == 1) {
-			c = Color.AQUA;
+		switch (i) {
+		case 1:
+			return Color.AQUA;
+		case 2:
+			return Color.BLACK;
+		case 3:
+			return Color.BLUE;
+		case 4:
+			return Color.FUCHSIA;
+		case 5:
+			return Color.GRAY;
+		case 6:
+			return Color.GREEN;
+		case 7:
+			return Color.LIME;
+		case 8:
+			return Color.MAROON;
+		case 9:
+			return Color.NAVY;
+		case 10:
+			return Color.OLIVE;
+		case 11:
+			return Color.ORANGE;
+		case 12:
+			return Color.PURPLE;
+		case 13:
+			return Color.RED;
+		case 14:
+			return Color.SILVER;
+		case 15:
+			return Color.TEAL;
+		case 16:
+			return Color.WHITE;
+		case 17:
+			return Color.YELLOW;
+		default:
+			return Color.AQUA;
 		}
-		if (i == 2) {
-			c = Color.BLACK;
-		}
-		if (i == 3) {
-			c = Color.BLUE;
-		}
-		if (i == 4) {
-			c = Color.FUCHSIA;
-		}
-		if (i == 5) {
-			c = Color.GRAY;
-		}
-		if (i == 6) {
-			c = Color.GREEN;
-		}
-		if (i == 7) {
-			c = Color.LIME;
-		}
-		if (i == 8) {
-			c = Color.MAROON;
-		}
-		if (i == 9) {
-			c = Color.NAVY;
-		}
-		if (i == 10) {
-			c = Color.OLIVE;
-		}
-		if (i == 11) {
-			c = Color.ORANGE;
-		}
-		if (i == 12) {
-			c = Color.PURPLE;
-		}
-		if (i == 13) {
-			c = Color.RED;
-		}
-		if (i == 14) {
-			c = Color.SILVER;
-		}
-		if (i == 15) {
-			c = Color.TEAL;
-		}
-		if (i == 16) {
-			c = Color.WHITE;
-		}
-		if (i == 17) {
-			c = Color.YELLOW;
-		}
-
-		return c;
 	}
 }

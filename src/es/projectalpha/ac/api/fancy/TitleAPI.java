@@ -1,10 +1,12 @@
-package es.projectalpha.ac.api;
+package es.projectalpha.ac.api.fancy;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
 import org.bukkit.entity.Player;
+
+import es.projectalpha.ac.api.ReflectionAPI;
 
 public class TitleAPI {
 	private static Class<?> packetClass = null;

@@ -1,4 +1,4 @@
-package es.projectalpha.ac.api;
+package es.projectalpha.ac.api.fancy;
 
 import java.util.List;
 
