@@ -11,13 +11,14 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-import es.projectalpha.ac.api.BossBarAPI;
-import es.projectalpha.ac.api.HoloAPI;
 import es.projectalpha.ac.api.NPCAPI;
+import es.projectalpha.ac.api.fancy.BossBarAPI;
+import es.projectalpha.ac.api.fancy.HoloAPI;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.managers.ManagerCore;
 import es.projectalpha.ac.managers.Managers;
 import es.projectalpha.ac.managers.SpawnManagers;
+import es.projectalpha.ac.modifiers.ModifiersCore;
 import es.projectalpha.ac.shops.Shops;
 
 public class Game {
@@ -44,6 +45,9 @@ public class Game {
 					for (HoloAPI holo : holos) {
 						holo.destroy(p);
 					}
+
+					//TEST
+					System.out.println("Work");
 
 					//TP Villagers
 					//					for (Villager v : VillagerShops.villagerUtils) {
@@ -72,37 +76,37 @@ public class Game {
 					}
 				}
 
-				//TODO: Real cooldown
+				//TODO: Real cooldown, Better System
 				//Managers
 				for (Player p : ManagerCore.lemonade) {
-					Currency.addMoney(p, Shops.LEMONADE.getReward());
+					Currency.addMoney(p, Shops.LEMONADE.getReward() * ModifiersCore.getMoneyShopItems(Shops.LEMONADE, p));
 				}
 				for (Player p : ManagerCore.news) {
-					Currency.addMoney(p, Shops.NEWS.getReward());
+					Currency.addMoney(p, Shops.NEWS.getReward() * ModifiersCore.getMoneyShopItems(Shops.NEWS, p));
 				}
 				for (Player p : ManagerCore.car) {
-					Currency.addMoney(p, Shops.CAR.getReward());
+					Currency.addMoney(p, Shops.CAR.getReward() * ModifiersCore.getMoneyShopItems(Shops.CAR, p));
 				}
 				for (Player p : ManagerCore.pizza) {
-					Currency.addMoney(p, Shops.PIZZA.getReward());
+					Currency.addMoney(p, Shops.PIZZA.getReward() * ModifiersCore.getMoneyShopItems(Shops.PIZZA, p));
 				}
 				for (Player p : ManagerCore.donut) {
-					Currency.addMoney(p, Shops.DONUT.getReward());
+					Currency.addMoney(p, Shops.DONUT.getReward() * ModifiersCore.getMoneyShopItems(Shops.DONUT, p));
 				}
 				for (Player p : ManagerCore.boats) {
-					Currency.addMoney(p, Shops.BOAT.getReward());
+					Currency.addMoney(p, Shops.BOAT.getReward() * ModifiersCore.getMoneyShopItems(Shops.BOAT, p));
 				}
 				for (Player p : ManagerCore.hockey) {
-					Currency.addMoney(p, Shops.HOCKEY.getReward());
+					Currency.addMoney(p, Shops.HOCKEY.getReward() * ModifiersCore.getMoneyShopItems(Shops.HOCKEY, p));
 				}
 				for (Player p : ManagerCore.movie) {
-					Currency.addMoney(p, Shops.MOVIE.getReward());
+					Currency.addMoney(p, Shops.MOVIE.getReward() * ModifiersCore.getMoneyShopItems(Shops.MOVIE, p));
 				}
 				for (Player p : ManagerCore.banks) {
-					Currency.addMoney(p, Shops.BANK.getReward());
+					Currency.addMoney(p, Shops.BANK.getReward() * ModifiersCore.getMoneyShopItems(Shops.BANK, p));
 				}
 				for (Player p : ManagerCore.oil) {
-					Currency.addMoney(p, Shops.OIL.getReward());
+					Currency.addMoney(p, Shops.OIL.getReward() * ModifiersCore.getMoneyShopItems(Shops.OIL, p));
 				}
 
 			}

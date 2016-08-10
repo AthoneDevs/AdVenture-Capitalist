@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 
 import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.api.NPCAPI;
-import es.projectalpha.ac.api.TitleAPI;
+import es.projectalpha.ac.api.fancy.TitleAPI;
 import es.projectalpha.ac.cooldowns.Cooldowns;
 import es.projectalpha.ac.game.Game;
 import es.projectalpha.ac.managers.Managers;
