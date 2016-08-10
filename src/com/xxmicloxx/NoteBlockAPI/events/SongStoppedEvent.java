@@ -1,16 +1,16 @@
-package es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI.events;
+package com.xxmicloxx.NoteBlockAPI.events;
 
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-import es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI.SongPlayer;
+import com.xxmicloxx.NoteBlockAPI.SongPlayer;
 
-public class SongEndEvent extends Event {
+public class SongStoppedEvent extends Event {
 
 	private static final HandlerList handlers = new HandlerList();
 	private SongPlayer song;
 
-	public SongEndEvent(SongPlayer song){
+	public SongStoppedEvent(SongPlayer song){
 		this.song = song;
 	}
 

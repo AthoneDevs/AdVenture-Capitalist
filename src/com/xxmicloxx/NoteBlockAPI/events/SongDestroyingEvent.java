@@ -1,10 +1,10 @@
-package es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI.events;
+package com.xxmicloxx.NoteBlockAPI.events;
 
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-import es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI.SongPlayer;
+import com.xxmicloxx.NoteBlockAPI.SongPlayer;
 
 public class SongDestroyingEvent extends Event implements Cancellable {
 

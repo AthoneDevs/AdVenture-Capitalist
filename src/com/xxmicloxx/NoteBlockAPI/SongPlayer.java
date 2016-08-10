@@ -1,4 +1,4 @@
-package es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI;
+package com.xxmicloxx.NoteBlockAPI;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,10 +7,11 @@ import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import com.xxmicloxx.NoteBlockAPI.events.SongDestroyingEvent;
+import com.xxmicloxx.NoteBlockAPI.events.SongEndEvent;
+import com.xxmicloxx.NoteBlockAPI.events.SongStoppedEvent;
+
 import es.projectalpha.ac.api.NBAPI;
-import es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI.events.SongDestroyingEvent;
-import es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI.events.SongEndEvent;
-import es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI.events.SongStoppedEvent;
 
 public abstract class SongPlayer {
 

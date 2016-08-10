@@ -1,4 +1,4 @@
-package es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI;
+package com.xxmicloxx.NoteBlockAPI;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import org.bukkit.entity.Player;
 
-import es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI.SongPlayer;
+import com.xxmicloxx.NoteBlockAPI.SongPlayer;
 
 public class NBAPI {
 

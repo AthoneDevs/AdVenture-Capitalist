@@ -1,4 +1,4 @@
-package es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI;
+package com.xxmicloxx.NoteBlockAPI;
 
 public class Note {
 

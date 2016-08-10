@@ -1,4 +1,4 @@
-package es.projectalpha.ac.com.xxmicloxx.NoteBlockAPI;
+package com.xxmicloxx.NoteBlockAPI;
 
 import java.io.DataInputStream;
 import java.io.File;
