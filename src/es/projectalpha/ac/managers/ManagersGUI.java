@@ -11,7 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class ManagersGUI {
 
-	public static void openAchievementsGUI(Player p){
+	public static void openManagersGUI(Player p){
 		Inventory inv = Bukkit.createInventory(null, 18, ChatColor.GREEN + "Managers");
 
 		for (int g = 0; g < Managers.values().length; g++) {

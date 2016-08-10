@@ -21,6 +21,7 @@ import es.projectalpha.ac.api.ActionBarAPI;
 import es.projectalpha.ac.api.AttackSpeedAPI;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.game.Currency;
+import es.projectalpha.ac.managers.ManagersGUI;
 import es.projectalpha.ac.managers.SpawnManagers;
 import es.projectalpha.ac.shops.Shops;
 import es.projectalpha.ac.shops.ShopsCore;
@@ -48,12 +49,23 @@ public class Help implements CommandExecutor {
 				p.sendMessage(Messages.prefix + ChatColor.AQUA + "AC Help");
 				p.sendMessage(ChatColor.DARK_GREEN + "/avc play" + f + ChatColor.YELLOW + "Play AC");
 				p.sendMessage(ChatColor.DARK_GREEN + "/avc achievements" + f + ChatColor.YELLOW + "View your achievements");
-				p.sendMessage(ChatColor.DARK_GREEN + "/avc angel" + f + ChatColor.YELLOW + "View your angels");
+				p.sendMessage(ChatColor.DARK_GREEN + "/avc angels" + f + ChatColor.YELLOW + "View your angels");
+				p.sendMessage(ChatColor.DARK_GREEN + "/avc debug" + f + ChatColor.YELLOW + "Debug command");
+				p.sendMessage(ChatColor.DARK_GREEN + "/avc managers" + f + ChatColor.YELLOW + "View avariable Managers");
 				p.sendMessage(" ");
 			}
 			if (args.length == 1) {
 				if (args[0].equalsIgnoreCase("achievements")) {
 					AchievementsGUI.openAchievementsGUI(p);
+				}
+
+				if (args[0].equalsIgnoreCase("angels")) {
+					//TODO: Make Methods
+					return true;
+				}
+
+				if (args[0].equalsIgnoreCase("managers")) {
+					ManagersGUI.openManagersGUI(p);
 				}
 
 				if (args[0].equalsIgnoreCase("debug")) {
@@ -92,7 +104,7 @@ public class Help implements CommandExecutor {
 
 						Location l = new Location(world, x, y, z);
 
-						p.teleport(l.add(0, 2, 0));
+						p.teleport(l.add(0, 1, 0));
 
 						Currency.loadMoney(p);
 
@@ -152,7 +164,7 @@ public class Help implements CommandExecutor {
 					} else {
 						id++;
 
-						p.teleport(new Location(world, 0, 16, 0));
+						p.teleport(new Location(world, 0, 30, 0));
 
 						Files.locs.set("num", id);
 
@@ -171,11 +183,12 @@ public class Help implements CommandExecutor {
 							p.teleport(new Location(b.getWorld(), b.getLocation().getX(), b.getLocation().getY() + 1, b.getLocation().getZ()));
 
 						}
+
 						Files.players.set(p.getName() + ".id", id);
+
+						Files.saveFiles();
 					}
 					p.setFlying(false);
-
-					Files.saveFiles();
 				}
 			}
 		}
