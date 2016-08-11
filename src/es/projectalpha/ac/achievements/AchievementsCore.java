@@ -15,7 +15,10 @@ import es.projectalpha.ac.utils.Messages;
 
 public class AchievementsCore {
 
-	public static void addAchievement(Player p, AchievementsType at){
+	private Game game = new Game();
+	private Currency c = new Currency();
+
+	public void addAchievement(Player p, AchievementsType at){
 		if (hasAchievement(p, at)) {
 			return;
 		} else {
@@ -36,7 +39,7 @@ public class AchievementsCore {
 		}
 	}
 
-	public static void remAchievement(Player p, AchievementsType at){
+	public void remAchievement(Player p, AchievementsType at){
 		if (hasAchievement(p, at)) {
 			List<String> players = Files.achie.getStringList(at.toString());
 
@@ -47,17 +50,17 @@ public class AchievementsCore {
 		}
 	}
 
-	public static boolean hasAchievement(Player p, AchievementsType at){
+	public boolean hasAchievement(Player p, AchievementsType at){
 		if (Files.achie.getStringList(at.toString()).contains(p)) {
 			return true;
 		}
 		return false;
 	}
 
-	public static void checkAchievements(){
-		for (Player p : Game.playing) {
-			if (Currency.getMoney(p) >= 5000) {
-				AchievementsCore.addAchievement(p, AchievementsType.PC);
+	public void checkAchievements(){
+		for (Player p : game.playing) {
+			if (c.getMoney(p) >= 5000) {
+				addAchievement(p, AchievementsType.PC);
 			}
 		}
 	}

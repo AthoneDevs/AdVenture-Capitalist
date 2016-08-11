@@ -12,12 +12,14 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class AchievementsGUI {
 
+	private static AchievementsCore achi = new AchievementsCore();
+
 	public static void openAchievementsGUI(Player p){
 		Inventory inv = Bukkit.createInventory(null, 54, ChatColor.GREEN + "Achievements");
 
 		for (int g = 0; g < AchievementsType.values().length; g++) {
 			AchievementsType at = AchievementsType.values()[g];
-			if (AchievementsCore.hasAchievement(p, at)) {
+			if (achi.hasAchievement(p, at)) {
 				ItemStack i = new ItemStack(Material.STAINED_CLAY, 1, (short) 5);
 				ItemMeta im = i.getItemMeta();
 				im.setDisplayName(at.getDispName());

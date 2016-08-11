@@ -14,6 +14,7 @@ import es.projectalpha.ac.utils.Messages;
 public class IAchievements implements Listener {
 
 	private AVC plugin;
+	private AchievementsCore achi = new AchievementsCore();
 
 	public IAchievements(AVC Main){
 		this.plugin = Main;
@@ -40,7 +41,7 @@ public class IAchievements implements Listener {
 					e.setCancelled(true);
 					p.closeInventory();
 
-					if (AchievementsCore.hasAchievement(p, at)) {
+					if (achi.hasAchievement(p, at)) {
 						p.sendMessage(" ");
 						p.sendMessage(ChatColor.WHITE + "==================================================");
 						p.sendMessage(" ");

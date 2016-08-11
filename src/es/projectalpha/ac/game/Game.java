@@ -14,22 +14,27 @@ import org.bukkit.plugin.Plugin;
 import es.projectalpha.ac.api.NPCAPI;
 import es.projectalpha.ac.api.fancy.BossBarAPI;
 import es.projectalpha.ac.api.fancy.HoloAPI;
+import es.projectalpha.ac.cooldowns.Cooldowns;
 import es.projectalpha.ac.files.Files;
-import es.projectalpha.ac.managers.ManagerCore;
 import es.projectalpha.ac.managers.Managers;
+import es.projectalpha.ac.managers.ManagersCore;
 import es.projectalpha.ac.managers.SpawnManagers;
 import es.projectalpha.ac.modifiers.ModifiersCore;
-import es.projectalpha.ac.shops.Shops;
 
 public class Game {
 
-	public static ArrayList<Player> playing = new ArrayList<Player>();
-	public static ArrayList<Location> progressBar = new ArrayList<Location>();
-	public static HashMap<Location, String> shopLocation = new HashMap<Location, String>();
+	public ArrayList<Player> playing = new ArrayList<Player>();
+	public ArrayList<Location> progressBar = new ArrayList<Location>();
+	public HashMap<Location, String> shopLocation = new HashMap<Location, String>();
 
-	private static ArrayList<HoloAPI> holos = new ArrayList<HoloAPI>();
+	private ArrayList<HoloAPI> holos = new ArrayList<HoloAPI>();
 
-	public static void startTimer(Plugin plugin){
+	//Utils
+	private ManagersCore mc = new ManagersCore();
+	private ModifiersCore mo = new ModifiersCore();
+	private Currency c = new Currency();
+
+	public void startTimer(Plugin plugin){
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 			public void run(){
 				for (Player p : playing) {
@@ -63,52 +68,29 @@ public class Game {
 
 					Location l = new Location(Bukkit.getWorld("ac"), x, y + 3, z);
 
-					HoloAPI holo = new HoloAPI(l, "$ " + Currency.getMoney(p));
+					HoloAPI holo = new HoloAPI(l, "$ " + c.getMoney(p));
 					holo.display(p);
 
 					//Check if Enough Money
-					for (int g = 0; g < Managers.values().length; g++) {
-						Managers m = Managers.values()[g];
-
-						if (Currency.getMoney(p) >= m.getPrice()) {
+					for (Managers m : Managers.values()) {
+						if (c.getMoney(p) >= m.getPrice()) {
 							BossBarAPI.sendMessageToPlayerRecurring(ChatColor.GREEN + "You can buy " + ChatColor.RED + m.getName() + ChatColor.GREEN + " manager", 8, BarColor.WHITE, BarStyle.SOLID, p);
 						}
 					}
 				}
 
-				//TODO: Real cooldown, Better System
+				//TODO: Real cooldown
 				//Managers
-				for (Player p : ManagerCore.lemonade) {
-					Currency.addMoney(p, Shops.LEMONADE.getReward() * ModifiersCore.getMoneyShopItems(Shops.LEMONADE, p));
-				}
-				for (Player p : ManagerCore.news) {
-					Currency.addMoney(p, Shops.NEWS.getReward() * ModifiersCore.getMoneyShopItems(Shops.NEWS, p));
-				}
-				for (Player p : ManagerCore.car) {
-					Currency.addMoney(p, Shops.CAR.getReward() * ModifiersCore.getMoneyShopItems(Shops.CAR, p));
-				}
-				for (Player p : ManagerCore.pizza) {
-					Currency.addMoney(p, Shops.PIZZA.getReward() * ModifiersCore.getMoneyShopItems(Shops.PIZZA, p));
-				}
-				for (Player p : ManagerCore.donut) {
-					Currency.addMoney(p, Shops.DONUT.getReward() * ModifiersCore.getMoneyShopItems(Shops.DONUT, p));
-				}
-				for (Player p : ManagerCore.boats) {
-					Currency.addMoney(p, Shops.BOAT.getReward() * ModifiersCore.getMoneyShopItems(Shops.BOAT, p));
-				}
-				for (Player p : ManagerCore.hockey) {
-					Currency.addMoney(p, Shops.HOCKEY.getReward() * ModifiersCore.getMoneyShopItems(Shops.HOCKEY, p));
-				}
-				for (Player p : ManagerCore.movie) {
-					Currency.addMoney(p, Shops.MOVIE.getReward() * ModifiersCore.getMoneyShopItems(Shops.MOVIE, p));
-				}
-				for (Player p : ManagerCore.banks) {
-					Currency.addMoney(p, Shops.BANK.getReward() * ModifiersCore.getMoneyShopItems(Shops.BANK, p));
-				}
-				for (Player p : ManagerCore.oil) {
-					Currency.addMoney(p, Shops.OIL.getReward() * ModifiersCore.getMoneyShopItems(Shops.OIL, p));
-				}
 
+				for (Managers m : Managers.values()) {
+					for (Player p : mc.getPlayersWithManager(m)) {
+						if (Cooldowns.isCooling(p.getName(), "data_" + m.getName())) {
+							return;
+						}
+						c.addMoney(p, m.getShop().getReward() + mo.getMoneyShopItems(m.getShop(), p));
+						Cooldowns.add(p.getName(), "data_" + m.getName(), (long) m.getShop().getTimer(), System.currentTimeMillis());
+					}
+				}
 			}
 		}, 0L, 20L);
 	}

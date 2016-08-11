@@ -21,6 +21,8 @@ import es.projectalpha.ac.game.Game;
 public class ProtectWorld implements Listener {
 
 	private AVC plugin;
+	private Game game = new Game();
+	private AchievementsCore achi = new AchievementsCore();
 
 	public ProtectWorld(AVC Main){
 		this.plugin = Main;
@@ -31,9 +33,9 @@ public class ProtectWorld implements Listener {
 	public void onBreak(BlockBreakEvent e){
 		Player p = e.getPlayer();
 
-		if (Game.playing.contains(p)) {
+		if (game.playing.contains(p)) {
 			e.setCancelled(true);
-			AchievementsCore.addAchievement(p, AchievementsType.BREAK);
+			achi.addAchievement(p, AchievementsType.BREAK);
 		}
 	}
 
@@ -41,7 +43,7 @@ public class ProtectWorld implements Listener {
 	public void onPlace(BlockPlaceEvent e){
 		Player p = e.getPlayer();
 
-		if (Game.playing.contains(p)) {
+		if (game.playing.contains(p)) {
 			e.setCancelled(true);
 		}
 	}
@@ -50,7 +52,7 @@ public class ProtectWorld implements Listener {
 	public void onDrop(PlayerDropItemEvent e){
 		Player p = e.getPlayer();
 
-		if (Game.playing.contains(p)) {
+		if (game.playing.contains(p)) {
 			e.setCancelled(true);
 		}
 	}
@@ -61,7 +63,7 @@ public class ProtectWorld implements Listener {
 
 		if (en instanceof Player) {
 			Player p = (Player) en;
-			if (Game.playing.contains(p)) {
+			if (game.playing.contains(p)) {
 				e.setCancelled(true);
 			}
 		}

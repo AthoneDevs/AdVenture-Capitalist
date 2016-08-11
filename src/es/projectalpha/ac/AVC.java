@@ -16,10 +16,8 @@ import es.projectalpha.ac.events.invs.IAchievements;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.game.Currency;
 import es.projectalpha.ac.game.Game;
-import es.projectalpha.ac.managers.ManagerCore;
 import es.projectalpha.ac.mysql.Data;
 import es.projectalpha.ac.mysql.MySQL;
-import es.projectalpha.ac.shops.ShopsCore;
 import es.projectalpha.ac.utils.Messages;
 import es.projectalpha.ac.utils.ServerVersion;
 import es.projectalpha.ac.world.Generator;
@@ -27,6 +25,8 @@ import es.projectalpha.ac.world.Generator;
 public class AVC extends JavaPlugin {
 
 	private static AVC plugin;
+	private Game game = new Game();
+	private Currency c = new Currency();
 
 	private MySQL mysql;
 	private Data data;
@@ -85,9 +85,7 @@ public class AVC extends JavaPlugin {
 		Bukkit.getConsoleSender().sendMessage(" ");
 
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Loading Game. . .");
-		ManagerCore.loadManagers();
-		ShopsCore.loadShops();
-		Game.startTimer(this);
+		game.startTimer(this);
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Game Loaded");
 
 		Bukkit.getConsoleSender().sendMessage(" ");
@@ -103,8 +101,8 @@ public class AVC extends JavaPlugin {
 
 	public void onDisable(){
 
-		for (Player p : Game.playing) {
-			Currency.saveMoney(p);
+		for (Player p : game.playing) {
+			c.saveMoney(p);
 		}
 
 	}

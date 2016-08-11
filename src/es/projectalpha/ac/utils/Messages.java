@@ -11,6 +11,8 @@ import es.projectalpha.ac.shops.Shops;
 
 public class Messages {
 
+	private static Game game = new Game();
+
 	//Utils
 	public static String prefix = ChatColor.GRAY + " || " + ChatColor.GREEN + "AC" + ChatColor.GRAY + " || ";
 	public static String noPerms = prefix + ChatColor.RED + "You don't have permissions to do this";
@@ -52,7 +54,7 @@ public class Messages {
 	//Progress Bar
 	public static String getProgress(Player p, Location l, Shops shop){
 		int time = 0;
-		String name = Game.shopLocation.get(l);
+		String name = game.shopLocation.get(l);
 
 		if (shop.getTimer() >= 100) {
 			time = (int) ((Cooldowns.getRemaining(p.getName(), name) * 100) / shop.getTimer());

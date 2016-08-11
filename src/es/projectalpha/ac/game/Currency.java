@@ -9,47 +9,47 @@ import es.projectalpha.ac.utils.NumberUtils;
 
 public class Currency {
 
-	public static String moneyName = "Dollars";
-	public static String moneySymbol = "$";
+	public String moneyName = "Dollars";
+	public String moneySymbol = "$";
 
-	public static HashMap<Player, String> runningCurrency = new HashMap<Player, String>();
+	public HashMap<Player, String> runningCurrency = new HashMap<Player, String>();
 
-	public static boolean existPlayer(Player p){
+	public boolean existPlayer(Player p){
 		if (Files.players.contains(p.getName())) {
 			return true;
 		}
 		return false;
 	}
 
-	public static void addMoney(Player p, double amount){
+	public void addMoney(Player p, double amount){
 		if (existPlayer(p)) {
 			runningCurrency.put(p, parseMoney(getMoney(p) + amount));
 		}
 	}
 
-	public static void removeMoney(Player p, double amount){
+	public void removeMoney(Player p, double amount){
 		if (existPlayer(p)) {
 			runningCurrency.put(p, parseMoney(getMoney(p) - amount));
 		}
 	}
 
-	public static void saveMoney(Player p){
+	public void saveMoney(Player p){
 		Files.players.set(p.getName() + ".money", getMoney(p));
 		Files.saveFiles();
 	}
 
-	public static void loadMoney(Player p){
+	public void loadMoney(Player p){
 		if (existPlayer(p)) {
 			runningCurrency.put(p, parseMoney(Files.players.getDouble(p.getName() + ".money")));
 		}
 	}
 
-	public static void newPlayerMoney(Player p, double amount){
+	public void newPlayerMoney(Player p, double amount){
 		runningCurrency.put(p, parseMoney(amount));
 		saveMoney(p);
 	}
 
-	public static double getMoney(Player p){
+	public double getMoney(Player p){
 		String currency = runningCurrency.get(p);
 		String[] subString;
 
@@ -80,7 +80,7 @@ public class Currency {
 		return Double.parseDouble(subString[0]);
 	}
 
-	public static String getSMoney(Player p){
+	public String getSMoney(Player p){
 		double g = 1000000;
 
 		if (getMoney(p) == g) {
@@ -110,7 +110,7 @@ public class Currency {
 		return String.valueOf(getMoney(p));
 	}
 
-	public static String parseMoney(double currency){
+	public String parseMoney(double currency){
 		double g = 1000000;
 
 		if (currency == g) {

@@ -11,13 +11,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class ManagersGUI {
 
+	private static ManagersCore mc = new ManagersCore();
+
 	public static void openManagersGUI(Player p){
 		Inventory inv = Bukkit.createInventory(null, 18, ChatColor.GREEN + "Managers");
 
 		for (int g = 0; g < Managers.values().length; g++) {
 			Managers m = Managers.values()[g];
 
-			if (!ManagerCore.hasManager(p, m)) {
+			if (!mc.hasManager(p, m)) {
 				ItemStack i = new ItemStack(m.getMaterial());
 				ItemMeta im = i.getItemMeta();
 				im.setDisplayName(m.getName());

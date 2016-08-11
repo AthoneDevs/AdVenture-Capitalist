@@ -19,6 +19,7 @@ public class Data {
 	private AVC plugin;
 	private Connection conn;
 	private String tableName = "avc_data";
+	private Currency c = new Currency();
 
 	public Data(AVC Main){
 		this.plugin = Main;
@@ -51,7 +52,7 @@ public class Data {
 
 			preparedStatement.setString(1, uuid.toString());
 			preparedStatement.setString(2, p.getName());
-			preparedStatement.setString(3, Currency.getSMoney(p));
+			preparedStatement.setString(3, c.getSMoney(p));
 
 			preparedStatement.executeUpdate();
 			return true;

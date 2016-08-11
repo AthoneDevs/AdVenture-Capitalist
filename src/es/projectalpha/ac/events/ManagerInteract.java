@@ -18,6 +18,8 @@ import es.projectalpha.ac.shops.ShopsCore;
 public class ManagerInteract implements Listener {
 
 	private AVC plugin;
+	private Game game = new Game();
+	private ShopsCore sc = new ShopsCore();
 
 	public ManagerInteract(AVC Main){
 		this.plugin = Main;
@@ -29,7 +31,7 @@ public class ManagerInteract implements Listener {
 		Player p = e.getPlayer();
 		Entity en = e.getRightClicked();
 
-		if (Game.playing.contains(p)) {
+		if (game.playing.contains(p)) {
 			if (en instanceof NPCAPI) {
 				NPCAPI v = (NPCAPI) en;
 				String name = v.getName();
@@ -37,7 +39,7 @@ public class ManagerInteract implements Listener {
 				for (Managers m : Managers.values()) {
 					if (name.equalsIgnoreCase(m.getManagerName())) {
 
-						if (!ShopsCore.hasShop(p, ShopsCore.getShop(m))) {
+						if (!sc.hasShop(p, m.getShop())) {
 							TitleAPI.sendTitle(p, 0, 5, 0, ChatColor.DARK_RED + "Error!", ChatColor.AQUA + "You don't have this Shop");
 							return;
 						}
@@ -46,8 +48,8 @@ public class ManagerInteract implements Listener {
 							Cooldowns.coolDurMessage(p, m.getName());
 							return;
 						}
-						Game.progressBar.add(v.getLocation().add(0, 3, 0));
-						Cooldowns.add(p.getName(), m.getName(), (long) ShopsCore.getShop(m).getTimer(), System.currentTimeMillis());
+						game.progressBar.add(v.getLocation().add(0, 3, 0));
+						Cooldowns.add(p.getName(), m.getName(), (long) m.getShop().getTimer(), System.currentTimeMillis());
 					}
 				}
 			}

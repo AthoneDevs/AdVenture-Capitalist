@@ -32,6 +32,9 @@ public class Help implements CommandExecutor {
 
 	@SuppressWarnings("unused")
 	private AVC plugin;
+	private AchievementsCore achi = new AchievementsCore();
+	private ShopsCore sc = new ShopsCore();
+	private Currency c = new Currency();
 
 	public Help(AVC Main){
 		this.plugin = Main;
@@ -106,7 +109,7 @@ public class Help implements CommandExecutor {
 
 						p.teleport(l.add(0, 1, 0));
 
-						Currency.loadMoney(p);
+						c.loadMoney(p);
 
 						p.sendMessage(Messages.tpCompany);
 
@@ -116,13 +119,13 @@ public class Help implements CommandExecutor {
 
 					ActionBarAPI.sendActionBar(p, ChatColor.RED + "Have Fun :D");
 
-					AchievementsCore.addAchievement(p, AchievementsType.START);
+					achi.addAchievement(p, AchievementsType.START);
 
-					Currency.newPlayerMoney(p, 0);
+					c.newPlayerMoney(p, 0);
 
 					Messages.sendMapInfo(p);
 
-					ShopsCore.addShop(p, Shops.LEMONADE);
+					sc.addShop(p, Shops.LEMONADE);
 
 					//Others
 					if (id > 0) {
