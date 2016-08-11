@@ -34,6 +34,9 @@ public class Currency {
 	}
 
 	public void saveMoney(Player p){
+		if (getMaxMoney(p) < getMoney(p)) {
+			Files.players.set(p.getName() + ".maxMoney", getMoney(p));
+		}
 		Files.players.set(p.getName() + ".money", getMoney(p));
 		Files.saveFiles();
 	}
@@ -47,6 +50,10 @@ public class Currency {
 	public void newPlayerMoney(Player p, double amount){
 		runningCurrency.put(p, parseMoney(amount));
 		saveMoney(p);
+	}
+
+	public double getMaxMoney(Player p){
+		return Files.players.getDouble(p.getName() + ".maxMoney");
 	}
 
 	public double getMoney(Player p){
