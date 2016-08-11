@@ -13,6 +13,7 @@ import es.projectalpha.ac.api.fancy.TitleAPI;
 import es.projectalpha.ac.cooldowns.Cooldowns;
 import es.projectalpha.ac.game.Game;
 import es.projectalpha.ac.managers.Managers;
+import es.projectalpha.ac.managers.ManagersCore;
 import es.projectalpha.ac.shops.ShopsCore;
 
 public class ManagerInteract implements Listener {
@@ -20,6 +21,7 @@ public class ManagerInteract implements Listener {
 	private AVC plugin;
 	private Game game = new Game();
 	private ShopsCore sc = new ShopsCore();
+	private ManagersCore mc = new ManagersCore();
 
 	public ManagerInteract(AVC Main){
 		this.plugin = Main;
@@ -41,6 +43,11 @@ public class ManagerInteract implements Listener {
 
 						if (!sc.hasShop(p, m.getShop())) {
 							TitleAPI.sendTitle(p, 0, 5, 0, ChatColor.DARK_RED + "Error!", ChatColor.AQUA + "You don't have this Shop");
+							return;
+						}
+
+						if (mc.hasManager(p, m)) {
+							TitleAPI.sendTitle(p, 0, 5, 0, ChatColor.DARK_RED + "Error!", ChatColor.AQUA + "You can't click in a shop with a Manager");
 							return;
 						}
 

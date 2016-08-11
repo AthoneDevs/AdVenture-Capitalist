@@ -19,7 +19,6 @@ import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.managers.Managers;
 import es.projectalpha.ac.managers.ManagersCore;
 import es.projectalpha.ac.managers.SpawnManagers;
-import es.projectalpha.ac.modifiers.ModifiersCore;
 
 public class Game {
 
@@ -31,7 +30,6 @@ public class Game {
 
 	//Utils
 	private ManagersCore mc = new ManagersCore();
-	private ModifiersCore mo = new ModifiersCore();
 	private Currency c = new Currency();
 
 	public void startTimer(Plugin plugin){
@@ -79,16 +77,19 @@ public class Game {
 					}
 				}
 
-				//TODO: Real cooldown
 				//Managers
 
 				for (Managers m : Managers.values()) {
 					for (Player p : mc.getPlayersWithManager(m)) {
-						if (Cooldowns.isCooling(p.getName(), "data_" + m.getName())) {
+						if (Cooldowns.isCooling(p.getName(), m.getName())) {
 							return;
 						}
-						c.addMoney(p, m.getShop().getReward() + mo.getMoneyShopItems(m.getShop(), p));
-						Cooldowns.add(p.getName(), "data_" + m.getName(), (long) m.getShop().getTimer(), System.currentTimeMillis());
+						for (NPCAPI npc : SpawnManagers.npcs) {
+							if (npc.getName().equalsIgnoreCase(m.getManagerName())) {
+								progressBar.add(npc.getLocation().add(0, 3, 0));
+							}
+						}
+						Cooldowns.add(p.getName(), m.getName(), (long) m.getShop().getTimer(), System.currentTimeMillis());
 					}
 				}
 			}

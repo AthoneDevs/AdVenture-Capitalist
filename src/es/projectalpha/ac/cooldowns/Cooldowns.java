@@ -10,11 +10,14 @@ import org.bukkit.entity.Player;
 
 import es.projectalpha.ac.game.Currency;
 import es.projectalpha.ac.managers.Managers;
+import es.projectalpha.ac.modifiers.ModifiersCore;
+import es.projectalpha.ac.shops.Shops;
 import es.projectalpha.ac.utils.Messages;
 
 public class Cooldowns {
 
 	private static Currency c = new Currency();
+	private static ModifiersCore mo = new ModifiersCore();
 
 	public static HashMap<String, ShopCooldown> cooldownPlayers = new HashMap<String, ShopCooldown>();
 
@@ -62,10 +65,11 @@ public class Cooldowns {
 			return;
 		}
 		cooldownPlayers.get(player).cooldownMap.remove(manager);
-		//Player cPlayer = Bukkit.getPlayer(player);
-		if (player != null && !manager.contains("data_")) {
+		Player cPlayer = Bukkit.getPlayer(player);
+		if (player != null) {
+			Shops s = Managers.valueOf(manager).getShop();
 			//cPlayer.sendMessage(Messages.prefix + ChatColor.GRAY + "Complete: " + ChatColor.AQUA + WordUtils.capitalizeFully(manager));
-			c.addMoney(Bukkit.getPlayer(player), Managers.valueOf(manager).getShop().getReward());
+			c.addMoney(cPlayer, s.getReward() + mo.getMoneyShopItems(s, cPlayer));
 		}
 	}
 
