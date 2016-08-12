@@ -16,10 +16,11 @@ import org.bukkit.entity.Player;
 import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.achievements.AchievementsCore;
 import es.projectalpha.ac.achievements.AchievementsGUI;
-import es.projectalpha.ac.achievements.AchievementsType;
+import es.projectalpha.ac.achievements.Achievements;
 import es.projectalpha.ac.api.AttackSpeedAPI;
 import es.projectalpha.ac.api.fancy.ActionBarAPI;
 import es.projectalpha.ac.files.Files;
+import es.projectalpha.ac.game.Angels;
 import es.projectalpha.ac.game.Currency;
 import es.projectalpha.ac.managers.ManagersGUI;
 import es.projectalpha.ac.managers.SpawnManagers;
@@ -35,6 +36,7 @@ public class Help implements CommandExecutor {
 	private AchievementsCore achi = new AchievementsCore();
 	private ShopsCore sc = new ShopsCore();
 	private Currency c = new Currency();
+	private Angels a = new Angels();
 
 	public Help(AVC Main){
 		this.plugin = Main;
@@ -117,15 +119,16 @@ public class Help implements CommandExecutor {
 					}
 					int id = Files.locs.getInt("num");
 
+					//New Game
+
 					ActionBarAPI.sendActionBar(p, ChatColor.RED + "Have Fun :D");
 
-					achi.addAchievement(p, AchievementsType.START);
-
+					achi.addAchievement(p, Achievements.START);
 					c.newPlayerMoney(p, 0);
+					sc.addShop(p, Shops.LEMONADE);
+					a.startGame(p);
 
 					Messages.sendMapInfo(p);
-
-					sc.addShop(p, Shops.LEMONADE);
 
 					//Others
 					if (id > 0) {

@@ -15,7 +15,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 
 import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.achievements.AchievementsCore;
-import es.projectalpha.ac.achievements.AchievementsType;
+import es.projectalpha.ac.achievements.Achievements;
 import es.projectalpha.ac.game.Game;
 
 public class ProtectWorld implements Listener {
@@ -35,7 +35,7 @@ public class ProtectWorld implements Listener {
 
 		if (game.playing.contains(p)) {
 			e.setCancelled(true);
-			achi.addAchievement(p, AchievementsType.BREAK);
+			achi.addAchievement(p, Achievements.BREAK);
 		}
 	}
 

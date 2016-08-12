@@ -2,14 +2,16 @@ package es.projectalpha.ac.game;
 
 import org.bukkit.entity.Player;
 
+import es.projectalpha.ac.achievements.Achievements;
+import es.projectalpha.ac.api.AVCAPI;
 import es.projectalpha.ac.files.Files;
-import es.projectalpha.ac.managers.ManagersCore;
 import es.projectalpha.ac.managers.Managers;
+import es.projectalpha.ac.shops.Shops;
 import es.projectalpha.ac.utils.Messages;
 
 public class ResetGame {
 
-	private static ManagersCore mc = new ManagersCore();
+	private static AVCAPI api = new AVCAPI();
 
 	public static void resetGame(Player p){
 		if (!Files.players.contains(p.getName())) {
@@ -17,12 +19,25 @@ public class ResetGame {
 			return;
 		}
 
+		if (!api.getAngels().checkIfEnoughMoneyToReset(p)) {
+			//TODO: Messages
+			return;
+		}
+
 		Files.players.set(p.getName(), null);
 
 		for (Managers m : Managers.values()) {
-			mc.removeManager(p, m);
+			api.getManagers().removeManager(p, m);
 		}
 
-		//TODO: Add Angels
+		for (Shops s : Shops.values()) {
+			api.getShops().removeShop(p, s);
+		}
+
+		for (Achievements a : Achievements.values()) {
+			api.getAchievements().remAchievement(p, a);
+		}
+
+		api.getAngels().addAngels(p, api.getAngels().calculateAngels(p));
 	}
 }

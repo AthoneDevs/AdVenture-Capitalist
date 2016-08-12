@@ -32,7 +32,7 @@ public class ModifiersCore {
 
 	//TODO: Shop with own money per item
 	public double getMoneyShopItems(Shops s, Player p){
-		return getShopItems(s, p) * 0.1;
+		return getShopItems(s, p) * (s.getReward() * s.getCoefficient()); //Change!
 	}
 
 	public void deteleItems(Shops s, int amount, Player p){

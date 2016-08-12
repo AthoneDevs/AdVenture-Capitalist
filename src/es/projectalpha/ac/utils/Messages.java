@@ -4,7 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import es.projectalpha.ac.achievements.AchievementsType;
+import es.projectalpha.ac.achievements.Achievements;
 import es.projectalpha.ac.cooldowns.Cooldowns;
 import es.projectalpha.ac.game.Game;
 import es.projectalpha.ac.shops.Shops;
@@ -43,7 +43,7 @@ public class Messages {
 	}
 
 	//New Achievement
-	public static void newAchievement(AchievementsType at, Player p){
+	public static void newAchievement(Achievements at, Player p){
 		p.sendMessage(" ");
 
 		p.sendMessage(Messages.prefix + ChatColor.GREEN + "You have get a new achievement: " + ChatColor.YELLOW + at.getDispName());

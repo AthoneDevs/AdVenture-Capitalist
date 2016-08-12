@@ -32,6 +32,13 @@ public class Angels {
 		return Files.players.getInt(p.getName() + ".angels");
 	}
 
+	public boolean checkIfEnoughMoneyToReset(Player p){
+		if (calculateAngels(p) >= 1) {
+			return true;
+		}
+		return false;
+	}
+
 	//This uses an equation created by Kongregate user Sodapants
 	public int calculateAngels(Player p){
 		return (int) (150 * Math.sqrt((c.getMaxMoney(p) / 1000000000000000D)));

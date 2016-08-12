@@ -8,7 +8,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.achievements.AchievementsCore;
-import es.projectalpha.ac.achievements.AchievementsType;
+import es.projectalpha.ac.achievements.Achievements;
 import es.projectalpha.ac.utils.Messages;
 
 public class IAchievements implements Listener {
@@ -36,7 +36,7 @@ public class IAchievements implements Listener {
 				return;
 			}
 
-			for (AchievementsType at : AchievementsType.values()) {
+			for (Achievements at : Achievements.values()) {
 				if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(at.getDispName())) {
 					e.setCancelled(true);
 					p.closeInventory();

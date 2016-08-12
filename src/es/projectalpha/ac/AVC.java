@@ -100,7 +100,7 @@ public class AVC extends JavaPlugin {
 	}
 
 	public void onDisable(){
-
+		Bukkit.getScheduler().cancelTasks(this);
 		for (Player p : game.playing) {
 			c.saveMoney(p);
 		}

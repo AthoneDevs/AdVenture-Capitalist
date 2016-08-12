@@ -18,18 +18,18 @@ public class AchievementsCore {
 	private Game game = new Game();
 	private Currency c = new Currency();
 
-	public void addAchievement(Player p, AchievementsType at){
-		if (hasAchievement(p, at)) {
+	public void addAchievement(Player p, Achievements a){
+		if (hasAchievement(p, a)) {
 			return;
 		} else {
-			List<String> players = Files.achie.getStringList(at.toString());
+			List<String> players = Files.achie.getStringList(a.toString());
 
 			players.add(p.getName());
 
-			Files.achie.set(at.toString(), players);
+			Files.achie.set(a.toString(), players);
 			Files.saveFiles();
 
-			Messages.newAchievement(at, p);
+			Messages.newAchievement(a, p);
 			TitleAPI.sendTitle(p, 0, 3, 0, "", ChatColor.GREEN + "New Achievement!");
 			p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 5.0F, 5.0F);
 
@@ -39,19 +39,19 @@ public class AchievementsCore {
 		}
 	}
 
-	public void remAchievement(Player p, AchievementsType at){
-		if (hasAchievement(p, at)) {
-			List<String> players = Files.achie.getStringList(at.toString());
+	public void remAchievement(Player p, Achievements a){
+		if (hasAchievement(p, a)) {
+			List<String> players = Files.achie.getStringList(a.toString());
 
 			players.remove(p.getName());
 
-			Files.achie.set(at.toString(), players);
+			Files.achie.set(a.toString(), players);
 			Files.saveFiles();
 		}
 	}
 
-	public boolean hasAchievement(Player p, AchievementsType at){
-		if (Files.achie.getStringList(at.toString()).contains(p)) {
+	public boolean hasAchievement(Player p, Achievements a){
+		if (Files.achie.getStringList(a.toString()).contains(p)) {
 			return true;
 		}
 		return false;
@@ -60,7 +60,7 @@ public class AchievementsCore {
 	public void checkAchievements(){
 		for (Player p : game.playing) {
 			if (c.getMoney(p) >= 5000) {
-				addAchievement(p, AchievementsType.PC);
+				addAchievement(p, Achievements.PC);
 			}
 		}
 	}
