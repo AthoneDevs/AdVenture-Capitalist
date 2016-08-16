@@ -13,27 +13,27 @@ import es.projectalpha.ac.utils.Messages;
 public class Files {
 
 	//Config
-	public static File fileConfig = new File("plugins/AC", "config.yml");
+	public static File fileConfig = new File("plugins/AVC", "config.yml");
 	public static YamlConfiguration cfg = YamlConfiguration.loadConfiguration(fileConfig);
 
 	//Utils Folder
-	public static File fileSchema = new File("plugins/AC", "Utils");
+	public static File fileSchema = new File("plugins/AVC", "Utils");
 	public static YamlConfiguration schema = YamlConfiguration.loadConfiguration(fileSchema);
 
 	//Data
-	public static File filePlayers = new File("plugins/AC/Data", "players.yml");
+	public static File filePlayers = new File("plugins/AVC/Data", "players.yml");
 	public static YamlConfiguration players = YamlConfiguration.loadConfiguration(filePlayers);
 
-	public static File fileAchie = new File("plugins/AC/Data", "achievemetns.yml");
+	public static File fileAchie = new File("plugins/AVC/Data", "achievemetns.yml");
 	public static YamlConfiguration achie = YamlConfiguration.loadConfiguration(fileAchie);
 
-	public static File fileManagers = new File("plugins/AC/Data", "managers.yml");
+	public static File fileManagers = new File("plugins/AVC/Data", "managers.yml");
 	public static YamlConfiguration manager = YamlConfiguration.loadConfiguration(fileManagers);
 
-	public static File fileLocs = new File("plugins/AC/Data", "locs.yml");
+	public static File fileLocs = new File("plugins/AVC/Data", "locs.yml");
 	public static YamlConfiguration locs = YamlConfiguration.loadConfiguration(fileLocs);
 
-	public static File fileShops = new File("plugins/AC/Data", "shops.yml");
+	public static File fileShops = new File("plugins/AVC/Data", "shops.yml");
 	public static YamlConfiguration shops = YamlConfiguration.loadConfiguration(fileShops);
 
 	public static void setupFiles(){

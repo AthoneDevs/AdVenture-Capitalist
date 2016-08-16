@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 
 import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.api.NPCAPI;
+import es.projectalpha.ac.api.fancy.JsonAPI;
 import es.projectalpha.ac.api.fancy.TitleAPI;
 import es.projectalpha.ac.cooldowns.Cooldowns;
 import es.projectalpha.ac.game.Game;
@@ -40,9 +41,9 @@ public class ManagerInteract implements Listener {
 
 				for (Managers m : Managers.values()) {
 					if (name.equalsIgnoreCase(m.getManagerName())) {
-
 						if (!sc.hasShop(p, m.getShop())) {
 							TitleAPI.sendTitle(p, 0, 5, 0, ChatColor.DARK_RED + "Error!", ChatColor.AQUA + "You don't have this Shop");
+							JsonAPI.jsonMessages(p, ChatColor.GREEN + "[Click to buy Shop]", ChatColor.AQUA + m.getShop().toString().toLowerCase(), "/avc shops " + m.getShop().toString().toLowerCase());
 							return;
 						}
 

@@ -16,9 +16,7 @@ public class ManagersGUI {
 	public static void openManagersGUI(Player p){
 		Inventory inv = Bukkit.createInventory(null, 18, ChatColor.GREEN + "Managers");
 
-		for (int g = 0; g < Managers.values().length; g++) {
-			Managers m = Managers.values()[g];
-
+		for (Managers m : Managers.values()) {
 			if (!mc.hasManager(p, m)) {
 				ItemStack i = new ItemStack(m.getMaterial());
 				ItemMeta im = i.getItemMeta();

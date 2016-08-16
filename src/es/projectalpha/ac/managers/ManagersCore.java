@@ -48,7 +48,7 @@ public class ManagersCore {
 			return;
 		}
 
-		if (c.getMoney(p) <= m.getPrice()) {
+		if (c.getMoney(p) < m.getPrice()) {
 			p.sendMessage(Messages.notEnoughMoney);
 			return;
 		}

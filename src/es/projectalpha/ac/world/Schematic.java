@@ -16,23 +16,19 @@ import com.sk89q.worldedit.schematic.SchematicFormat;
 @SuppressWarnings("deprecation")
 public class Schematic {
 
-	public synchronized static void pasteSchematic(File dir, Location pasteLoc){
-
+	public static void pasteSchematic(File dir, Location pasteLoc){
 		try {
-
 			EditSession editSession = new EditSession(new BukkitWorld(pasteLoc.getWorld()), Integer.MAX_VALUE);
 			editSession.enableQueue();
 
 			Vector position = BukkitUtil.toVector(pasteLoc);
 
-			SchematicFormat.getFormat(dir).load(dir).paste(editSession, position, true, true);
+			SchematicFormat.getFormat(dir).load(dir).paste(editSession, position, true, false);
 
 			editSession.flushQueue();
-
-		} catch (DataException | IOException ex) {
-			ex.printStackTrace();
-		} catch (MaxChangedBlocksException ex) {
-			ex.printStackTrace();
+		} catch (MaxChangedBlocksException | DataException | IOException e) {
+			e.printStackTrace();
 		}
+
 	}
 }

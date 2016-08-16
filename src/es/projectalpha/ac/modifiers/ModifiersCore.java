@@ -30,13 +30,13 @@ public class ModifiersCore {
 		return Files.players.getInt(p.getName() + "." + s.toString().toLowerCase());
 	}
 
-	//TODO: Shop with own money per item
-	public double getMoneyShopItems(Shops s, Player p){
-		return getShopItems(s, p) * (s.getReward() * s.getCoefficient()); //Temporal, until HyperHippo tell me the equation
-	}
-
 	public void deteleItems(Shops s, int amount, Player p){
 		Files.players.set(p.getName() + "." + s.toString().toLowerCase(), getShopItems(s, p) - amount);
 		Files.saveFiles();
+	}
+
+	//TODO: Shop with own money per item
+	public double getMoneyShopItems(Shops s, Player p){
+		return getShopItems(s, p) * (s.getReward() * s.getCoefficient()); //Temporal, until HyperHippo tell me the equation
 	}
 }

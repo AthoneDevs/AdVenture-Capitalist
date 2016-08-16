@@ -46,7 +46,7 @@ public class ShopsCore {
 			return;
 		}
 
-		if (c.getMoney(p) <= s.getPrice()) {
+		if (c.getMoney(p) < s.getPrice()) {
 			p.sendMessage(Messages.notEnoughMoney);
 			return;
 		}

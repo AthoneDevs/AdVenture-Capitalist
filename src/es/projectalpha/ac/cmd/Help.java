@@ -13,7 +13,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.AVCAPI;
 import es.projectalpha.ac.achievements.Achievements;
 import es.projectalpha.ac.achievements.AchievementsGUI;
@@ -28,17 +27,9 @@ import es.projectalpha.ac.world.Schematic;
 
 public class Help implements CommandExecutor {
 
-	@SuppressWarnings("unused")
-	private AVC plugin;
 	private AVCAPI api = new AVCAPI();
 
-	public Help(AVC Main){
-		this.plugin = Main;
-	}
-
 	private String f = ChatColor.GRAY + " => ";
-
-	//TODO: Add menu for admins, angels, managers, and a lot more
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 		Player p;
@@ -47,7 +38,7 @@ public class Help implements CommandExecutor {
 
 			if (args.length == 0) {
 				p.sendMessage(" ");
-				p.sendMessage(Messages.prefix + ChatColor.AQUA + "AC Help");
+				p.sendMessage(Messages.prefix + ChatColor.AQUA + "AVC Help");
 				p.sendMessage(ChatColor.DARK_GREEN + "/avc play" + f + ChatColor.YELLOW + "Play AC");
 				p.sendMessage(ChatColor.DARK_GREEN + "/avc achievements" + f + ChatColor.YELLOW + "View your achievements");
 				p.sendMessage(ChatColor.DARK_GREEN + "/avc angels" + f + ChatColor.YELLOW + "View your angels");
@@ -55,6 +46,7 @@ public class Help implements CommandExecutor {
 				p.sendMessage(ChatColor.DARK_GREEN + "/avc managers" + f + ChatColor.YELLOW + "View avariable Managers");
 				p.sendMessage(" ");
 			}
+
 			if (args.length == 1) {
 				if (args[0].equalsIgnoreCase("achievements")) {
 					AchievementsGUI.openAchievementsGUI(p);
@@ -191,6 +183,15 @@ public class Help implements CommandExecutor {
 						Files.saveFiles();
 					}
 					p.setFlying(false);
+				}
+			}
+
+			if (args.length == 2) {
+				//JSON only
+				if (args[0].equalsIgnoreCase("shops")) {
+					String shop = args[1];
+
+					api.getShops().buyShop(p, Shops.valueOf(shop.toUpperCase()));
 				}
 			}
 		}

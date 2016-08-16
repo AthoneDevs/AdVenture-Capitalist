@@ -27,7 +27,7 @@ public class Data {
 		this.conn = api.getMySQL().getConnection();
 		try {
 
-			String sql = "SELECT `player_uuid` FROM `" + this.tableName + "` WHERE `player_uuid` = ?";
+			String sql = "SELECT `player` FROM `" + this.tableName + "` WHERE `player` = ?";
 			PreparedStatement preparedUpdateStatement = this.conn.prepareStatement(sql);
 			preparedUpdateStatement.setString(1, p.toString());
 

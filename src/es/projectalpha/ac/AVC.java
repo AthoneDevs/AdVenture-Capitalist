@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import es.projectalpha.ac.cmd.Admin;
 import es.projectalpha.ac.cmd.Help;
 import es.projectalpha.ac.events.Fancy;
 import es.projectalpha.ac.events.ManagerInteract;
@@ -125,7 +126,8 @@ public class AVC extends JavaPlugin {
 	}
 
 	private void regCMDs(){
-		getCommand("avc").setExecutor(new Help(this));
+		getCommand("avc").setExecutor(new Help());
+		getCommand("avca").setExecutor(new Admin());
 	}
 
 	//Added if you access to the Main class instead of the API class
