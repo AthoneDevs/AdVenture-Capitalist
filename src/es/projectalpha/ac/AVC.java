@@ -25,6 +25,8 @@ public class AVC extends JavaPlugin {
 
 	private AVCAPI api = new AVCAPI();
 
+	//Only World, not Moon and Mars
+
 	public void onEnable(){
 		Bukkit.getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "========================");
 		Bukkit.getConsoleSender().sendMessage(" ");
@@ -77,7 +79,6 @@ public class AVC extends JavaPlugin {
 		Bukkit.getConsoleSender().sendMessage(" ");
 
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Loading Game. . .");
-		api.getGame().setPlugin(this);
 		api.getGame().startTimer();
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Game Loaded");
 

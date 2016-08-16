@@ -20,7 +20,7 @@ public class ResetGame {
 		}
 
 		if (!api.getAngels().checkIfEnoughMoneyToReset(p)) {
-			//TODO: Messages
+			p.sendMessage(Messages.notEnoughMoneyToRestart);
 			return;
 		}
 

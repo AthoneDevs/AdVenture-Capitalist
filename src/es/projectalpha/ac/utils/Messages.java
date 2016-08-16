@@ -28,6 +28,7 @@ public class Messages {
 	public static String notEnoughMoney = prefix + ChatColor.RED + "Sorry, but you don't have enough money";
 	public static String buyManager = prefix + ChatColor.GREEN + "You have been bought the manager of " + ChatColor.YELLOW;
 	public static String buyShop = prefix + ChatColor.GREEN + "You have been bought the shop of " + ChatColor.YELLOW;
+	public static String notEnoughMoneyToRestart = prefix + ChatColor.RED + "You don't have enough money to re-start the game";
 
 	//Angels Info
 	public static void sendAngelsInfo(Player p){
