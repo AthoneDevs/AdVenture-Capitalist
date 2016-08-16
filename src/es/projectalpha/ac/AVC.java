@@ -10,7 +10,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import es.projectalpha.ac.cmd.Admin;
 import es.projectalpha.ac.cmd.Help;
-import es.projectalpha.ac.events.Fancy;
 import es.projectalpha.ac.events.ManagerInteract;
 import es.projectalpha.ac.events.ProtectWorld;
 import es.projectalpha.ac.events.invs.IAchievements;
@@ -123,7 +122,6 @@ public class AVC extends JavaPlugin {
 		new ManagerInteract(this);
 		new ProtectWorld(this);
 		new IAchievements(this);
-		new Fancy(this);
 	}
 
 	private void regCMDs(){
