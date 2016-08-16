@@ -10,23 +10,21 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import es.projectalpha.ac.AVC;
+import es.projectalpha.ac.AVCAPI;
 import es.projectalpha.ac.game.Currency;
 import es.projectalpha.ac.utils.Messages;
 
 public class Data {
 
-	private AVC plugin;
 	private Connection conn;
-	private String tableName = "avc_data";
-	private Currency c = new Currency();
 
-	public Data(AVC Main){
-		this.plugin = Main;
-	}
+	private String tableName = "avc_data";
+
+	private Currency c = new Currency();
+	private AVCAPI api = new AVCAPI();
 
 	public boolean hasAccount(UUID p){
-		this.conn = this.plugin.getMySQL().getConnection();
+		this.conn = api.getMySQL().getConnection();
 		try {
 
 			String sql = "SELECT `player_uuid` FROM `" + this.tableName + "` WHERE `player_uuid` = ?";
@@ -44,7 +42,7 @@ public class Data {
 	}
 
 	public boolean createAccount(UUID uuid, Player p){
-		this.conn = this.plugin.getMySQL().getConnection();
+		this.conn = api.getMySQL().getConnection();
 		try {
 
 			String sql = "INSERT INTO `" + this.tableName + "`(`player_uuid`, `player_name`, `money`) " + "VALUES(?, ?, ?, ?, ?)";
@@ -66,7 +64,7 @@ public class Data {
 		if (!hasAccount(uuid)) {
 			createAccount(uuid, p);
 		}
-		this.conn = this.plugin.getMySQL().getConnection();
+		this.conn = api.getMySQL().getConnection();
 		try {
 
 			String updateSqlExp = "UPDATE `" + this.tableName + "` " + "SET `player_name` = ?" + ", `money` = ?" + " WHERE `player_uuid` = ?";
@@ -87,7 +85,7 @@ public class Data {
 		if (!hasAccount(uuid)) {
 			createAccount(uuid, null);
 		}
-		this.conn = this.plugin.getMySQL().getConnection();
+		this.conn = api.getMySQL().getConnection();
 		try {
 
 			String sql = "SELECT `money` FROM `" + this.tableName + "` WHERE `player_uuid` = ?";

@@ -4,14 +4,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import es.projectalpha.ac.AVCAPI;
 import es.projectalpha.ac.achievements.Achievements;
 import es.projectalpha.ac.cooldowns.Cooldowns;
-import es.projectalpha.ac.game.Game;
 import es.projectalpha.ac.shops.Shops;
 
 public class Messages {
 
-	private static Game game = new Game();
+	private static AVCAPI api = new AVCAPI();
 
 	//Utils
 	public static String prefix = ChatColor.GRAY + " || " + ChatColor.GREEN + "AC" + ChatColor.GRAY + " || ";
@@ -29,16 +29,22 @@ public class Messages {
 	public static String buyManager = prefix + ChatColor.GREEN + "You have been bought the manager of " + ChatColor.YELLOW;
 	public static String buyShop = prefix + ChatColor.GREEN + "You have been bought the shop of " + ChatColor.YELLOW;
 
+	//Angels Info
+	public static void sendAngelsInfo(Player p){
+		p.sendMessage(" ");
+
+		p.sendMessage(ChatColor.GREEN + "Your Angels " + ChatColor.YELLOW + api.getAngels().getAngels(p));
+		p.sendMessage(ChatColor.GREEN + "Angels at game re-start " + ChatColor.YELLOW + api.getAngels().calculateAngels(p));
+
+		p.sendMessage(" ");
+	}
+
 	//Map Info
 	public static void sendMapInfo(Player p){
-		p.sendMessage(" ");
-		p.sendMessage(ChatColor.LIGHT_PURPLE + "==================================================");
 		p.sendMessage(" ");
 
 		p.sendMessage(ChatColor.GREEN + "Map created by " + ChatColor.RED + "SrJonh");
 
-		p.sendMessage(" ");
-		p.sendMessage(ChatColor.LIGHT_PURPLE + "==================================================");
 		p.sendMessage(" ");
 	}
 
@@ -54,7 +60,7 @@ public class Messages {
 	//Progress Bar
 	public static String getProgress(Player p, Location l, Shops shop){
 		int time = 0;
-		String name = game.shopLocation.get(l);
+		String name = api.getGame().shopLocation.get(l);
 
 		if (shop.getTimer() >= 100) {
 			time = (int) ((Cooldowns.getRemaining(p.getName(), name) * 100) / shop.getTimer());

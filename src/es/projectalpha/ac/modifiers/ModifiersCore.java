@@ -32,7 +32,7 @@ public class ModifiersCore {
 
 	//TODO: Shop with own money per item
 	public double getMoneyShopItems(Shops s, Player p){
-		return getShopItems(s, p) * (s.getReward() * s.getCoefficient()); //Change!
+		return getShopItems(s, p) * (s.getReward() * s.getCoefficient()); //Temporal, until HyperHippo tell me the equation
 	}
 
 	public void deteleItems(Shops s, int amount, Player p){

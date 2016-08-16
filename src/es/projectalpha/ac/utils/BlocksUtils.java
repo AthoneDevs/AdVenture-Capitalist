@@ -8,7 +8,7 @@ import org.bukkit.block.Block;
 
 public class BlocksUtils {
 
-	public static ArrayList<Block> getBlocks(Block start, int radius){
+	private static ArrayList<Block> getBlocks(Block start, int radius){
 		ArrayList<Block> blocks = new ArrayList<Block>();
 		for (double x = start.getLocation().getX() - radius; x <= start.getLocation().getX() + radius; x++) {
 			for (double y = start.getLocation().getY() - radius; y <= start.getLocation().getY() + radius; y++) {

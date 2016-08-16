@@ -14,8 +14,6 @@ import es.projectalpha.ac.events.ManagerInteract;
 import es.projectalpha.ac.events.ProtectWorld;
 import es.projectalpha.ac.events.invs.IAchievements;
 import es.projectalpha.ac.files.Files;
-import es.projectalpha.ac.game.Currency;
-import es.projectalpha.ac.game.Game;
 import es.projectalpha.ac.mysql.Data;
 import es.projectalpha.ac.mysql.MySQL;
 import es.projectalpha.ac.utils.Messages;
@@ -24,20 +22,13 @@ import es.projectalpha.ac.world.Generator;
 
 public class AVC extends JavaPlugin {
 
-	private static AVC plugin;
-	private Game game = new Game();
-	private Currency c = new Currency();
-
-	private MySQL mysql;
-	private Data data;
-
-	private static boolean debug = false;
+	private AVCAPI api = new AVCAPI();
 
 	public void onEnable(){
 		Bukkit.getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "========================");
 		Bukkit.getConsoleSender().sendMessage(" ");
 
-		plugin = this;
+		api.setPlugin(this);
 
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Checking Server Version. . .");
 		if (!ServerVersion.isMC110() && !ServerVersion.isMC19()) {
@@ -72,8 +63,8 @@ public class AVC extends JavaPlugin {
 
 		if (Files.cfg.getBoolean("MySQL.enabled")) {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Connecting to MySQL. . .");
-			this.mysql = new MySQL(this);
-			this.data = new Data(this);
+			api.setMySQL(new MySQL(this));
+			api.setData(new Data());
 			Bukkit.getConsoleSender().sendMessage(" ");
 		}
 
@@ -85,28 +76,47 @@ public class AVC extends JavaPlugin {
 		Bukkit.getConsoleSender().sendMessage(" ");
 
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Loading Game. . .");
-		game.startTimer(this);
+		api.getGame().setPlugin(this);
+		api.getGame().startTimer();
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Game Loaded");
 
 		Bukkit.getConsoleSender().sendMessage(" ");
 
-		Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.GREEN + "AC enabled");
-		Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.GREEN + "AC Version: " + ChatColor.RED + getDescription().getVersion());
-		Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.GREEN + "AC Autor: " + ChatColor.RED + getDescription().getAuthors().toString());
-		Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.GREEN + "AC Utils: " + ChatColor.RED + "https://github.com/ProjectAlphaES/AdVenture-Capitalist");
+		Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.GREEN + "AVC enabled");
+		Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.GREEN + "AVC Version: " + ChatColor.RED + getDescription().getVersion());
+		Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.GREEN + "AVC Autors: " + ChatColor.RED + getDescription().getAuthors().toString());
+		Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.GREEN + "AVC Utils: " + ChatColor.RED + "https://github.com/ProjectAlphaES/AdVenture-Capitalist");
 
 		Bukkit.getConsoleSender().sendMessage(" ");
 		Bukkit.getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "========================");
 	}
 
 	public void onDisable(){
+		Bukkit.getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "========================");
+		Bukkit.getConsoleSender().sendMessage(" ");
+
+		Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.GOLD + "Saving all. . . ");
 		Bukkit.getScheduler().cancelTasks(this);
-		for (Player p : game.playing) {
-			c.saveMoney(p);
+
+		for (Player p : api.getGame().playing) {
+			api.getCurrency().saveMoney(p);
 		}
 
+		if (api.getMySQL().checkConnection()) {
+			api.getMySQL().closeConnection();
+		}
+
+		Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.AQUA + "All saved");
+
+		Bukkit.getConsoleSender().sendMessage(" ");
+
+		Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.RED + "AVC disabled");
+
+		Bukkit.getConsoleSender().sendMessage(" ");
+		Bukkit.getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "========================");
 	}
 
+	//Registers
 	private void regEvents(){
 		new ManagerInteract(this);
 		new ProtectWorld(this);
@@ -118,27 +128,13 @@ public class AVC extends JavaPlugin {
 		getCommand("avc").setExecutor(new Help(this));
 	}
 
-	public static AVC getPlugin(){
-		return plugin;
+	//Added if you access to the Main class instead of the API class
+	public AVCAPI getAPI(){
+		return this.api;
 	}
 
-	public MySQL getMySQL(){
-		return this.mysql;
-	}
-
-	public Data getData(){
-		return this.data;
-	}
-
-	public static boolean getDebug(){
-		return debug;
-	}
-
-	public static void setDebug(boolean debug){
-		AVC.debug = debug;
-	}
-
-	//For Multiverse or Bukkit Settings
+	//For Multiverse, the Plugin or Bukkit Settings
+	//Do not try to load a world with this, leave the plugin works...
 	@Override
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id){
 		return new Generator();

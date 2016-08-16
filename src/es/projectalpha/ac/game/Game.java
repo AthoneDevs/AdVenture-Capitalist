@@ -9,8 +9,8 @@ import org.bukkit.Location;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 
+import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.api.NPCAPI;
 import es.projectalpha.ac.api.fancy.BossBarAPI;
 import es.projectalpha.ac.api.fancy.HoloAPI;
@@ -22,6 +22,8 @@ import es.projectalpha.ac.managers.SpawnManagers;
 
 public class Game {
 
+	private AVC plugin;
+
 	public ArrayList<Player> playing = new ArrayList<Player>();
 	public ArrayList<Location> progressBar = new ArrayList<Location>();
 	public HashMap<Location, String> shopLocation = new HashMap<Location, String>();
@@ -32,7 +34,7 @@ public class Game {
 	private ManagersCore mc = new ManagersCore();
 	private Currency c = new Currency();
 
-	public void startTimer(Plugin plugin){
+	public void startTimer(){
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 			public void run(){
 				for (Player p : playing) {
@@ -51,11 +53,6 @@ public class Game {
 
 					//TEST
 					System.out.println("Work");
-
-					//TP Villagers
-					//					for (Villager v : VillagerShops.villagerUtils) {
-					//						v.teleport(VillagerShops.villagerLocs.get(v));
-					//					}
 
 					//Show Money
 					int id = Files.players.getInt(p.getName() + ".id");
@@ -78,7 +75,6 @@ public class Game {
 				}
 
 				//Managers
-
 				for (Managers m : Managers.values()) {
 					for (Player p : mc.getPlayersWithManager(m)) {
 						if (Cooldowns.isCooling(p.getName(), m.getName())) {
@@ -94,5 +90,9 @@ public class Game {
 				}
 			}
 		}, 0L, 20L);
+	}
+
+	public void setPlugin(AVC plugin){
+		this.plugin = plugin;
 	}
 }

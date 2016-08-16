@@ -41,6 +41,6 @@ public class Angels {
 
 	//This uses an equation created by Kongregate user Sodapants
 	public int calculateAngels(Player p){
-		return (int) (150 * Math.sqrt((c.getMaxMoney(p) / 1000000000000000D)));
+		return (int) (150 * Math.sqrt((c.getMaxMoney(p) / 1000000000000000D))); //Small number, no?
 	}
 }

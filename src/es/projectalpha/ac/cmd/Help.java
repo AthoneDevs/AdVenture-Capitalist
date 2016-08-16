@@ -14,18 +14,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import es.projectalpha.ac.AVC;
-import es.projectalpha.ac.achievements.AchievementsCore;
-import es.projectalpha.ac.achievements.AchievementsGUI;
+import es.projectalpha.ac.AVCAPI;
 import es.projectalpha.ac.achievements.Achievements;
+import es.projectalpha.ac.achievements.AchievementsGUI;
 import es.projectalpha.ac.api.AttackSpeedAPI;
 import es.projectalpha.ac.api.fancy.ActionBarAPI;
 import es.projectalpha.ac.files.Files;
-import es.projectalpha.ac.game.Angels;
-import es.projectalpha.ac.game.Currency;
 import es.projectalpha.ac.managers.ManagersGUI;
 import es.projectalpha.ac.managers.SpawnManagers;
 import es.projectalpha.ac.shops.Shops;
-import es.projectalpha.ac.shops.ShopsCore;
 import es.projectalpha.ac.utils.Messages;
 import es.projectalpha.ac.world.Schematic;
 
@@ -33,16 +30,15 @@ public class Help implements CommandExecutor {
 
 	@SuppressWarnings("unused")
 	private AVC plugin;
-	private AchievementsCore achi = new AchievementsCore();
-	private ShopsCore sc = new ShopsCore();
-	private Currency c = new Currency();
-	private Angels a = new Angels();
+	private AVCAPI api = new AVCAPI();
 
 	public Help(AVC Main){
 		this.plugin = Main;
 	}
 
 	private String f = ChatColor.GRAY + " => ";
+
+	//TODO: Add menu for admins, angels, managers, and a lot more
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 		Player p;
@@ -65,7 +61,7 @@ public class Help implements CommandExecutor {
 				}
 
 				if (args[0].equalsIgnoreCase("angels")) {
-					//TODO: Make Methods
+					Messages.sendAngelsInfo(p);
 					return true;
 				}
 
@@ -75,13 +71,13 @@ public class Help implements CommandExecutor {
 
 				if (args[0].equalsIgnoreCase("debug")) {
 					if (p.hasPermission("avc.admin")) {
-						if (AVC.getDebug()) {
-							AVC.setDebug(false);
-							p.sendMessage(Messages.prefix + "Debug: " + ChatColor.RED + AVC.getDebug());
+						if (api.getDebug()) {
+							api.setDebug(false);
+							p.sendMessage(Messages.prefix + "Debug: " + ChatColor.RED + api.getDebug());
 							return true;
 						}
-						AVC.setDebug(true);
-						p.sendMessage(Messages.prefix + "Debug: " + ChatColor.RED + AVC.getDebug());
+						api.setDebug(true);
+						p.sendMessage(Messages.prefix + "Debug: " + ChatColor.RED + api.getDebug());
 					} else {
 						p.sendMessage(Messages.noPerms);
 					}
@@ -111,7 +107,7 @@ public class Help implements CommandExecutor {
 
 						p.teleport(l.add(0, 1, 0));
 
-						c.loadMoney(p);
+						api.getCurrency().loadMoney(p);
 
 						p.sendMessage(Messages.tpCompany);
 
@@ -123,10 +119,10 @@ public class Help implements CommandExecutor {
 
 					ActionBarAPI.sendActionBar(p, ChatColor.RED + "Have Fun :D");
 
-					achi.addAchievement(p, Achievements.START);
-					c.newPlayerMoney(p, 0);
-					sc.addShop(p, Shops.LEMONADE);
-					a.startGame(p);
+					api.getAchievements().addAchievement(p, Achievements.START);
+					api.getCurrency().newPlayerMoney(p, 0);
+					api.getShops().addShop(p, Shops.LEMONADE);
+					api.getAngels().startGame(p);
 
 					Messages.sendMapInfo(p);
 
