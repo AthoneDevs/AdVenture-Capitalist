@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -14,8 +15,8 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 
 import es.projectalpha.ac.AVC;
-import es.projectalpha.ac.achievements.AchievementsCore;
 import es.projectalpha.ac.achievements.Achievements;
+import es.projectalpha.ac.achievements.AchievementsCore;
 import es.projectalpha.ac.game.Game;
 
 public class ProtectWorld implements Listener {
@@ -91,6 +92,13 @@ public class ProtectWorld implements Listener {
 	@EventHandler
 	public void noFire(EntityCombustEvent e){
 		if (e.getEntityType() == EntityType.ARMOR_STAND) {
+			e.setCancelled(true);
+		}
+	}
+
+	@EventHandler
+	public void noSpawn(CreatureSpawnEvent e){
+		if (e.getLocation().getWorld().getName().equalsIgnoreCase("avc")) {
 			e.setCancelled(true);
 		}
 	}

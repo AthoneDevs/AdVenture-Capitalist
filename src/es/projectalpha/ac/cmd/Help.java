@@ -80,7 +80,6 @@ public class Help implements CommandExecutor {
 
 					AttackSpeedAPI.setAttackSpeed(p, 16.0D);
 
-					p.setFlying(true);
 					p.setNoDamageTicks(Integer.MAX_VALUE);
 
 					//							Song song = NBSDecoder.parse(new File("/plugins/AC/Utils/ac.nbs"));
@@ -136,7 +135,7 @@ public class Help implements CommandExecutor {
 
 						Files.players.set(p.getName() + ".id", id);
 
-						Schematic.pasteSchematic(new File("plugins/AC/Utils/build.schematic"), p.getLocation());
+						Schematic.pasteSchematic(new File("plugins/AVC/Utils/build.schematic"), p.getLocation());
 
 						Block b = p.getWorld().getBlockAt(p.getLocation().subtract(0, 1, 0));
 
@@ -162,7 +161,7 @@ public class Help implements CommandExecutor {
 
 						Files.locs.set("num", id);
 
-						Schematic.pasteSchematic(new File("plugins/AC/Utils/build.schematic"), p.getLocation());
+						Schematic.pasteSchematic(new File("plugins/AVC/Utils/build.schematic"), p.getLocation());
 
 						Block b = p.getWorld().getBlockAt(p.getLocation().subtract(0, 1, 0));
 
@@ -182,7 +181,6 @@ public class Help implements CommandExecutor {
 
 						Files.saveFiles();
 					}
-					p.setFlying(false);
 				}
 			}
 

@@ -23,7 +23,7 @@ public class Schematic {
 
 			Vector position = BukkitUtil.toVector(pasteLoc);
 
-			SchematicFormat.getFormat(dir).load(dir).paste(editSession, position, true, false);
+			SchematicFormat.getFormat(dir).load(dir).paste(editSession, position, true, true);
 
 			editSession.flushQueue();
 		} catch (MaxChangedBlocksException | DataException | IOException e) {

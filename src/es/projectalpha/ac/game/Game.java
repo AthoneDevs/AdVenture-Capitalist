@@ -28,9 +28,12 @@ public class Game {
 	private ArrayList<HoloAPI> holos = new ArrayList<HoloAPI>();
 
 	//Utils
-	private AVCAPI api = new AVCAPI();
+	private AVCAPI api;
 
 	public void startTimer(){
+
+		api = new AVCAPI();
+
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(api.getPlugin(), new Runnable() {
 			public void run(){
 				for (Player p : playing) {

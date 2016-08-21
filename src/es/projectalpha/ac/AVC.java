@@ -2,13 +2,13 @@ package es.projectalpha.ac;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.World.Environment;
 import org.bukkit.WorldCreator;
 import org.bukkit.entity.Player;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import es.projectalpha.ac.cmd.Admin;
 import es.projectalpha.ac.cmd.Help;
 import es.projectalpha.ac.events.ManagerInteract;
 import es.projectalpha.ac.events.ProtectWorld;
@@ -22,15 +22,20 @@ import es.projectalpha.ac.world.Generator;
 
 public class AVC extends JavaPlugin {
 
-	private AVCAPI api = new AVCAPI();
+	private AVCAPI api;
 
 	//Only World, not Moon and Mars
+
+	public static AVC plugin;
 
 	public void onEnable(){
 		Bukkit.getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "========================");
 		Bukkit.getConsoleSender().sendMessage(" ");
 
-		api.setPlugin(this);
+		api = new AVCAPI();
+		//		api.setPlugin(this);
+
+		plugin = this;
 
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Checking Server Version. . .");
 		if (!ServerVersion.isMC110() && !ServerVersion.isMC19()) {
@@ -56,7 +61,12 @@ public class AVC extends JavaPlugin {
 		if (!Bukkit.getWorlds().contains(Bukkit.getWorld("ac"))) {
 
 			Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Creating World. . .");
-			Bukkit.createWorld(new WorldCreator("ac").generator(getDefaultWorldGenerator("ac", "ac")).environment(Environment.NORMAL));
+			Bukkit.createWorld(new WorldCreator("avc").generator(getDefaultWorldGenerator("ac", "ac")).environment(Environment.NORMAL));
+			World w = Bukkit.getWorld("avc");
+			w.setGameRuleValue("doDaylightCycle", "false");
+			w.setGameRuleValue("doMobSpawning", "false");
+			w.setTime(14000);
+
 			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "World Created");
 
 			Bukkit.getConsoleSender().sendMessage(" ");
@@ -103,9 +113,9 @@ public class AVC extends JavaPlugin {
 			api.getCurrency().saveMoney(p);
 		}
 
-		if (api.getMySQL().checkConnection()) {
-			api.getMySQL().closeConnection();
-		}
+		//		if (api.getMySQL().checkConnection()) {
+		//			api.getMySQL().closeConnection();
+		//		}
 
 		Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.AQUA + "All saved");
 
@@ -126,7 +136,6 @@ public class AVC extends JavaPlugin {
 
 	private void regCMDs(){
 		getCommand("avc").setExecutor(new Help());
-		getCommand("avca").setExecutor(new Admin());
 	}
 
 	//Added if you access to the Main class instead of the API class

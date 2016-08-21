@@ -12,7 +12,7 @@ import es.projectalpha.ac.shops.ShopsCore;
 
 public class AVCAPI {
 
-	private AVC plugin;
+	private AVC plugin = AVC.plugin; //IDK why...
 
 	private Game game = new Game();
 	private Currency c = new Currency();
@@ -85,6 +85,8 @@ public class AVCAPI {
 	}
 
 	public void setPlugin(AVC plugin){
+		System.out.println("G " + plugin);
 		this.plugin = plugin;
+		System.out.println("G " + this.plugin);
 	}
 }
