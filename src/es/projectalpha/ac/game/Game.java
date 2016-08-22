@@ -1,7 +1,6 @@
 package es.projectalpha.ac.game;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -23,7 +22,7 @@ public class Game {
 
 	public ArrayList<Player> playing = new ArrayList<Player>();
 	public ArrayList<Location> progressBar = new ArrayList<Location>();
-	public HashMap<Location, String> shopLocation = new HashMap<Location, String>();
+	//public HashMap<Location, String> shopLocation = new HashMap<Location, String>();
 
 	private ArrayList<HoloAPI> holos = new ArrayList<HoloAPI>();
 
@@ -33,6 +32,9 @@ public class Game {
 	public void startTimer(){
 
 		api = new AVCAPI();
+
+		//Test
+		System.out.println("Trying");
 
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(api.getPlugin(), new Runnable() {
 			public void run(){

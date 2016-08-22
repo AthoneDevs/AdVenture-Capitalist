@@ -82,11 +82,6 @@ public class Help implements CommandExecutor {
 
 					p.setNoDamageTicks(Integer.MAX_VALUE);
 
-					//							Song song = NBSDecoder.parse(new File("/plugins/AC/Utils/ac.nbs"));
-					//							SongPlayer sp = new RadioSongPlayer(song);
-					//							sp.addPlayer(p);
-					//							sp.setPlaying(true);
-
 					if (Files.players.contains(p.getName())) {
 						int id = Files.players.getInt(p.getName() + ".id");
 
@@ -127,7 +122,7 @@ public class Help implements CommandExecutor {
 
 						Location loc = l.clone().add(150, 0, 0);
 
-						p.teleport(loc);
+						p.teleport(loc.add(0, 2, 0));
 
 						id++;
 
@@ -135,7 +130,7 @@ public class Help implements CommandExecutor {
 
 						Files.players.set(p.getName() + ".id", id);
 
-						Schematic.pasteSchematic(new File("plugins/AVC/Utils/build.schematic"), p.getLocation());
+						Schematic.pasteSchematic(new File("plugins/AVC/Utils/build.schematic"), p.getLocation().add(0, -2, 0));
 
 						Block b = p.getWorld().getBlockAt(p.getLocation().subtract(0, 1, 0));
 
@@ -157,11 +152,11 @@ public class Help implements CommandExecutor {
 					} else {
 						id++;
 
-						p.teleport(new Location(world, 0, 30, 0));
+						p.teleport(new Location(world, 0, 30, 0).add(0, 2, 0));
 
 						Files.locs.set("num", id);
 
-						Schematic.pasteSchematic(new File("plugins/AVC/Utils/build.schematic"), p.getLocation());
+						Schematic.pasteSchematic(new File("plugins/AVC/Utils/build.schematic"), p.getLocation().add(0, -2, 0));
 
 						Block b = p.getWorld().getBlockAt(p.getLocation().subtract(0, 1, 0));
 

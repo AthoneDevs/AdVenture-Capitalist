@@ -10,6 +10,7 @@ import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import es.projectalpha.ac.cmd.Help;
+import es.projectalpha.ac.cooldowns.Cooldowns;
 import es.projectalpha.ac.events.ManagerInteract;
 import es.projectalpha.ac.events.ProtectWorld;
 import es.projectalpha.ac.events.invs.IAchievements;
@@ -89,6 +90,7 @@ public class AVC extends JavaPlugin {
 
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Loading Game. . .");
 		api.getGame().startTimer();
+		startCooldowns();
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Game Loaded");
 
 		Bukkit.getConsoleSender().sendMessage(" ");
@@ -141,6 +143,26 @@ public class AVC extends JavaPlugin {
 	//Added if you access to the Main class instead of the API class
 	public AVCAPI getAPI(){
 		return this.api;
+	}
+
+	//Cooldowns
+	private void startCooldowns(){
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+
+			@Override
+			public void run(){
+				Cooldowns.handleCooldowns();
+
+				for (Player p : api.getGame().playing) {
+					if (Cooldowns.isCooling(p.getName(), "song")) {
+						Cooldowns.coolDurMessage(p, "song");
+						return;
+					}
+					//Play Sound ResourcePack
+					Cooldowns.add(p.getName(), "song", 1800L, System.currentTimeMillis());
+				}
+			}
+		}, 1L, 1L);
 	}
 
 	//For Multiverse, the Plugin or Bukkit Settings

@@ -85,8 +85,6 @@ public class AVCAPI {
 	}
 
 	public void setPlugin(AVC plugin){
-		System.out.println("G " + plugin);
 		this.plugin = plugin;
-		System.out.println("G " + this.plugin);
 	}
 }
