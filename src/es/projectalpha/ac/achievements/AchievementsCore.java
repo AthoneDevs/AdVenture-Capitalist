@@ -6,7 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
-import es.projectalpha.ac.api.FireworkAPI;
+import es.projectalpha.ac.api.fancy.FireworkAPI;
 import es.projectalpha.ac.api.fancy.TitleAPI;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.game.Currency;

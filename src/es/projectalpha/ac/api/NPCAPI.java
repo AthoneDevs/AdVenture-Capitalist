@@ -28,6 +28,8 @@ import com.mojang.authlib.properties.Property;
 
 public class NPCAPI {
 
+	//TODO: New working class (and better)
+
 	private String name;
 	private Location loc;
 

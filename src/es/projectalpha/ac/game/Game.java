@@ -9,9 +9,9 @@ import org.bukkit.Location;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
 
 import es.projectalpha.ac.AVCAPI;
-import es.projectalpha.ac.api.NPCAPI;
 import es.projectalpha.ac.api.fancy.BossBarAPI;
 import es.projectalpha.ac.api.fancy.HoloAPI;
 import es.projectalpha.ac.cooldowns.Cooldowns;
@@ -43,11 +43,11 @@ public class Game {
 				for (Player p : playing) {
 
 					//Show NPCs
-					for (NPCAPI npc : SpawnManagers.npcs) {
-						npc.destroy();
-						npc.spawn();
-						npc.show(p);
-					}
+					//					for (NPCAPI npc : SpawnManagers.npcs) {
+					//						npc.destroy();
+					//						npc.spawn();
+					//						npc.show(p);
+					//					}
 
 					//Destroy Hologram
 					for (HoloAPI holo : holos) {
@@ -82,7 +82,20 @@ public class Game {
 							if (Cooldowns.isCooling(pl.getName(), m.getName())) {
 								return;
 							}
-							for (NPCAPI npc : SpawnManagers.npcs) {
+							//							for (NPCAPI npc : SpawnManagers.npcs) {
+							//								if (npc.getName().equalsIgnoreCase(m.getManagerName())) {
+							//									progressBar.put(npc.getLocation().add(0, 3, 0), m.getManagerName());
+							//
+							//									//TODO: Better Hologram System
+							//
+							//									HoloAPI pro = new HoloAPI(npc.getLocation().add(0, 3, 0), Messages.getProgress(p, npc.getLocation().add(0, 3, 0), m.getShop()));
+							//
+							//									pro.display(p);
+							//
+							//									holos.add(pro);
+							//								}
+							//							}
+							for (Villager npc : SpawnManagers.npcs) {
 								if (npc.getName().equalsIgnoreCase(m.getManagerName())) {
 									progressBar.put(npc.getLocation().add(0, 3, 0), m.getManagerName());
 

@@ -35,7 +35,6 @@ public class ModifiersCore {
 		Files.saveFiles();
 	}
 
-	//TODO: Shop with own money per item
 	public double getMoneyShopItems(Shops s, Player p){
 		return getShopItems(s, p) * (s.getReward() * s.getCoefficient()); //Temporal, until HyperHippo tell me the equation
 	}
