@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 
 import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.api.NPCAPI;
+import es.projectalpha.ac.api.fancy.HoloAPI;
 import es.projectalpha.ac.api.fancy.JsonAPI;
 import es.projectalpha.ac.api.fancy.TitleAPI;
 import es.projectalpha.ac.cooldowns.Cooldowns;
@@ -16,6 +17,7 @@ import es.projectalpha.ac.game.Game;
 import es.projectalpha.ac.managers.Managers;
 import es.projectalpha.ac.managers.ManagersCore;
 import es.projectalpha.ac.shops.ShopsCore;
+import es.projectalpha.ac.utils.Messages;
 
 public class ManagerInteract implements Listener {
 
@@ -56,7 +58,17 @@ public class ManagerInteract implements Listener {
 							Cooldowns.coolDurMessage(p, m.getName());
 							return;
 						}
-						game.progressBar.add(v.getLocation().add(0, 3, 0));
+
+						game.progressBar.put(v.getLocation().add(0, 3, 0), m.getManagerName());
+
+						//TODO: Better Hologram System
+
+						HoloAPI holo = new HoloAPI(v.getLocation().add(0, 3, 0), Messages.getProgress(p, v.getLocation().add(0, 3, 0), m.getShop()));
+
+						holo.display(p);
+
+						game.holos.add(holo);
+
 						Cooldowns.add(p.getName(), m.getName(), (long) m.getShop().getTimer(), System.currentTimeMillis());
 					}
 				}

@@ -61,7 +61,7 @@ public class Messages {
 	//Progress Bar
 	public static String getProgress(Player p, Location l, Shops shop){
 		int time = 0;
-		String name = api.getGame().shopLocation.get(l);
+		String name = api.getGame().progressBar.get(l);
 
 		if (shop.getTimer() >= 100) {
 			time = (int) ((Cooldowns.getRemaining(p.getName(), name) * 100) / shop.getTimer());

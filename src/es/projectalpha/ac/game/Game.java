@@ -1,6 +1,7 @@
 package es.projectalpha.ac.game;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -17,14 +18,15 @@ import es.projectalpha.ac.cooldowns.Cooldowns;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.managers.Managers;
 import es.projectalpha.ac.managers.SpawnManagers;
+import es.projectalpha.ac.utils.Messages;
 
 public class Game {
 
 	public ArrayList<Player> playing = new ArrayList<Player>();
-	public ArrayList<Location> progressBar = new ArrayList<Location>();
-	//public HashMap<Location, String> shopLocation = new HashMap<Location, String>();
 
-	private ArrayList<HoloAPI> holos = new ArrayList<HoloAPI>();
+	public HashMap<Location, String> progressBar = new HashMap<Location, String>();
+
+	public ArrayList<HoloAPI> holos = new ArrayList<HoloAPI>();
 
 	//Utils
 	private AVCAPI api;
@@ -67,6 +69,8 @@ public class Game {
 					HoloAPI holo = new HoloAPI(l, "$ " + api.getCurrency().getMoney(p));
 					holo.display(p);
 
+					holos.add(holo);
+
 					//Check if Enough Money
 					for (Managers m : Managers.values()) {
 						if (api.getCurrency().getMoney(p) >= m.getPrice()) {
@@ -80,7 +84,15 @@ public class Game {
 							}
 							for (NPCAPI npc : SpawnManagers.npcs) {
 								if (npc.getName().equalsIgnoreCase(m.getManagerName())) {
-									progressBar.add(npc.getLocation().add(0, 3, 0));
+									progressBar.put(npc.getLocation().add(0, 3, 0), m.getManagerName());
+
+									//TODO: Better Hologram System
+
+									HoloAPI pro = new HoloAPI(npc.getLocation().add(0, 3, 0), Messages.getProgress(p, npc.getLocation().add(0, 3, 0), m.getShop()));
+
+									pro.display(p);
+
+									holos.add(pro);
 								}
 							}
 							Cooldowns.add(pl.getName(), m.getName(), (long) m.getShop().getTimer(), System.currentTimeMillis());
