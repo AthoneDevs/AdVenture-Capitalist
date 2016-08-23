@@ -1,4 +1,4 @@
-package es.projectalpha.ac.api;
+package es.projectalpha.ac.api.fancy;
 
 import java.util.Random;
 
@@ -18,21 +18,34 @@ public class FireworkAPI {
 
 		Random r = new Random();
 
-		int rt = r.nextInt(4) + 1;
+		int rt = r.nextInt(5);
 		Type type = Type.BALL;
-		if (rt == 1)
+
+		switch (rt) {
+		case 0:
 			type = Type.BALL;
-		if (rt == 2)
+			break;
+		case 1:
 			type = Type.BALL_LARGE;
-		if (rt == 3)
+			break;
+		case 2:
 			type = Type.BURST;
-		if (rt == 4)
+			break;
+		case 3:
 			type = Type.CREEPER;
-		if (rt == 5)
+			break;
+		case 4:
 			type = Type.STAR;
+			break;
+		default:
+			type = Type.BALL;
+			//Just for security (or not, line 22)
+			break;
+		}
 
 		int r1i = r.nextInt(17) + 1;
 		int r2i = r.nextInt(17) + 1;
+
 		Color c1 = getColor(r1i);
 		Color c2 = getColor(r2i);
 
