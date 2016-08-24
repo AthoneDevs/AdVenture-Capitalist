@@ -65,7 +65,6 @@ public class AVC extends JavaPlugin {
 			Bukkit.createWorld(new WorldCreator("avc").generator(getDefaultWorldGenerator("ac", "ac")).environment(Environment.NORMAL));
 			World w = Bukkit.getWorld("avc");
 			w.setGameRuleValue("doDaylightCycle", "false");
-			w.setGameRuleValue("doMobSpawning", "false");
 			w.setTime(14000);
 
 			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "World Created");

@@ -76,7 +76,7 @@ public class Help implements CommandExecutor {
 				}
 
 				if (args[0].equalsIgnoreCase("play")) {
-					World world = Bukkit.getWorld("ac");
+					World world = Bukkit.getWorld("avc");
 
 					AttackSpeedAPI.setAttackSpeed(p, 16.0D);
 
@@ -132,18 +132,24 @@ public class Help implements CommandExecutor {
 
 						Schematic.pasteSchematic(new File("plugins/AVC/Utils/build.schematic"), p.getLocation().add(0, -2, 0));
 
-						Block b = p.getWorld().getBlockAt(p.getLocation().subtract(0, 1, 0));
+						for (int k = 0; k < 5; k++) {
+							Block b = p.getWorld().getBlockAt(p.getLocation().clone().add(0, -k, 0));
 
-						if (b.getType() == Material.BEACON) {
+							if (api.getDebug()) {
+								System.out.println(Messages.parseLoc(b.getLocation()) + " " + b.getType());
+							}
 
-							Files.locs.set("id" + id + ".x", b.getLocation().getX());
-							Files.locs.set("id" + id + ".y", b.getLocation().getY() + 1);
-							Files.locs.set("id" + id + ".z", b.getLocation().getZ());
+							if (b.getType() == Material.BEACON) {
 
-							SpawnManagers.spawnManager(b.getLocation().add(0, 1, 0));
+								Files.locs.set("id" + id + ".x", b.getLocation().getX());
+								Files.locs.set("id" + id + ".y", b.getLocation().getY() + 1);
+								Files.locs.set("id" + id + ".z", b.getLocation().getZ());
 
-							p.teleport(new Location(b.getWorld(), b.getLocation().getX(), b.getLocation().getY() + 1, b.getLocation().getZ()));
+								SpawnManagers.spawnManager(b.getLocation().add(0, 1, 0));
 
+								p.teleport(new Location(b.getWorld(), b.getLocation().getX(), b.getLocation().getY() + 1, b.getLocation().getZ()));
+
+							}
 						}
 
 						Files.saveFiles();
@@ -152,24 +158,30 @@ public class Help implements CommandExecutor {
 					} else {
 						id++;
 
-						p.teleport(new Location(world, 0, 30, 0).add(0, 2, 0));
+						p.teleport(new Location(world, 0.5, 30, 0.5));
 
 						Files.locs.set("num", id);
 
-						Schematic.pasteSchematic(new File("plugins/AVC/Utils/build.schematic"), p.getLocation().add(0, -2, 0));
+						Schematic.pasteSchematic(new File("plugins/AVC/Utils/build.schematic"), p.getLocation());
 
-						Block b = p.getWorld().getBlockAt(p.getLocation().subtract(0, 1, 0));
+						for (int k = 0; k < 4; k++) {
+							Block b = p.getWorld().getBlockAt(p.getLocation().clone().add(0, -k, 0));
 
-						if (b.getType() == Material.BEACON) {
+							if (api.getDebug()) {
+								System.out.println(Messages.parseLoc(b.getLocation()) + " " + b.getType());
+							}
 
-							Files.locs.set("id" + id + ".x", b.getLocation().getX());
-							Files.locs.set("id" + id + ".y", b.getLocation().getY() + 1);
-							Files.locs.set("id" + id + ".z", b.getLocation().getZ());
+							if (b.getType() == Material.BEACON) {
 
-							SpawnManagers.spawnManager(b.getLocation().add(0, 1, 0));
+								Files.locs.set("id" + id + ".x", b.getLocation().getX());
+								Files.locs.set("id" + id + ".y", b.getLocation().getY() + 1);
+								Files.locs.set("id" + id + ".z", b.getLocation().getZ());
 
-							p.teleport(new Location(b.getWorld(), b.getLocation().getX(), b.getLocation().getY() + 1, b.getLocation().getZ()));
+								SpawnManagers.spawnManager(b.getLocation().add(0, 1, 0));
 
+								p.teleport(new Location(b.getWorld(), b.getLocation().getX(), b.getLocation().getY() + 1, b.getLocation().getZ()));
+
+							}
 						}
 
 						Files.players.set(p.getName() + ".id", id);

@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Villager;
 
-import es.projectalpha.ac.AVCAPI;
+import es.projectalpha.ac.utils.Messages;
 
 public class SpawnManagers {
 
@@ -16,22 +17,35 @@ public class SpawnManagers {
 	public static HashMap<Villager, Location> loc = new HashMap<Villager, Location>();
 	public static ArrayList<Villager> npcs = new ArrayList<Villager>();
 
-	private static AVCAPI api = new AVCAPI();
+	//private static AVCAPI api = new AVCAPI();
 
-	public static void spawnManager(Location l){
+	public static void spawnManager(Location lo){
 		for (Managers m : Managers.values()) {
+			Location l = lo.clone();
+
+			l.getWorld().getBlockAt(l.add(m.getDistX(), 0, m.getDistZ())).setType(Material.AIR);
+
 			Villager v = l.getWorld().spawn(l.add(m.getDistX(), 0, m.getDistZ()), Villager.class);
+
+			//TODO: Solved not spawning bug
+
+			v.setCustomName(m.getManagerName());
 
 			loc.put(v, l.add(m.getDistX(), 0, m.getDistZ()));
 			npcs.add(v);
 
-			if (api.getDebug()) {
-				System.out.println(v.getName());
-				System.out.println(v);
-				System.out.println(v.getLocation());
+			System.out.println(Messages.parseLoc(l.add(m.getDistX(), 0, m.getDistZ())) + " " + l.getWorld().getBlockAt(l.add(m.getDistX(), 0, m.getDistZ())).getType());
+			System.out.println(v.getName());
+			System.out.println(Messages.parseLoc(v.getLocation()));
 
-				System.out.println(" ");
-			}
+			System.out.println(" ");
+
+			//			if (api.getDebug()) {
+			//				System.out.println(v.getName());
+			//				System.out.println(v.getLocation());
+			//
+			//				System.out.println(" ");
+			//			}
 		}
 	}
 

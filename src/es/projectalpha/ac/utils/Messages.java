@@ -58,6 +58,15 @@ public class Messages {
 		p.sendMessage(" ");
 	}
 
+	//Location Debug
+	public static String parseLoc(Location l){
+		return "World: " + l.getWorld() + " X: " + l.getX() + " Y: " + l.getY() + " Z: " + l.getZ();
+	}
+
+	public static String parseLoc(Location l, Location l2){
+		return "World: " + l.getWorld() + " - " + l2.getWorld() + " X: " + l.getX() + " - " + l2.getX() + " Y: " + l.getY() + " - " + l2.getY() + " Z: " + l.getZ() + " - " + l2.getZ();
+	}
+
 	//Progress Bar
 	public static String getProgress(Player p, Location l, Shops shop){
 		int time = 0;
