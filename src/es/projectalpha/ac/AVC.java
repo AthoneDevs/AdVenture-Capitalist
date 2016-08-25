@@ -2,6 +2,7 @@ package es.projectalpha.ac;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
 import org.bukkit.WorldCreator;
@@ -157,7 +158,8 @@ public class AVC extends JavaPlugin {
 						Cooldowns.coolDurMessage(p, "song");
 						return;
 					}
-					//Play Sound ResourcePack
+					//Play Sound ResourcePackç
+					p.playSound(p.getLocation(), Sound.RECORD_13, 6.0F, 6.0F);
 					Cooldowns.add(p.getName(), "song", 1800L, System.currentTimeMillis());
 				}
 			}
