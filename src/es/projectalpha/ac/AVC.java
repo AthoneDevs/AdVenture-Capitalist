@@ -26,16 +26,18 @@ public class AVC extends JavaPlugin {
 
 	private AVCAPI api;
 
-	//Only World, not Moon and Mars
+	// Only World, not Moon and Mars
 
 	public static AVC plugin;
 
-	public void onEnable(){
+	@Override
+	public void onEnable() {
 		Bukkit.getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "========================");
 		Bukkit.getConsoleSender().sendMessage(" ");
 
 		api = new AVCAPI();
-		//		api.setPlugin(this);
+		api.setDebug(false);
+		//api.setPlugin(this);
 
 		plugin = this;
 
@@ -104,7 +106,8 @@ public class AVC extends JavaPlugin {
 		Bukkit.getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "========================");
 	}
 
-	public void onDisable(){
+	@Override
+	public void onDisable() {
 		Bukkit.getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "========================");
 		Bukkit.getConsoleSender().sendMessage(" ");
 
@@ -129,28 +132,23 @@ public class AVC extends JavaPlugin {
 		Bukkit.getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "========================");
 	}
 
-	//Registers
-	private void regEvents(){
+	// Registers
+	private void regEvents() {
 		new ManagerInteract(this);
 		new ProtectWorld(this);
 		new IAchievements(this);
 	}
 
-	private void regCMDs(){
+	private void regCMDs() {
 		getCommand("avc").setExecutor(new Help());
 	}
 
-	//Added if you access to the Main class instead of the API class
-	public AVCAPI getAPI(){
-		return this.api;
-	}
-
-	//Cooldowns
-	private void startCooldowns(){
+	// Cooldowns
+	private void startCooldowns() {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 
 			@Override
-			public void run(){
+			public void run() {
 				Cooldowns.handleCooldowns();
 
 				for (Player p : api.getGame().playing) {
@@ -166,10 +164,17 @@ public class AVC extends JavaPlugin {
 		}, 1L, 1L);
 	}
 
+	//DATA
+
+	//Added if you access to the Main class instead of the API class
+	public AVCAPI getAPI() {
+		return this.api;
+	}
+
 	//For Multiverse, the Plugin or Bukkit Settings
 	//Do not try to load a world with this, leave the plugin works...
 	@Override
-	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id){
+	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {
 		return new Generator();
 	}
 }
