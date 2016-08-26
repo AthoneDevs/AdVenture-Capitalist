@@ -10,13 +10,13 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class SanValentine extends Events {
+public class SaintValentine extends Events{
 
-	public SanValentine() {
-		super("SanValentine", ChatColor.RED + "San Valentine", Date.valueOf(LocalDate.of(2016, 2, 14)), sanValentine(), 1000D);
+	public SaintValentine(){
+		super("SaintValentine", ChatColor.RED + "Saint Valentine", Date.valueOf(LocalDate.of(2016, 2, 14)), sanValentine(), 1000D);
 	}
 
-	private static ItemStack sanValentine() {
+	private static ItemStack sanValentine(){
 		List<String> lore = new ArrayList<String>();
 
 		ItemStack i = new ItemStack(Material.RED_ROSE);
