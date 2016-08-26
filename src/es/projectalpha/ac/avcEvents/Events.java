@@ -17,7 +17,7 @@ public abstract class Events{
 	//TODO: Check system to get it
 
 	//Data
-	public static Events SAN_VALENTINE = new SanValentine();
+	public static Events SAINT_VALENTINE = new SaintValentine();
 
 	public static ArrayList<Events> events = new ArrayList<Events>();
 
@@ -57,7 +57,7 @@ public abstract class Events{
 	}
 
 	public static void loadEvents(){
-		events.add(SAN_VALENTINE);
+		events.add(SAINT_VALENTINE);
 	}
 
 	private static boolean isInDay(Date d, Events e){
