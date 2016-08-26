@@ -7,8 +7,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import es.projectalpha.ac.AVC;
-import es.projectalpha.ac.achievements.AchievementsCore;
 import es.projectalpha.ac.achievements.Achievements;
+import es.projectalpha.ac.achievements.AchievementsCore;
+import es.projectalpha.ac.achievements.AchievementsGUI;
 import es.projectalpha.ac.utils.Messages;
 
 public class IAchievements implements Listener {
@@ -16,13 +17,13 @@ public class IAchievements implements Listener {
 	private AVC plugin;
 	private AchievementsCore achi = new AchievementsCore();
 
-	public IAchievements(AVC Main){
+	public IAchievements(AVC Main) {
 		this.plugin = Main;
 		this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
 	}
 
 	@EventHandler
-	public void onInteractShops(InventoryClickEvent e){
+	public void onInteractShops(InventoryClickEvent e) {
 		Player p = (Player) e.getWhoClicked();
 
 		if (e.getInventory().getName().equals(ChatColor.GREEN + "Achievements")) {
@@ -36,6 +37,27 @@ public class IAchievements implements Listener {
 				return;
 			}
 
+			//Pages
+
+			if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(AchievementsGUI.getNextItem().getItemMeta().getDisplayName())) {
+				e.setCancelled(true);
+				p.closeInventory();
+
+				AchievementsGUI.playerPage.put(p, AchievementsGUI.playerPage.get(p) + 1);
+				AchievementsGUI.openAchievementsGUI(p, AchievementsGUI.playerPage.get(p));
+				return;
+			}
+
+			if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(AchievementsGUI.getPrevItem().getItemMeta().getDisplayName())) {
+				e.setCancelled(true);
+				p.closeInventory();
+
+				AchievementsGUI.playerPage.put(p, AchievementsGUI.playerPage.get(p) - 1);
+				AchievementsGUI.openAchievementsGUI(p, AchievementsGUI.playerPage.get(p));
+				return;
+			}
+
+			//Items
 			for (Achievements at : Achievements.values()) {
 				if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(at.getDispName())) {
 					e.setCancelled(true);

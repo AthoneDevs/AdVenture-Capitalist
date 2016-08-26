@@ -19,19 +19,23 @@ import es.projectalpha.ac.achievements.AchievementsGUI;
 import es.projectalpha.ac.api.AttackSpeedAPI;
 import es.projectalpha.ac.api.fancy.ActionBarAPI;
 import es.projectalpha.ac.files.Files;
+import es.projectalpha.ac.game.ResetGame;
 import es.projectalpha.ac.managers.ManagersGUI;
 import es.projectalpha.ac.managers.SpawnManagers;
 import es.projectalpha.ac.shops.Shops;
 import es.projectalpha.ac.utils.Messages;
+import es.projectalpha.ac.utils.Randoms;
 import es.projectalpha.ac.world.Schematic;
 
 public class Help implements CommandExecutor {
 
 	private AVCAPI api = new AVCAPI();
+	private Randoms r = new Randoms();
 
 	private String f = ChatColor.GRAY + " => ";
 
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		Player p;
 		if (cmd.getName().equalsIgnoreCase("avc") && ((sender instanceof Player))) {
 			p = (Player) sender;
@@ -42,19 +46,41 @@ public class Help implements CommandExecutor {
 				p.sendMessage(ChatColor.DARK_GREEN + "/avc play" + f + ChatColor.YELLOW + "Play AC");
 				p.sendMessage(ChatColor.DARK_GREEN + "/avc achievements" + f + ChatColor.YELLOW + "View your achievements");
 				p.sendMessage(ChatColor.DARK_GREEN + "/avc angels" + f + ChatColor.YELLOW + "View your angels");
-				p.sendMessage(ChatColor.DARK_GREEN + "/avc debug" + f + ChatColor.YELLOW + "Debug command");
 				p.sendMessage(ChatColor.DARK_GREEN + "/avc managers" + f + ChatColor.YELLOW + "View avariable Managers");
+				p.sendMessage(ChatColor.DARK_GREEN + "/avc reset" + f + ChatColor.YELLOW + "Re-start your game");
+				p.sendMessage(ChatColor.DARK_GREEN + "/avc admin" + f + ChatColor.YELLOW + "To see admin commands");
 				p.sendMessage(" ");
 			}
 
 			if (args.length == 1) {
+				if (args[0].equalsIgnoreCase("admin")) {
+					if (!p.hasPermission("avc.admin")) {
+						p.sendMessage(Messages.noPerms);
+						return true;
+					}
+					//TODO: Make this commands
+					p.sendMessage(" ");
+					p.sendMessage(Messages.prefix + ChatColor.AQUA + "AVC Admin Help");
+					p.sendMessage(ChatColor.DARK_GREEN + "/avc debug" + f + ChatColor.YELLOW + "Debug command (Console)");
+					p.sendMessage(ChatColor.DARK_GREEN + "/avc achi <add/remove/get> <Achievement (only for add/remove)> <player>" + f + ChatColor.YELLOW + "Achievements Manager");
+					p.sendMessage(ChatColor.DARK_GREEN + "/avc money <add/remove/get> <money (only for add/remove)> <player>" + f + ChatColor.YELLOW + "Money Manager");
+					p.sendMessage(ChatColor.DARK_GREEN + "/avc shops <add/remove/get> <Shop (only for add/remove)> <player>" + f + ChatColor.YELLOW + "Shops Manager");
+					p.sendMessage(ChatColor.DARK_GREEN + "/avc managers <add/remove/get> <Manager (only for add/remove)> <player>" + f + ChatColor.YELLOW + "Managers Manager");
+					p.sendMessage(ChatColor.DARK_GREEN + "/avc modifiers <get> <Shop> <player>" + f + ChatColor.YELLOW + "Modifiers Manager");
+					p.sendMessage(ChatColor.DARK_GREEN + "/avc angels <add/remove/get/check> <Angels (only for add/remove)> <player>" + f + ChatColor.YELLOW + "Angels Manager");
+					p.sendMessage(" ");
+				}
+
 				if (args[0].equalsIgnoreCase("achievements")) {
-					AchievementsGUI.openAchievementsGUI(p);
+					AchievementsGUI.openAchievementsGUI(p, AchievementsGUI.playerPage.get(p));
+				}
+
+				if (args[0].equalsIgnoreCase("reset")) {
+					ResetGame.resetGame(p);
 				}
 
 				if (args[0].equalsIgnoreCase("angels")) {
 					Messages.sendAngelsInfo(p);
-					return true;
 				}
 
 				if (args[0].equalsIgnoreCase("managers")) {
@@ -70,6 +96,7 @@ public class Help implements CommandExecutor {
 						}
 						api.setDebug(true);
 						p.sendMessage(Messages.prefix + "Debug: " + ChatColor.RED + api.getDebug());
+						return true;
 					} else {
 						p.sendMessage(Messages.noPerms);
 					}
@@ -78,9 +105,18 @@ public class Help implements CommandExecutor {
 				if (args[0].equalsIgnoreCase("play")) {
 					World world = Bukkit.getWorld("avc");
 
+					if (api.getGame().playing.contains(p)) {
+						p.sendMessage(Messages.alreadyPlaying);
+						return true;
+					}
+
 					AttackSpeedAPI.setAttackSpeed(p, 16.0D);
 
 					p.setNoDamageTicks(Integer.MAX_VALUE);
+
+					if (!Files.players.contains(p.getName())) {
+						Files.players.set(p.getName(), r.getPlayerID());
+					}
 
 					if (Files.players.contains(p.getName())) {
 						int id = Files.players.getInt(p.getName() + ".id");

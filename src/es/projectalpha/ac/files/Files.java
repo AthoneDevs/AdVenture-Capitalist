@@ -36,7 +36,7 @@ public class Files {
 	public static File fileShops = new File("plugins/AVC/Data", "shops.yml");
 	public static YamlConfiguration shops = YamlConfiguration.loadConfiguration(fileShops);
 
-	public static void setupFiles(){
+	public static void setupFiles() {
 		if (!fileConfig.exists()) {
 			fileConfig.mkdir();
 			cfg.set("MySQL.enabled", false);
@@ -45,6 +45,8 @@ public class Files {
 			cfg.set("MySQL.db", "avc");
 			cfg.set("MySQL.user", "root");
 			cfg.set("MySQL.pass", "123456");
+
+			cfg.set("Dedicated_Server", false);
 		}
 		if (!filePlayers.exists()) {
 			filePlayers.mkdir();
@@ -68,18 +70,23 @@ public class Files {
 		saveFiles();
 	}
 
-	public static void saveFiles(){
+	public static void saveFiles() {
 		try {
 			cfg.save(fileConfig);
 			cfg.load(fileConfig);
+
 			players.save(filePlayers);
 			players.load(filePlayers);
+
 			locs.save(fileLocs);
 			locs.load(fileLocs);
+
 			manager.save(fileManagers);
 			manager.load(fileManagers);
+
 			shops.save(fileShops);
 			shops.load(fileShops);
+
 			achie.save(fileAchie);
 			achie.load(fileAchie);
 		} catch (IOException | InvalidConfigurationException e) {

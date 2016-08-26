@@ -8,39 +8,39 @@ public enum Achievements {
 	private final String message;
 	private final double reward;
 
-	Achievements(String dispName, String message, double reward){
+	Achievements(String dispName, String message, double reward) {
 		this.dispName = dispName;
 		this.message = message;
 		this.reward = reward;
 	}
 
-	Achievements(String dispName, String message){
+	Achievements(String dispName, String message) {
 		this.dispName = dispName;
 		this.message = message;
 		this.reward = 0.0D;
 	}
 
-	Achievements(String dispName){
+	Achievements(String dispName) {
 		this.dispName = dispName;
 		this.message = "";
 		this.reward = 0.0D;
 	}
 
-	Achievements(String dispName, double reward){
+	Achievements(String dispName, double reward) {
 		this.dispName = dispName;
 		this.message = "";
 		this.reward = reward;
 	}
 
-	public String getDispName(){
+	public String getDispName() {
 		return dispName;
 	}
 
-	public String getMessage(){
+	public String getMessage() {
 		return message;
 	}
 
-	public double getReward(){
+	public double getReward() {
 		return reward;
 	}
 }

@@ -1,6 +1,7 @@
 package es.projectalpha.ac.achievements;
 
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -10,41 +11,58 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import es.projectalpha.ac.utils.ItemsUtils;
+import es.projectalpha.ac.utils.Messages;
+
 public class AchievementsGUI {
 
-	private static AchievementsCore achi = new AchievementsCore();
+	public static HashMap<Player, Integer> playerPage = new HashMap<Player, Integer>();
 
-	public static void openAchievementsGUI(Player p){
+	private static ItemsUtils iu = new ItemsUtils();
+
+	public static void openAchievementsGUI(Player p, int page) {
 		Inventory inv = Bukkit.createInventory(null, 54, ChatColor.GREEN + "Achievements");
+		int tot = Achievements.values().length;
+		List<ItemStack> items = iu.getItemsPerPageAchi(p, page);
 
-		for (int g = 0; g < Achievements.values().length; g++) {
-			Achievements at = Achievements.values()[g];
-			if (achi.hasAchievement(p, at)) {
-				ItemStack i = new ItemStack(Material.STAINED_CLAY, 1, (short) 5);
-				ItemMeta im = i.getItemMeta();
-				im.setDisplayName(at.getDispName());
-				im.setLore(Arrays.asList("Description: Right Click", "Reward: " + at.getReward()));
-				i.setItemMeta(im);
-
-				inv.addItem(i);
-			} else {
-				ItemStack i = new ItemStack(Material.STAINED_CLAY, 1, (short) 14);
-				ItemMeta im = i.getItemMeta();
-				im.setDisplayName(at.getDispName());
-				im.setLore(Arrays.asList("Description: Right Click", "Reward: " + at.getReward()));
-				i.setItemMeta(im);
-
-				inv.addItem(i);
-			}
+		if (items.isEmpty()) {
+			p.sendMessage(Messages.prefix + ChatColor.RED + "Sorry, but there is an error here");
+			return;
 		}
 
-		//		ItemStack i = new ItemStack(Material.BOW);
-		//		ItemMeta im = i.getItemMeta();
-		//		im.setDisplayName("Next Page");
-		//		i.setItemMeta(im);
-		//
-		//		inv.setItem(49, i);
+		for (ItemStack i : items) {
+			inv.addItem(i);
+		}
+
+		if (page == 1 && Math.round(tot / 45) >= 1) {
+			inv.setItem(50, getNextItem());
+		}
+
+		if (page >= 2) {
+			if (Math.round(tot / 45) >= page) {
+				inv.setItem(50, getNextItem());
+			}
+			inv.setItem(47, getPrevItem());
+		}
 
 		p.openInventory(inv);
+	}
+
+	public static ItemStack getNextItem() {
+		ItemStack i = new ItemStack(Material.ARROW);
+		ItemMeta im = i.getItemMeta();
+		im.setDisplayName(ChatColor.GREEN + "Next Page");
+		i.setItemMeta(im);
+
+		return i;
+	}
+
+	public static ItemStack getPrevItem() {
+		ItemStack i = new ItemStack(Material.ARROW);
+		ItemMeta im = i.getItemMeta();
+		im.setDisplayName(ChatColor.AQUA + "Prev Page");
+		i.setItemMeta(im);
+
+		return i;
 	}
 }

@@ -13,6 +13,8 @@ public class Messages {
 
 	private static AVCAPI api = new AVCAPI();
 
+	//TODO: Messages to config.yml
+
 	//Utils
 	public static String prefix = ChatColor.GRAY + " || " + ChatColor.GREEN + "AC" + ChatColor.GRAY + " || ";
 	public static String noPerms = prefix + ChatColor.RED + "You don't have permissions to do this";
@@ -29,9 +31,10 @@ public class Messages {
 	public static String buyManager = prefix + ChatColor.GREEN + "You have been bought the manager of " + ChatColor.YELLOW;
 	public static String buyShop = prefix + ChatColor.GREEN + "You have been bought the shop of " + ChatColor.YELLOW;
 	public static String notEnoughMoneyToRestart = prefix + ChatColor.RED + "You don't have enough money to re-start the game";
+	public static String alreadyPlaying = prefix + ChatColor.RED + "You are already playing";
 
 	//Angels Info
-	public static void sendAngelsInfo(Player p){
+	public static void sendAngelsInfo(Player p) {
 		p.sendMessage(" ");
 
 		p.sendMessage(ChatColor.GREEN + "Your Angels " + ChatColor.YELLOW + api.getAngels().getAngels(p));
@@ -41,7 +44,7 @@ public class Messages {
 	}
 
 	//Map Info
-	public static void sendMapInfo(Player p){
+	public static void sendMapInfo(Player p) {
 		p.sendMessage(" ");
 
 		p.sendMessage(ChatColor.GREEN + "Map created by " + ChatColor.RED + "SrJonh");
@@ -50,7 +53,7 @@ public class Messages {
 	}
 
 	//New Achievement
-	public static void newAchievement(Achievements at, Player p){
+	public static void newAchievement(Achievements at, Player p) {
 		p.sendMessage(" ");
 
 		p.sendMessage(Messages.prefix + ChatColor.GREEN + "You have get a new achievement: " + ChatColor.YELLOW + at.getDispName());
@@ -59,16 +62,16 @@ public class Messages {
 	}
 
 	//Location Debug
-	public static String parseLoc(Location l){
+	public static String parseLoc(Location l) {
 		return "World: " + l.getWorld() + " X: " + l.getX() + " Y: " + l.getY() + " Z: " + l.getZ();
 	}
 
-	public static String parseLoc(Location l, Location l2){
+	public static String parseLoc(Location l, Location l2) {
 		return "World: " + l.getWorld() + " - " + l2.getWorld() + " X: " + l.getX() + " - " + l2.getX() + " Y: " + l.getY() + " - " + l2.getY() + " Z: " + l.getZ() + " - " + l2.getZ();
 	}
 
 	//Progress Bar
-	public static String getProgress(Player p, Location l, Shops shop){
+	public static String getProgress(Player p, Location l, Shops shop) {
 		int time = 0;
 		String name = api.getGame().progressBar.get(l);
 

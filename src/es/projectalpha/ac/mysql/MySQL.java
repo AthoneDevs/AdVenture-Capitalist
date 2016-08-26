@@ -8,11 +8,10 @@ import java.sql.Statement;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
-import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.utils.Messages;
 
-public class MySQL {
+public class MySQL{
 
 	public Connection conn = null;
 	private String tableName = "avc_data";
@@ -22,12 +21,12 @@ public class MySQL {
 	private String dbUser;
 	private String dbPassword;
 
-	public MySQL(AVC Main){
+	public MySQL(){
 		setupDatabase();
 	}
 
 	public boolean setupDatabase(){
-		try {
+		try{
 			Class.forName("com.mysql.jdbc.Driver");
 
 			this.dbHost = Files.cfg.getString("MySQL.host");
@@ -40,16 +39,16 @@ public class MySQL {
 			String passFix2 = passFix.replaceAll("\\+", "%2B");
 
 			this.conn = DriverManager.getConnection("jdbc:mysql://" + this.dbHost + ":" + this.dbPort + "/" + this.database + "?" + "user=" + this.dbUser + "&" + "password=" + passFix2);
-		} catch (SQLException | ClassNotFoundException e1) {
+		}catch(SQLException | ClassNotFoundException e1){
 			Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.RED + "Can't connect to MySQL " + e1.getMessage());
 		}
 
-		try {
+		try{
 			Statement query = this.conn.createStatement();
 
 			String accounts = "CREATE TABLE IF NOT EXISTS `" + this.tableName + "` (id int(10) AUTO_INCREMENT, player_uuid varchar(50) NOT NULL UNIQUE, player_name varchar(50) NOT NULL, money varchar(20000) NOT NULL,  PRIMARY KEY(id));";
 			query.executeUpdate(accounts);
-		} catch (SQLException e) {
+		}catch(SQLException e){
 			e.printStackTrace();
 			return false;
 		}
@@ -63,47 +62,47 @@ public class MySQL {
 	}
 
 	public boolean closeConnection(){
-		try {
+		try{
 			this.conn.close();
 			return true;
-		} catch (SQLException e) {
+		}catch(SQLException e){
 			e.printStackTrace();
 		}
 		return false;
 	}
 
 	public boolean checkConnection(){
-		try {
-			if (this.conn == null) {
+		try{
+			if(this.conn == null){
 				Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.YELLOW + "Connection failed, reconnecting");
-				if (reConnect()) {
+				if(reConnect()){
 					return true;
 				}
 				return false;
 			}
-			if (!this.conn.isValid(3)) {
+			if(!this.conn.isValid(3)){
 				Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.YELLOW + "Connection finished, reconnecting");
-				if (reConnect()) {
+				if(reConnect()){
 					return true;
 				}
 				return false;
 			}
-			if (this.conn.isClosed()) {
+			if(this.conn.isClosed()){
 				Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.YELLOW + "Connection closed, reconnecting");
-				if (reConnect()) {
+				if(reConnect()){
 					return true;
 				}
 				return false;
 			}
 			return true;
-		} catch (Exception e) {
+		}catch(Exception e){
 			Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.RED + "Could not reconnect to Database!");
 		}
 		return true;
 	}
 
 	public boolean reConnect(){
-		try {
+		try{
 			this.dbHost = Files.cfg.getString("MySQL.host");
 			this.dbPort = Files.cfg.getString("MySQL.port");
 			this.database = Files.cfg.getString("MySQL.db");
@@ -123,7 +122,7 @@ public class MySQL {
 			end = System.currentTimeMillis();
 			Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.GREEN + "Connection to MySQL server established in " + (end - start) + "ms!");
 			return true;
-		} catch (Exception e) {
+		}catch(Exception e){
 			Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.RED + "Can't connect to MySQL " + e.getMessage());
 		}
 		return false;
