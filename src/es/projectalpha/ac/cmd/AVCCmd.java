@@ -7,16 +7,22 @@ import org.bukkit.entity.Player;
 
 import es.projectalpha.ac.cmd.sub.NormalCommand;
 import es.projectalpha.ac.cmd.sub.admin.DebugCommand;
+import es.projectalpha.ac.cmd.sub.admin.ModifiersCommand;
 import es.projectalpha.ac.cmd.sub.player.GUIsCommand;
 import es.projectalpha.ac.cmd.sub.player.PlayCommand;
 
 public class AVCCmd implements CommandExecutor {
 
-	//Sub-Commands
-	private DebugCommand debug = new DebugCommand();
+	//Sub-Commands Info
+	private NormalCommand normal = new NormalCommand();
+
+	//Sub-Commands Normal
 	private GUIsCommand gui = new GUIsCommand();
 	private PlayCommand play = new PlayCommand();
-	private NormalCommand normal = new NormalCommand();
+
+	//Sub-Commands Admin
+	private DebugCommand debug = new DebugCommand();
+	private ModifiersCommand mod = new ModifiersCommand();
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
@@ -59,6 +65,12 @@ public class AVCCmd implements CommandExecutor {
 				if(args.length == 2){
 					if(args[0].equalsIgnoreCase("shops")){
 						gui.executeShopsCommand(p, args);
+					}
+				}
+
+				if(args.length == 3){
+					if(args[0].equalsIgnoreCase("modifiers")){
+						mod.executeModifiersCommand(p, args);
 					}
 				}
 			}
