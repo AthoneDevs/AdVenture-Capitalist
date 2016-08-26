@@ -11,7 +11,7 @@ import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import es.projectalpha.ac.avcEvents.Events;
-import es.projectalpha.ac.cmd.Help;
+import es.projectalpha.ac.cmd.AVCCmd;
 import es.projectalpha.ac.cooldowns.Cooldowns;
 import es.projectalpha.ac.events.ManagerInteract;
 import es.projectalpha.ac.events.PlayerEvents;
@@ -154,7 +154,7 @@ public class AVC extends JavaPlugin{
 	}
 
 	private void regCMDs(){
-		getCommand("avc").setExecutor(new Help());
+		getCommand("avc").setExecutor(new AVCCmd());
 	}
 
 	// Cooldowns

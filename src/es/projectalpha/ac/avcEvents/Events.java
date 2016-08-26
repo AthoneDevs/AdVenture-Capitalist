@@ -73,6 +73,15 @@ public abstract class Events{
 		return (sameDay && sameMonth);
 	}
 
+	public static Events checkIfEvent(){
+		for(Events e : events){
+			if(e.getDate().equals(new Date())){
+				return e;
+			}
+		}
+		return null;
+	}
+
 	public static void giveEvent(Player p, Events e){
 		if(isInDay(new Date(), e) && !Files.players.getBoolean(p.getName() + ".events." + e.getDataName().toLowerCase())){
 			Files.players.set(p.getName() + ".events." + e.getDataName().toLowerCase(), true);
