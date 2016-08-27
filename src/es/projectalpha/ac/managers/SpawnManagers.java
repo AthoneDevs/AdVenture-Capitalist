@@ -5,11 +5,12 @@ import java.util.HashMap;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager;
 
 import es.projectalpha.ac.AVCAPI;
 
-public class SpawnManagers{
+public class SpawnManagers {
 
 	// public static HashMap<NPCAPI, Location> loc = new HashMap<NPCAPI, Location>();
 	// public static ArrayList<NPCAPI> npcs = new ArrayList<NPCAPI>();
@@ -20,8 +21,6 @@ public class SpawnManagers{
 	private static AVCAPI api = new AVCAPI();
 
 	public static void spawnManager(Location lo){
-		System.out.println(api.getDebug());
-
 		for(Managers m : Managers.values()){
 			Location l = lo.clone();
 
@@ -31,9 +30,8 @@ public class SpawnManagers{
 
 			l.getWorld().getBlockAt(l.add(m.getDistX(), 0, m.getDistZ())).setType(Material.AIR);
 
-			Villager v = l.getWorld().spawn(l.add(m.getDistX(), 0, m.getDistZ()), Villager.class);
-
-			// TODO: Fix not spawning bug
+			//Villager v = l.getWorld().spawn(l.add(m.getDistX(), 0, m.getDistZ()), Villager.class);
+			Villager v = (Villager) l.getWorld().spawnEntity(l.add(m.getDistX(), 0, m.getDistZ()), EntityType.VILLAGER);
 
 			v.setCustomName(m.getManagerName());
 

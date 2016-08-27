@@ -42,9 +42,9 @@ public class PlayCommand {
 
 		p.setNoDamageTicks(Integer.MAX_VALUE);
 
-		if(!Files.players.contains(p.getName())){
-			Files.players.set(p.getName(), r.getPlayerID());
-		}
+		//		if(!Files.players.contains(p.getName())){
+		//			Files.players.set(p.getName(), r.getPlayerID());
+		//		}
 
 		if(Files.players.contains(p.getName())){
 			int id = Files.players.getInt(p.getName() + ".id");
@@ -63,6 +63,7 @@ public class PlayCommand {
 
 			return;
 		}
+
 		int id = Files.locs.getInt("num");
 
 		//New Game
@@ -70,9 +71,9 @@ public class PlayCommand {
 		ActionBarAPI.sendActionBar(p, ChatColor.RED + "Have Fun :D");
 
 		api.getAchievements().addAchievement(p, Achievements.START);
-		api.getCurrency().newPlayerMoney(p, 0);
 		api.getShops().addShop(p, Shops.LEMONADE);
 		api.getAngels().startGame(p);
+		//api.getCurrency().newPlayerMoney(p, 0);
 
 		Messages.sendMapInfo(p);
 

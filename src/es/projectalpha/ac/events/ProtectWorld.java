@@ -3,6 +3,7 @@ package es.projectalpha.ac.events;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -34,7 +35,7 @@ public class ProtectWorld implements Listener {
 	public void onBreak(BlockBreakEvent e){
 		Player p = e.getPlayer();
 
-		if (game.playing.contains(p)) {
+		if(game.playing.contains(p)){
 			e.setCancelled(true);
 			achi.addAchievement(p, Achievements.BREAK);
 		}
@@ -44,7 +45,7 @@ public class ProtectWorld implements Listener {
 	public void onPlace(BlockPlaceEvent e){
 		Player p = e.getPlayer();
 
-		if (game.playing.contains(p)) {
+		if(game.playing.contains(p)){
 			e.setCancelled(true);
 		}
 	}
@@ -53,7 +54,7 @@ public class ProtectWorld implements Listener {
 	public void onDrop(PlayerDropItemEvent e){
 		Player p = e.getPlayer();
 
-		if (game.playing.contains(p)) {
+		if(game.playing.contains(p)){
 			e.setCancelled(true);
 		}
 	}
@@ -62,9 +63,9 @@ public class ProtectWorld implements Listener {
 	public void onFoodChange(FoodLevelChangeEvent e){
 		Entity en = e.getEntity();
 
-		if (en instanceof Player) {
+		if(en instanceof Player){
 			Player p = (Player) en;
-			if (game.playing.contains(p)) {
+			if(game.playing.contains(p)){
 				e.setCancelled(true);
 			}
 		}
@@ -75,7 +76,7 @@ public class ProtectWorld implements Listener {
 		Entity en = e.getDamager();
 		Entity en2 = e.getEntity();
 
-		if (en instanceof Player || en2 instanceof Player) {
+		if(en instanceof Player || en2 instanceof Player){
 			e.setCancelled(true);
 		}
 	}
@@ -84,22 +85,24 @@ public class ProtectWorld implements Listener {
 	public void noDamage(EntityDamageByBlockEvent e){
 		Entity en = e.getEntity();
 
-		if (en instanceof Player) {
+		if(en instanceof Player){
 			e.setCancelled(true);
 		}
 	}
 
 	@EventHandler
 	public void noFire(EntityCombustEvent e){
-		if (e.getEntityType() == EntityType.ARMOR_STAND) {
+		if(e.getEntityType() == EntityType.ARMOR_STAND){
 			e.setCancelled(true);
 		}
 	}
 
 	@EventHandler
 	public void noSpawn(CreatureSpawnEvent e){
-		if (e.getLocation().getWorld().getName().equalsIgnoreCase("avc")) {
-			e.setCancelled(true);
+		if(!(e.getEntity() instanceof Villager)){
+			if(e.getLocation().getWorld().getName().equalsIgnoreCase("avc")){
+				e.setCancelled(true);
+			}
 		}
 	}
 }

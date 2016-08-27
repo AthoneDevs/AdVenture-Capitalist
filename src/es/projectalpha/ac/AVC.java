@@ -25,7 +25,7 @@ import es.projectalpha.ac.utils.Messages;
 import es.projectalpha.ac.utils.ServerVersion;
 import es.projectalpha.ac.world.Generator;
 
-public class AVC extends JavaPlugin{
+public class AVC extends JavaPlugin {
 
 	private AVCAPI api;
 
@@ -71,7 +71,7 @@ public class AVC extends JavaPlugin{
 			WorldCreator wc = new WorldCreator("avc");
 
 			wc.generator(getDefaultWorldGenerator("avc", "avc"));
-			wc.environment(Environment.THE_END);
+			wc.environment(Environment.NORMAL);
 			wc.generateStructures(false);
 
 			Bukkit.createWorld(wc);
@@ -79,8 +79,8 @@ public class AVC extends JavaPlugin{
 			World w = Bukkit.getWorld("avc");
 
 			w.setGameRuleValue("doDaylightCycle", "false");
-			System.out.println(w.getGameRuleValue("doMobSpawning")); //Test
 			w.setTime(14000);
+
 			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "World Created");
 
 			Bukkit.getConsoleSender().sendMessage(" ");

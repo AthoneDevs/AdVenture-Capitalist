@@ -1,6 +1,6 @@
 name: AdVenture-Capitalist
 main: es.projectalpha.ac.AVC
-version: 0.5.6
+version: 0.6.2
 authors: [cadox8, Wikijito7]
 
 commands:
