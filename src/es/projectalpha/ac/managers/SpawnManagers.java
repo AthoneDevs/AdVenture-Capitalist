@@ -12,9 +12,6 @@ import es.projectalpha.ac.AVCAPI;
 
 public class SpawnManagers {
 
-	// public static HashMap<NPCAPI, Location> loc = new HashMap<NPCAPI, Location>();
-	// public static ArrayList<NPCAPI> npcs = new ArrayList<NPCAPI>();
-
 	public static HashMap<Villager, Location> loc = new HashMap<Villager, Location>();
 	public static ArrayList<Villager> npcs = new ArrayList<Villager>();
 
@@ -47,30 +44,4 @@ public class SpawnManagers {
 			}
 		}
 	}
-
-	//	public static void spawnManager(Location l){
-	//		for(Managers m : Managers.values()){
-	//			NPCAPI npc = new NPCAPI(m.getManagerName(), l.add(m.getDistX(), 0, m.getDistZ()), "cadox8");
-	//
-	//			npc.destroy();
-	//			npc.spawn();
-	//			npc.setGameMode(GameMode.CREATIVE);
-	//			npc.setLocation(l.add(m.getDistX(), 0, m.getDistZ()));
-	//
-	//			for(Player p : Bukkit.getOnlinePlayers()){
-	//				npc.show(p);
-	//			}
-	//
-	//			loc.put(npc, l.add(m.getDistX(), 0, m.getDistZ()));
-	//			npcs.add(npc);
-	//
-	//			if(api.getDebug()){
-	//				System.out.println(npc.getName());
-	//				System.out.println(npc);
-	//				System.out.println(npc.getLocation());
-	//
-	//				System.out.println(" ");
-	//			}
-	//		}
-	//	}
 }

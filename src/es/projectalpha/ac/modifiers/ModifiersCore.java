@@ -14,7 +14,7 @@ public class ModifiersCore {
 	private Money c = new Money();
 
 	public void buyItem(Shops s, int amount, Player p){
-		if (c.getMoney(p) < (s.getBuyBase() * (Math.pow(s.getCoefficient(), (amount - 1))))) {
+		if(c.getMoney(p) < (s.getBuyBase() * (Math.pow(s.getCoefficient(), (amount - 1))))){
 			p.sendMessage(Messages.notEnoughMoney);
 			return;
 		}
@@ -24,7 +24,7 @@ public class ModifiersCore {
 	}
 
 	public int getShopItems(Shops s, Player p){
-		if (!sc.hasShop(p, s)) {
+		if(!sc.hasShop(p, s)){
 			return 0;
 		}
 		return Files.players.getInt(p.getName() + "." + s.toString().toLowerCase());
@@ -36,6 +36,7 @@ public class ModifiersCore {
 	}
 
 	public double getMoneyShopItems(Shops s, Player p){
-		return getShopItems(s, p) * (s.getReward() * s.getCoefficient()); //Temporal, until HyperHippo tell me the equation
+		return getShopItems(s, p) * (s.getReward() * s.getCoefficient());
+		//No equation from HyperHippo, must test to reproduce the real equation...
 	}
 }

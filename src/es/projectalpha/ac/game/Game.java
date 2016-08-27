@@ -37,26 +37,18 @@ public class Game {
 
 		//Test
 		System.out.println("Trying");
+		System.out.println(api.getPlugin());
 
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(api.getPlugin(), new Runnable() {
+		//If api.getPlugin() is null, fix it!
+
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(api.getPlugin(), new Runnable(){
+			@Override
 			public void run(){
-				for (Player p : playing) {
-
-					//Show NPCs
-					//					for (NPCAPI npc : SpawnManagers.npcs) {
-					//						npc.destroy();
-					//						npc.spawn();
-					//						npc.show(p);
-					//					}
-
+				for(Player p : playing){
 					//Destroy Hologram
-					for (HoloAPI holo : holos) {
+					for(HoloAPI holo : holos){
 						holo.destroy(p);
 					}
-
-					//TEST
-					System.out.println("Work");
-
 					//Show Money
 					int id = Files.players.getInt(p.getName() + ".id");
 
@@ -72,14 +64,14 @@ public class Game {
 					holos.add(holo);
 
 					//Check if Enough Money
-					for (Managers m : Managers.values()) {
-						if (api.getCurrency().getMoney(p) >= m.getPrice()) {
+					for(Managers m : Managers.values()){
+						if(api.getCurrency().getMoney(p) >= m.getPrice()){
 							BossBarAPI.sendMessageToPlayerRecurring(ChatColor.GREEN + "You can buy " + ChatColor.RED + m.getName() + ChatColor.GREEN + " manager", 8, BarColor.WHITE, BarStyle.SOLID, p);
 						}
 
 						//Managers
-						for (Player pl : api.getManagers().getPlayersWithManager(m)) {
-							if (Cooldowns.isCooling(pl.getName(), m.getName())) {
+						for(Player pl : api.getManagers().getPlayersWithManager(m)){
+							if(Cooldowns.isCooling(pl.getName(), m.getName())){
 								return;
 							}
 							//							for (NPCAPI npc : SpawnManagers.npcs) {
@@ -95,8 +87,8 @@ public class Game {
 							//									holos.add(pro);
 							//								}
 							//							}
-							for (Villager npc : SpawnManagers.npcs) {
-								if (npc.getName().equalsIgnoreCase(m.getManagerName())) {
+							for(Villager npc : SpawnManagers.npcs){
+								if(npc.getName().equalsIgnoreCase(m.getManagerName())){
 									progressBar.put(npc.getLocation().add(0, 3, 0), m.getManagerName());
 
 									//TODO: Better Hologram System

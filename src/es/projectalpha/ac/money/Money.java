@@ -47,8 +47,8 @@ public class Money {
 		}
 	}
 
-	public void newPlayerMoney(Player p, double amount){
-		runningCurrency.put(p, parseMoney(amount));
+	public void newPlayerMoney(Player p){
+		runningCurrency.put(p, parseMoney(0));
 		saveMoney(p);
 	}
 

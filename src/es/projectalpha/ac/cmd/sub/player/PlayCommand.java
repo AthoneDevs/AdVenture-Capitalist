@@ -18,13 +18,12 @@ import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.managers.SpawnManagers;
 import es.projectalpha.ac.shops.Shops;
 import es.projectalpha.ac.utils.Messages;
-import es.projectalpha.ac.utils.Randoms;
 import es.projectalpha.ac.world.Schematic;
 
 public class PlayCommand {
 
 	private AVCAPI api = new AVCAPI();
-	private Randoms r = new Randoms();
+	//private Randoms r = new Randoms();
 
 	public void executePlayCommand(Player p, String[] args){
 		World world = Bukkit.getWorld("avc");
@@ -73,7 +72,7 @@ public class PlayCommand {
 		api.getAchievements().addAchievement(p, Achievements.START);
 		api.getShops().addShop(p, Shops.LEMONADE);
 		api.getAngels().startGame(p);
-		//api.getCurrency().newPlayerMoney(p, 0);
+		api.getCurrency().newPlayerMoney(p); //INFO: If game doesn't load, remove this
 
 		Messages.sendMapInfo(p);
 
