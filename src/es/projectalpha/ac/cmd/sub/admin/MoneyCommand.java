@@ -22,7 +22,7 @@ public class MoneyCommand {
 		Player pl = Bukkit.getPlayer(args[2]);
 
 		if(!NumberUtils.isDouble(args[3])){
-			p.sendMessage(Messages.prefix); //TODO: No number message
+			p.sendMessage(Messages.prefix + ChatColor.GRAY + args[3] + ChatColor.RED + " isn't a number");
 			return;
 		}
 
@@ -35,7 +35,7 @@ public class MoneyCommand {
 		Player pl = Bukkit.getPlayer(args[2]);
 
 		if(!NumberUtils.isDouble(args[3])){
-			p.sendMessage(Messages.prefix); //TODO: No number message
+			p.sendMessage(Messages.prefix + ChatColor.GRAY + args[3] + ChatColor.RED + " isn't a number");
 			return;
 		}
 

@@ -24,7 +24,7 @@ public class AchiCommand {
 		Achievements a;
 
 		if(!api.getAchievements().existAchievement(args[3])){
-			p.sendMessage(Messages.prefix); //TODO: Not exist Achievement message
+			p.sendMessage(Messages.prefix + ChatColor.RED + "This achievement doesn't exist");
 			return;
 		}
 
@@ -40,7 +40,7 @@ public class AchiCommand {
 		Achievements a;
 
 		if(!api.getAchievements().existAchievement(args[3])){
-			p.sendMessage(Messages.prefix); //TODO: Not exist Achievement message
+			p.sendMessage(Messages.prefix + ChatColor.RED + "This achievement doesn't exist");
 			return;
 		}
 

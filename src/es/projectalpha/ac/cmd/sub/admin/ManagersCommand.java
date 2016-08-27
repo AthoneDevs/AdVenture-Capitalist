@@ -24,7 +24,7 @@ public class ManagersCommand {
 		Managers m;
 
 		if(api.getManagers().existManager(args[3])){
-			p.sendMessage(Messages.prefix); //TODO: No manager exist message
+			p.sendMessage(Messages.prefix + ChatColor.RED + "This manager doesn't exist");
 			return;
 		}
 
@@ -40,7 +40,7 @@ public class ManagersCommand {
 		Managers m;
 
 		if(api.getManagers().existManager(args[3])){
-			p.sendMessage(Messages.prefix); //TODO: No manager exist message
+			p.sendMessage(Messages.prefix + ChatColor.RED + "This manager doesn't exist");
 			return;
 		}
 

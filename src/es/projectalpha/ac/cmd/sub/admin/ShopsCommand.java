@@ -25,7 +25,7 @@ public class ShopsCommand {
 		Shops s;
 
 		if(api.getShops().existShop(args[3])){
-			p.sendMessage(Messages.prefix); //TODO: No shop exist message
+			p.sendMessage(Messages.prefix + ChatColor.RED + "This shop doesn't exist");
 			return;
 		}
 
@@ -41,7 +41,7 @@ public class ShopsCommand {
 		Shops s;
 
 		if(api.getShops().existShop(args[3])){
-			p.sendMessage(Messages.prefix); //TODO: No shop exist message
+			p.sendMessage(Messages.prefix + ChatColor.RED + "This shop doesn't exist");
 			return;
 		}
 
