@@ -6,8 +6,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import es.projectalpha.ac.cmd.sub.NormalCommand;
+import es.projectalpha.ac.cmd.sub.admin.AchiCommand;
+import es.projectalpha.ac.cmd.sub.admin.AngelsCommand;
 import es.projectalpha.ac.cmd.sub.admin.DebugCommand;
+import es.projectalpha.ac.cmd.sub.admin.ManagersCommand;
 import es.projectalpha.ac.cmd.sub.admin.ModifiersCommand;
+import es.projectalpha.ac.cmd.sub.admin.MoneyCommand;
+import es.projectalpha.ac.cmd.sub.admin.ShopsCommand;
 import es.projectalpha.ac.cmd.sub.player.GUIsCommand;
 import es.projectalpha.ac.cmd.sub.player.PlayCommand;
 
@@ -23,6 +28,11 @@ public class AVCCmd implements CommandExecutor {
 	//Sub-Commands Admin
 	private DebugCommand debug = new DebugCommand();
 	private ModifiersCommand mod = new ModifiersCommand();
+	private MoneyCommand mc = new MoneyCommand();
+	private AchiCommand ac = new AchiCommand();
+	private ShopsCommand sc = new ShopsCommand();
+	private ManagersCommand mac = new ManagersCommand();
+	private AngelsCommand anc = new AngelsCommand();
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
@@ -71,6 +81,59 @@ public class AVCCmd implements CommandExecutor {
 				if(args.length == 3){
 					if(args[0].equalsIgnoreCase("modifiers")){
 						mod.executeModifiersCommand(p, args);
+					}
+					if(args[0].equalsIgnoreCase("money") && args[1].equalsIgnoreCase("get")){
+						mc.executeGetMoneyCommand(p, args);
+					}
+					if(args[0].equalsIgnoreCase("achievements") && args[1].equalsIgnoreCase("get")){
+						ac.executeGetAchiCommand(p, args);
+					}
+					if(args[0].equalsIgnoreCase("shops") && args[1].equalsIgnoreCase("get")){
+						sc.executeGetShopsCommand(p, args);
+					}
+					if(args[0].equalsIgnoreCase("managers") && args[1].equalsIgnoreCase("get")){
+						mac.executeGetShopsCommand(p, args);
+					}
+					if(args[0].equalsIgnoreCase("angels") && args[1].equalsIgnoreCase("get")){
+						anc.executeGetAngelsCommand(p, args);
+					}
+				}
+
+				if(args.length == 4){
+					//Money
+					if(args[0].equalsIgnoreCase("money") && args[1].equalsIgnoreCase("add")){
+						mc.executeAddMoneyCommand(p, args);
+					}
+					if(args[0].equalsIgnoreCase("money") && args[1].equalsIgnoreCase("remove")){
+						mc.executeRemoveMoneyCommand(p, args);
+					}
+					//Achievements
+					if(args[0].equalsIgnoreCase("achievements") && args[1].equalsIgnoreCase("add")){
+						ac.executeAddAchiCommand(p, args);
+					}
+					if(args[0].equalsIgnoreCase("achievements") && args[1].equalsIgnoreCase("remove")){
+						ac.executeAddAchiCommand(p, args);
+					}
+					//Shops
+					if(args[0].equalsIgnoreCase("achievements") && args[1].equalsIgnoreCase("add")){
+						sc.executeAddShopsCommand(p, args);
+					}
+					if(args[0].equalsIgnoreCase("achievements") && args[1].equalsIgnoreCase("remove")){
+						sc.executeRemoveShopsCommand(p, args);
+					}
+					//Managers
+					if(args[0].equalsIgnoreCase("managers") && args[1].equalsIgnoreCase("add")){
+						mac.executeAddShopsCommand(p, args);
+					}
+					if(args[0].equalsIgnoreCase("managers") && args[1].equalsIgnoreCase("remove")){
+						mac.executeRemoveShopsCommand(p, args);
+					}
+					//Angels
+					if(args[0].equalsIgnoreCase("angels") && args[1].equalsIgnoreCase("add")){
+						anc.executeAddAngelsCommand(p, args);
+					}
+					if(args[0].equalsIgnoreCase("angels") && args[1].equalsIgnoreCase("remove")){
+						anc.executeRemoveAngelsCommand(p, args);
 					}
 				}
 			}

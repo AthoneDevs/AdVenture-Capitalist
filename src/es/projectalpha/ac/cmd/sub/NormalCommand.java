@@ -31,8 +31,6 @@ public class NormalCommand {
 			return;
 		}
 
-		//TODO: Must be done all
-
 		p.sendMessage(" ");
 		p.sendMessage(Messages.prefix + ChatColor.AQUA + "AVC Admin Help");
 
@@ -40,22 +38,22 @@ public class NormalCommand {
 		p.sendMessage(y + "Debug command (See Console)");
 		p.sendMessage(" ");
 
-		p.sendMessage(dg + "/avc achi <add/remove/get> <Achievement (add/remove)> <player>");
+		p.sendMessage(dg + "/avc achievements <add/remove/get> <player> <Achievement (add/remove)>");
 		p.sendMessage(y + "Achievements Manager");
 
 		p.sendMessage(" ");
 
-		p.sendMessage(dg + "/avc money <add/remove/get> <money (add/remove)> <player>");
+		p.sendMessage(dg + "/avc money <add/remove/get> <player> <money (add/remove)>");
 		p.sendMessage(y + "Money Manager");
 
 		p.sendMessage(" ");
 
-		p.sendMessage(dg + "/avc shops <add/remove/get> <Shop (add/remove)> <player>");
+		p.sendMessage(dg + "/avc shops <add/remove/get> <player> <Shop (add/remove)>");
 		p.sendMessage(y + "Shops Manager");
 
 		p.sendMessage(" ");
 
-		p.sendMessage(dg + "/avc managers <add/remove/get> <Manager (add/remove)> <player>");
+		p.sendMessage(dg + "/avc managers <add/remove/get> <player> <Manager (add/remove)>");
 		p.sendMessage(y + "Managers Manager");
 
 		p.sendMessage(" ");
@@ -65,7 +63,7 @@ public class NormalCommand {
 
 		p.sendMessage(" ");
 
-		p.sendMessage(dg + "/avc angels <add/remove/get/check> <Angels (add/remove)> <player>");
+		p.sendMessage(dg + "/avc angels <add/remove/get/check> <player> <Angels (add/remove)>");
 		p.sendMessage(y + "Angels Manager");
 
 		p.sendMessage(" ");

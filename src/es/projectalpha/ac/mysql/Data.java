@@ -11,7 +11,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import es.projectalpha.ac.AVCAPI;
-import es.projectalpha.ac.game.Currency;
+import es.projectalpha.ac.money.Money;
 import es.projectalpha.ac.utils.Messages;
 
 public class Data {
@@ -20,7 +20,7 @@ public class Data {
 
 	private String tableName = "avc_data";
 
-	private Currency c = new Currency();
+	private Money c = new Money();
 	private AVCAPI api = new AVCAPI();
 
 	public boolean hasAccount(UUID p){

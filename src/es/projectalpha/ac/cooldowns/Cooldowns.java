@@ -8,15 +8,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import es.projectalpha.ac.game.Currency;
 import es.projectalpha.ac.managers.Managers;
 import es.projectalpha.ac.modifiers.ModifiersCore;
+import es.projectalpha.ac.money.Money;
 import es.projectalpha.ac.shops.Shops;
 import es.projectalpha.ac.utils.Messages;
 
 public class Cooldowns {
 
-	private static Currency c = new Currency();
+	private static Money c = new Money();
 	private static ModifiersCore mo = new ModifiersCore();
 
 	public static HashMap<String, ShopCooldown> cooldownPlayers = new HashMap<String, ShopCooldown>();

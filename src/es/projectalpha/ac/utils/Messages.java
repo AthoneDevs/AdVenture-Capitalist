@@ -34,7 +34,7 @@ public class Messages {
 	public static String alreadyPlaying = prefix + ChatColor.RED + "You are already playing";
 
 	//Angels Info
-	public static void sendAngelsInfo(Player p) {
+	public static void sendAngelsInfo(Player p){
 		p.sendMessage(" ");
 
 		p.sendMessage(ChatColor.GREEN + "Your Angels " + ChatColor.YELLOW + api.getAngels().getAngels(p));
@@ -43,8 +43,17 @@ public class Messages {
 		p.sendMessage(" ");
 	}
 
+	public static void sendAngelsInfo(Player p, Player pl){
+		p.sendMessage(" ");
+
+		p.sendMessage(ChatColor.GREEN + pl.getName() + " Angels " + ChatColor.YELLOW + api.getAngels().getAngels(pl));
+		p.sendMessage(ChatColor.GREEN + "Angels at game re-start " + ChatColor.YELLOW + api.getAngels().calculateAngels(pl));
+
+		p.sendMessage(" ");
+	}
+
 	//Map Info
-	public static void sendMapInfo(Player p) {
+	public static void sendMapInfo(Player p){
 		p.sendMessage(" ");
 
 		p.sendMessage(ChatColor.GREEN + "Map created by " + ChatColor.RED + "SrJonh");
@@ -53,7 +62,7 @@ public class Messages {
 	}
 
 	//New Achievement
-	public static void newAchievement(Achievements at, Player p) {
+	public static void newAchievement(Achievements at, Player p){
 		p.sendMessage(" ");
 
 		p.sendMessage(Messages.prefix + ChatColor.GREEN + "You have get a new achievement: " + ChatColor.YELLOW + at.getDispName());
@@ -62,86 +71,86 @@ public class Messages {
 	}
 
 	//Location Debug
-	public static String parseLoc(Location l) {
+	public static String parseLoc(Location l){
 		return "World: " + l.getWorld() + " X: " + l.getX() + " Y: " + l.getY() + " Z: " + l.getZ();
 	}
 
-	public static String parseLoc(Location l, Location l2) {
+	public static String parseLoc(Location l, Location l2){
 		return "World: " + l.getWorld() + " - " + l2.getWorld() + " X: " + l.getX() + " - " + l2.getX() + " Y: " + l.getY() + " - " + l2.getY() + " Z: " + l.getZ() + " - " + l2.getZ();
 	}
 
 	//Progress Bar
-	public static String getProgress(Player p, Location l, Shops shop) {
+	public static String getProgress(Player p, Location l, Shops shop){
 		int time = 0;
 		String name = api.getGame().progressBar.get(l);
 
-		if (shop.getTimer() >= 100) {
+		if(shop.getTimer() >= 100){
 			time = (int) ((Cooldowns.getRemaining(p.getName(), name) * 100) / shop.getTimer());
-		} else {
+		}else{
 			time = (int) (Cooldowns.getRemaining(p.getName(), name) * 0.2);
 		}
 
-		if (time <= 0) {
+		if(time <= 0){
 			return ChatColor.GRAY + ChatColor.BOLD.toString() + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍";
 		}
-		if ((time > 0) && (time < 6)) {
+		if((time > 0) && (time < 6)){
 			return ChatColor.RED + ChatColor.BOLD.toString() + "▍▍" + ChatColor.GRAY + ChatColor.BOLD + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍";
 		}
-		if ((time > 5) && (time < 11)) {
+		if((time > 5) && (time < 11)){
 			return ChatColor.RED + ChatColor.BOLD.toString() + "▍▍▍▍" + ChatColor.GRAY + ChatColor.BOLD + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍";
 		}
-		if ((time > 10) && (time < 16)) {
+		if((time > 10) && (time < 16)){
 			return ChatColor.RED + ChatColor.BOLD.toString() + "▍▍▍▍▍▍" + ChatColor.GRAY + ChatColor.BOLD + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍";
 		}
-		if ((time > 15) && (time < 21)) {
+		if((time > 15) && (time < 21)){
 			return ChatColor.RED + ChatColor.BOLD.toString() + "▍▍▍▍▍▍▍▍" + ChatColor.GRAY + ChatColor.BOLD + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍";
 		}
-		if ((time > 20) && (time < 26)) {
+		if((time > 20) && (time < 26)){
 			return ChatColor.RED + ChatColor.BOLD.toString() + "▍▍▍▍▍▍▍▍▍▍" + ChatColor.GRAY + ChatColor.BOLD + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍";
 		}
-		if ((time > 25) && (time < 31)) {
+		if((time > 25) && (time < 31)){
 			return ChatColor.RED + ChatColor.BOLD.toString() + "▍▍▍▍▍▍▍▍▍▍▍▍" + ChatColor.GRAY + ChatColor.BOLD + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍";
 		}
-		if ((time > 30) && (time < 36)) {
+		if((time > 30) && (time < 36)){
 			return ChatColor.RED + ChatColor.BOLD.toString() + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍" + ChatColor.GRAY + ChatColor.BOLD + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍";
 		}
-		if ((time > 35) && (time < 41)) {
+		if((time > 35) && (time < 41)){
 			return ChatColor.RED + ChatColor.BOLD.toString() + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍" + ChatColor.GRAY + ChatColor.BOLD + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍";
 		}
-		if ((time > 40) && (time < 46)) {
+		if((time > 40) && (time < 46)){
 			return ChatColor.RED + ChatColor.BOLD.toString() + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍" + ChatColor.GRAY + ChatColor.BOLD + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍";
 		}
-		if ((time > 45) && (time < 51)) {
+		if((time > 45) && (time < 51)){
 			return ChatColor.RED + ChatColor.BOLD.toString() + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍" + ChatColor.GRAY + ChatColor.BOLD + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍";
 		}
-		if ((time > 50) && (time < 56)) {
+		if((time > 50) && (time < 56)){
 			return ChatColor.RED + ChatColor.BOLD.toString() + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍" + ChatColor.GRAY + ChatColor.BOLD + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍";
 		}
-		if ((time > 55) && (time < 61)) {
+		if((time > 55) && (time < 61)){
 			return ChatColor.RED + ChatColor.BOLD.toString() + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍" + ChatColor.GRAY + ChatColor.BOLD + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍";
 		}
-		if ((time > 60) && (time < 66)) {
+		if((time > 60) && (time < 66)){
 			return ChatColor.RED + ChatColor.BOLD.toString() + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍" + ChatColor.GRAY + ChatColor.BOLD + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍";
 		}
-		if ((time > 65) && (time < 71)) {
+		if((time > 65) && (time < 71)){
 			return ChatColor.RED + ChatColor.BOLD.toString() + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍" + ChatColor.GRAY + ChatColor.BOLD + "▍▍▍▍▍▍▍▍▍▍▍▍";
 		}
-		if ((time > 70) && (time < 76)) {
+		if((time > 70) && (time < 76)){
 			return ChatColor.RED + ChatColor.BOLD.toString() + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍" + ChatColor.GRAY + ChatColor.BOLD + "▍▍▍▍▍▍▍▍▍▍";
 		}
-		if ((time > 75) && (time < 81)) {
+		if((time > 75) && (time < 81)){
 			return ChatColor.RED + ChatColor.BOLD.toString() + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍" + ChatColor.GRAY + ChatColor.BOLD + "▍▍▍▍▍▍▍▍";
 		}
-		if ((time > 80) && (time < 86)) {
+		if((time > 80) && (time < 86)){
 			return ChatColor.RED + ChatColor.BOLD.toString() + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍" + ChatColor.GRAY + ChatColor.BOLD + "▍▍▍▍▍▍";
 		}
-		if ((time > 85) && (time < 91)) {
+		if((time > 85) && (time < 91)){
 			return ChatColor.RED + ChatColor.BOLD.toString() + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍" + ChatColor.GRAY + ChatColor.BOLD + "▍▍▍▍";
 		}
-		if ((time > 90) && (time < 96)) {
+		if((time > 90) && (time < 96)){
 			return ChatColor.RED + ChatColor.BOLD.toString() + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍" + ChatColor.GRAY + ChatColor.BOLD + "▍▍";
 		}
-		if ((time > 95) && (time < 101)) {
+		if((time > 95) && (time < 101)){
 			return ChatColor.RED + ChatColor.BOLD.toString() + "▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍";
 		}
 		return "Error";

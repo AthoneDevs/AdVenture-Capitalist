@@ -3,7 +3,7 @@ package es.projectalpha.ac.modifiers;
 import org.bukkit.entity.Player;
 
 import es.projectalpha.ac.files.Files;
-import es.projectalpha.ac.game.Currency;
+import es.projectalpha.ac.money.Money;
 import es.projectalpha.ac.shops.Shops;
 import es.projectalpha.ac.shops.ShopsCore;
 import es.projectalpha.ac.utils.Messages;
@@ -11,7 +11,7 @@ import es.projectalpha.ac.utils.Messages;
 public class ModifiersCore {
 
 	private ShopsCore sc = new ShopsCore();
-	private Currency c = new Currency();
+	private Money c = new Money();
 
 	public void buyItem(Shops s, int amount, Player p){
 		if (c.getMoney(p) < (s.getBuyBase() * (Math.pow(s.getCoefficient(), (amount - 1))))) {

@@ -1,12 +1,13 @@
-package es.projectalpha.ac.game;
+package es.projectalpha.ac.angels;
 
 import org.bukkit.entity.Player;
 
 import es.projectalpha.ac.files.Files;
+import es.projectalpha.ac.money.Money;
 
 public class Angels {
 
-	private Currency c = new Currency();
+	private Money c = new Money();
 
 	public void startGame(Player p){
 		Files.players.set(p.getName() + ".angels", 0);
@@ -18,8 +19,8 @@ public class Angels {
 		Files.saveFiles();
 	}
 
-	public void delAngels(Player p, int amount){
-		if (getAngels(p) - amount <= 0) {
+	public void removeAngels(Player p, int amount){
+		if(getAngels(p) - amount <= 0){
 			Files.players.set(p.getName() + ".angels", 0);
 			Files.saveFiles();
 			return;
@@ -33,7 +34,7 @@ public class Angels {
 	}
 
 	public boolean checkIfEnoughMoneyToReset(Player p){
-		if (calculateAngels(p) >= 1) {
+		if(calculateAngels(p) >= 1){
 			return true;
 		}
 		return false;

@@ -1,11 +1,11 @@
 package es.projectalpha.ac;
 
 import es.projectalpha.ac.achievements.AchievementsCore;
-import es.projectalpha.ac.game.Angels;
-import es.projectalpha.ac.game.Currency;
+import es.projectalpha.ac.angels.Angels;
 import es.projectalpha.ac.game.Game;
 import es.projectalpha.ac.managers.ManagersCore;
 import es.projectalpha.ac.modifiers.ModifiersCore;
+import es.projectalpha.ac.money.Money;
 import es.projectalpha.ac.mysql.Data;
 import es.projectalpha.ac.mysql.MySQL;
 import es.projectalpha.ac.shops.ShopsCore;
@@ -15,7 +15,7 @@ public class AVCAPI{
 	private AVC plugin = AVC.plugin; // IDK why...
 
 	private Game game = new Game();
-	private Currency c = new Currency();
+	private Money c = new Money();
 	private Angels a = new Angels();
 
 	private AchievementsCore ac = new AchievementsCore();
@@ -32,7 +32,7 @@ public class AVCAPI{
 		return this.game;
 	}
 
-	public Currency getCurrency(){
+	public Money getCurrency(){
 		return this.c;
 	}
 

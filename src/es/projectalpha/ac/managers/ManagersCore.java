@@ -7,17 +7,17 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import es.projectalpha.ac.files.Files;
-import es.projectalpha.ac.game.Currency;
+import es.projectalpha.ac.money.Money;
 import es.projectalpha.ac.utils.Messages;
 
 public class ManagersCore {
 
-	private Currency c = new Currency();
+	private Money c = new Money();
 
 	public void addManager(Player p, Managers m){
 		List<String> playersNames = Files.manager.getStringList(m.getdataName());
 
-		if (hasManager(p, m)) {
+		if(hasManager(p, m)){
 			p.sendMessage(Messages.hasManager);
 			return;
 		}
@@ -31,7 +31,7 @@ public class ManagersCore {
 	public void removeManager(Player p, Managers m){
 		List<String> playersNames = Files.manager.getStringList(m.getdataName());
 
-		if (!hasManager(p, m)) {
+		if(!hasManager(p, m)){
 			p.sendMessage(Messages.notHasManager);
 			return;
 		}
@@ -43,12 +43,12 @@ public class ManagersCore {
 	}
 
 	public void buyManager(Player p, Managers m){
-		if (hasManager(p, m)) {
+		if(hasManager(p, m)){
 			p.sendMessage(Messages.hasManager);
 			return;
 		}
 
-		if (c.getMoney(p) < m.getPrice()) {
+		if(c.getMoney(p) < m.getPrice()){
 			p.sendMessage(Messages.notEnoughMoney);
 			return;
 		}
@@ -61,15 +61,34 @@ public class ManagersCore {
 	public ArrayList<Player> getPlayersWithManager(Managers m){
 		ArrayList<Player> players = new ArrayList<Player>();
 
-		for (String s : Files.manager.getStringList(m.getdataName())) {
+		for(String s : Files.manager.getStringList(m.getdataName())){
 			players.add(Bukkit.getPlayer(s));
 		}
 
 		return players;
 	}
 
+	public List<String> getManagersByPlayer(Player p){
+		List<String> manager = new ArrayList<String>();
+
+		for(Managers m : Managers.values()){
+			if(hasManager(p, m)){
+				manager.add(m.getManagerName());
+			}
+		}
+
+		return manager;
+	}
+
+	public boolean existManager(String m){
+		if(Managers.valueOf(m.toUpperCase()) == null){
+			return false;
+		}
+		return true;
+	}
+
 	public boolean hasManager(Player p, Managers m){
-		if (Files.manager.getStringList(m.getdataName()).contains(p)) {
+		if(Files.manager.getStringList(m.getdataName()).contains(p)){
 			return true;
 		}
 		return false;
