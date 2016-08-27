@@ -8,5 +8,7 @@ Updates are done ASAP.
 
 Track the project on [Trello](https://trello.com/b/iovuT7LK "Trello's Board") <br>
 See the API [here](http://docs.cadox8.ga/avc/ "AVC API")
+Check the Wiki [here](https://github.com/ProjectAlphaES/AdVenture-Capitalist/wiki "Wiki")
+Download the plugin [here](https://github.com/ProjectAlphaES/AdVenture-Capitalist/releases "Downloads")
 
 We are not afiliated with [HyperHippo](http://hyperhippo.ca/ "HyperHippo's Homepage"), [Kongregate](http://kongregate.com "Kongregate's Homepage") and their game [Steam Game](http://store.steampowered.com/app/346900) [Play Store](https://play.google.com/store/apps/details?id=com.kongregate.mobile.adventurecapitalist.google)
