@@ -15,6 +15,7 @@ import es.projectalpha.ac.cmd.sub.admin.MoneyCommand;
 import es.projectalpha.ac.cmd.sub.admin.ShopsCommand;
 import es.projectalpha.ac.cmd.sub.player.GUIsCommand;
 import es.projectalpha.ac.cmd.sub.player.PlayCommand;
+import es.projectalpha.ac.cmd.sub.player.TopCommand;
 
 public class AVCCmd implements CommandExecutor {
 
@@ -24,6 +25,7 @@ public class AVCCmd implements CommandExecutor {
 	//Sub-Commands Normal
 	private GUIsCommand gui = new GUIsCommand();
 	private PlayCommand play = new PlayCommand();
+	private TopCommand top = new TopCommand();
 
 	//Sub-Commands Admin
 	private DebugCommand debug = new DebugCommand();
@@ -70,6 +72,9 @@ public class AVCCmd implements CommandExecutor {
 				}
 				if(args[0].equalsIgnoreCase("play")){
 					play.executePlayCommand(p, args);
+				}
+				if(args[0].equalsIgnoreCase("top")){
+					top.executeTopCommand(p, args);
 				}
 
 				if(args.length == 2){

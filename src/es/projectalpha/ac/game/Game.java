@@ -11,6 +11,7 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 
+import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.AVCAPI;
 import es.projectalpha.ac.api.fancy.BossBarAPI;
 import es.projectalpha.ac.api.fancy.HoloAPI;
@@ -29,26 +30,22 @@ public class Game {
 	public ArrayList<HoloAPI> holos = new ArrayList<HoloAPI>();
 
 	//Utils
-	private AVCAPI api;
+	private AVCAPI api = new AVCAPI();
 
 	public void startTimer(){
 
-		api = new AVCAPI();
-
-		//Test
-		System.out.println("Trying");
-		System.out.println(api.getPlugin());
-
-		//If api.getPlugin() is null, fix it!
-
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(api.getPlugin(), new Runnable(){
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(AVC.plugin, new Runnable(){
 			@Override
 			public void run(){
 				for(Player p : playing){
+
 					//Destroy Hologram
 					for(HoloAPI holo : holos){
 						holo.destroy(p);
 					}
+
+					System.out.println("Test");
+
 					//Show Money
 					int id = Files.players.getInt(p.getName() + ".id");
 

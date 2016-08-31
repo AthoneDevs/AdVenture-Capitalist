@@ -15,7 +15,7 @@ public class PlayerEvents implements Listener {
 	private AVC plugin;
 	private AVCAPI api;
 
-	public PlayerEvents(AVC Main) {
+	public PlayerEvents(AVC Main){
 		this.plugin = Main;
 		this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
 
@@ -23,19 +23,19 @@ public class PlayerEvents implements Listener {
 	}
 
 	@EventHandler
-	public void onLeave(PlayerQuitEvent e) {
+	public void onLeave(PlayerQuitEvent e){
 		Player p = e.getPlayer();
 
-		if (api.getGame().playing.contains(p)) {
+		if(api.getGame().playing.contains(p)){
 			api.getCurrency().saveMoney(p);
 		}
 	}
 
 	@EventHandler
-	public void onJoin(PlayerJoinEvent e) {
+	public void onJoin(PlayerJoinEvent e){
 		Player p = e.getPlayer();
 
-		if (Files.cfg.getBoolean("Dedicated_Server")) {
+		if(Files.cfg.getBoolean("Dedicated_Server")){
 			p.performCommand("/avc play");
 		}
 	}

@@ -18,7 +18,9 @@ public class ModifiersCore {
 			p.sendMessage(Messages.notEnoughMoney);
 			return;
 		}
+
 		c.removeMoney(p, s.getBuyBase() * (Math.pow(s.getCoefficient(), (amount - 1))));
+
 		Files.players.set(p.getName() + "." + s.toString().toLowerCase(), getShopItems(s, p) + amount);
 		Files.saveFiles();
 	}

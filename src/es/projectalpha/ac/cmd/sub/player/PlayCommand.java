@@ -18,12 +18,13 @@ import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.managers.SpawnManagers;
 import es.projectalpha.ac.shops.Shops;
 import es.projectalpha.ac.utils.Messages;
+import es.projectalpha.ac.utils.Randoms;
 import es.projectalpha.ac.world.Schematic;
 
 public class PlayCommand {
 
 	private AVCAPI api = new AVCAPI();
-	//private Randoms r = new Randoms();
+	private Randoms r = new Randoms();
 
 	public void executePlayCommand(Player p, String[] args){
 		World world = Bukkit.getWorld("avc");
@@ -40,10 +41,6 @@ public class PlayCommand {
 		AttackSpeedAPI.setAttackSpeed(p, 16.0D);
 
 		p.setNoDamageTicks(Integer.MAX_VALUE);
-
-		//		if(!Files.players.contains(p.getName())){
-		//			Files.players.set(p.getName(), r.getPlayerID());
-		//		}
 
 		if(Files.players.contains(p.getName())){
 			int id = Files.players.getInt(p.getName() + ".id");
@@ -62,6 +59,8 @@ public class PlayCommand {
 
 			return;
 		}
+
+		Files.players.set(p.getName(), r.getPlayerID());
 
 		int id = Files.locs.getInt("num");
 
