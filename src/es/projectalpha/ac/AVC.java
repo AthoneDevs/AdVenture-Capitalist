@@ -21,6 +21,7 @@ import es.projectalpha.ac.events.invs.IManagers;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.mysql.Data;
 import es.projectalpha.ac.mysql.MySQL;
+import es.projectalpha.ac.utils.Download;
 import es.projectalpha.ac.utils.Messages;
 import es.projectalpha.ac.utils.ServerVersion;
 import es.projectalpha.ac.world.Generator;
@@ -32,6 +33,8 @@ public class AVC extends JavaPlugin {
 	// Only World, not Moon and Mars
 
 	public static AVC plugin;
+
+	private Download d = new Download();
 
 	@Override
 	public void onEnable(){
@@ -61,6 +64,7 @@ public class AVC extends JavaPlugin {
 
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Checking and Creating files. . .");
 		Files.setupFiles();
+		d.downloadSchematic();
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Setup Files Complete");
 
 		Bukkit.getConsoleSender().sendMessage(" ");
