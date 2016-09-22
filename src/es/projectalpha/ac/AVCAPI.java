@@ -10,7 +10,7 @@ import es.projectalpha.ac.mysql.Data;
 import es.projectalpha.ac.mysql.MySQL;
 import es.projectalpha.ac.shops.ShopsCore;
 
-public class AVCAPI{
+public class AVCAPI {
 
 	private AVC plugin = AVC.plugin; // IDK why...
 
@@ -27,6 +27,17 @@ public class AVCAPI{
 	private Data data;
 
 	private boolean debug;
+
+	public void loadAPIs(){
+		game = new Game();
+		c = new Money();
+		a = new Angels();
+
+		ac = new AchievementsCore();
+		mc = new ManagersCore();
+		sc = new ShopsCore();
+		moc = new ModifiersCore();
+	}
 
 	public Game getGame(){
 		return this.game;
@@ -84,6 +95,7 @@ public class AVCAPI{
 		return this.plugin;
 	}
 
+	@Deprecated
 	public void setPlugin(AVC plugin){
 		this.plugin = plugin;
 	}

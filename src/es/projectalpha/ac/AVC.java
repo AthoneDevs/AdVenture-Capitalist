@@ -42,6 +42,9 @@ public class AVC extends JavaPlugin {
 		Bukkit.getConsoleSender().sendMessage(" ");
 
 		api = new AVCAPI();
+
+		api.loadAPIs();
+
 		api.setDebug(false);
 		//api.setPlugin(this);
 

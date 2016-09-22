@@ -71,7 +71,7 @@ public class PlayCommand {
 		api.getAchievements().addAchievement(p, Achievements.START);
 		api.getShops().addShop(p, Shops.LEMONADE);
 		api.getAngels().startGame(p);
-		api.getCurrency().newPlayerMoney(p); //INFO: If game doesn't load, remove this
+		//api.getCurrency().newPlayerMoney(p); //INFO: If game doesn't load, remove this
 
 		Messages.sendMapInfo(p);
 
@@ -135,6 +135,8 @@ public class PlayCommand {
 				}
 
 				if(b.getType() == Material.BEACON){
+
+					System.out.println(Messages.parseLoc(b.getLocation()) + " " + b.getType());
 
 					Files.locs.set("id" + id + ".x", b.getLocation().getX());
 					Files.locs.set("id" + id + ".y", b.getLocation().getY() + 1);

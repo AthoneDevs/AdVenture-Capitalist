@@ -30,9 +30,11 @@ public class Game {
 	public ArrayList<HoloAPI> holos = new ArrayList<HoloAPI>();
 
 	//Utils
-	private AVCAPI api = new AVCAPI();
+	private AVCAPI api;
 
 	public void startTimer(){
+
+		api = new AVCAPI();
 
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(AVC.plugin, new Runnable(){
 			@Override
@@ -71,24 +73,10 @@ public class Game {
 							if(Cooldowns.isCooling(pl.getName(), m.getName())){
 								return;
 							}
-							//							for (NPCAPI npc : SpawnManagers.npcs) {
-							//								if (npc.getName().equalsIgnoreCase(m.getManagerName())) {
-							//									progressBar.put(npc.getLocation().add(0, 3, 0), m.getManagerName());
-							//
-							//									//TODO: Better Hologram System
-							//
-							//									HoloAPI pro = new HoloAPI(npc.getLocation().add(0, 3, 0), Messages.getProgress(p, npc.getLocation().add(0, 3, 0), m.getShop()));
-							//
-							//									pro.display(p);
-							//
-							//									holos.add(pro);
-							//								}
-							//							}
+
 							for(Villager npc : SpawnManagers.npcs){
 								if(npc.getName().equalsIgnoreCase(m.getManagerName())){
 									progressBar.put(npc.getLocation().add(0, 3, 0), m.getManagerName());
-
-									//TODO: Better Hologram System
 
 									HoloAPI pro = new HoloAPI(npc.getLocation().add(0, 3, 0), Messages.getProgress(p, npc.getLocation().add(0, 3, 0), m.getShop()));
 

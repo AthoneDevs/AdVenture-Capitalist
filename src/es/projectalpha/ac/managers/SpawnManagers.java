@@ -25,6 +25,8 @@ public class SpawnManagers {
 				System.out.println(l.getWorld().getBlockAt(l.add(m.getDistX(), 0, m.getDistZ())).getType());
 			}
 
+			System.out.println(l.getWorld().getBlockAt(l.add(m.getDistX(), 0, m.getDistZ())).getType());
+
 			l.getWorld().getBlockAt(l.add(m.getDistX(), 0, m.getDistZ())).setType(Material.AIR);
 
 			//Villager v = l.getWorld().spawn(l.add(m.getDistX(), 0, m.getDistZ()), Villager.class);
@@ -34,6 +36,12 @@ public class SpawnManagers {
 
 			loc.put(v, l.add(m.getDistX(), 0, m.getDistZ()));
 			npcs.add(v);
+
+			System.out.println(l.getWorld().getBlockAt(l.add(m.getDistX(), 0, m.getDistZ())).getType());
+			System.out.println(v.getName());
+			System.out.println(v.getLocation());
+
+			System.out.println(" ");
 
 			if(api.getDebug()){
 				System.out.println(l.getWorld().getBlockAt(l.add(m.getDistX(), 0, m.getDistZ())).getType());
