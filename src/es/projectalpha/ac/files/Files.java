@@ -36,8 +36,8 @@ public class Files {
 	public static File fileShops = new File("plugins/AVC/Data", "shops.yml");
 	public static YamlConfiguration shops = YamlConfiguration.loadConfiguration(fileShops);
 
-	public static void setupFiles() {
-		if (!fileConfig.exists()) {
+	public static void setupFiles(){
+		if(!fileConfig.exists()){
 			fileConfig.mkdir();
 			cfg.set("MySQL.enabled", false);
 			cfg.set("MySQL.host", "localhost");
@@ -48,30 +48,30 @@ public class Files {
 
 			cfg.set("Dedicated_Server", false);
 		}
-		if (!filePlayers.exists()) {
+		if(!filePlayers.exists()){
 			filePlayers.mkdir();
 		}
-		if (!fileManagers.exists()) {
+		if(!fileManagers.exists()){
 			fileManagers.mkdir();
 		}
-		if (!fileLocs.exists()) {
+		if(!fileLocs.exists()){
 			fileLocs.mkdir();
 			locs.set("num", 0);
 		}
-		if (!fileSchema.exists()) {
+		if(!fileSchema.exists()){
 			fileSchema.mkdirs();
 		}
-		if (!fileAchie.exists()) {
+		if(!fileAchie.exists()){
 			fileAchie.mkdir();
 		}
-		if (!fileShops.exists()) {
+		if(!fileShops.exists()){
 			fileShops.mkdir();
 		}
 		saveFiles();
 	}
 
-	public static void saveFiles() {
-		try {
+	public static void saveFiles(){
+		try{
 			cfg.save(fileConfig);
 			cfg.load(fileConfig);
 
@@ -89,7 +89,7 @@ public class Files {
 
 			achie.save(fileAchie);
 			achie.load(fileAchie);
-		} catch (IOException | InvalidConfigurationException e) {
+		}catch(IOException | InvalidConfigurationException e){
 			Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.RED + "There are some errors on: ");
 			e.printStackTrace();
 		}

@@ -33,8 +33,9 @@ public class AVC extends JavaPlugin {
 	// Only World, not Moon and Mars
 
 	public static AVC plugin;
+	public static boolean debug;
 
-	private Download d = new Download();
+	private Download download = new Download();
 
 	@Override
 	public void onEnable(){
@@ -44,9 +45,6 @@ public class AVC extends JavaPlugin {
 		api = new AVCAPI();
 
 		api.loadAPIs();
-
-		api.setDebug(false);
-		//api.setPlugin(this);
 
 		plugin = this;
 
@@ -65,9 +63,9 @@ public class AVC extends JavaPlugin {
 
 		Bukkit.getConsoleSender().sendMessage(" ");
 
-		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Checking and Creating files. . .");
+		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Checking, Creating and Downloading files. . .");
 		Files.setupFiles();
-		d.downloadSchematic();
+		download.downloadSchematic();
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Setup Files Complete");
 
 		Bukkit.getConsoleSender().sendMessage(" ");
@@ -94,7 +92,7 @@ public class AVC extends JavaPlugin {
 
 		}
 
-		if(Files.cfg.getBoolean("MySQL.enabled")){
+		if(Files.cfg.getBoolean("MySQL.enabled")){ //ATM is better set this in false...
 			Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Connecting to MySQL. . .");
 			api.setMySQL(new MySQL());
 			api.setData(new Data());
@@ -110,7 +108,7 @@ public class AVC extends JavaPlugin {
 
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Loading Game. . .");
 		Events.loadEvents();
-		api.getGame().startTimer();
+		startTimers();
 		startCooldowns();
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Game Loaded");
 
@@ -183,6 +181,16 @@ public class AVC extends JavaPlugin {
 				}
 			}
 		}, 1L, 1L);
+	}
+
+	//Game
+	private void startTimers(){
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(AVC.plugin, new Runnable(){
+			@Override
+			public void run(){
+				api.getGame().startTimer();
+			}
+		}, 0L, 20L);
 	}
 
 	//DATA

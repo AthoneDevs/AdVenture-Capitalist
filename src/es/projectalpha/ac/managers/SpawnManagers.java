@@ -8,20 +8,18 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager;
 
-import es.projectalpha.ac.AVCAPI;
+import es.projectalpha.ac.AVC;
 
 public class SpawnManagers {
 
 	public static HashMap<Villager, Location> loc = new HashMap<Villager, Location>();
 	public static ArrayList<Villager> npcs = new ArrayList<Villager>();
 
-	private static AVCAPI api = new AVCAPI();
-
 	public static void spawnManager(Location lo){
 		for(Managers m : Managers.values()){
 			Location l = lo.clone();
 
-			if(api.getDebug()){
+			if(AVC.debug){
 				System.out.println(l.getWorld().getBlockAt(l.add(m.getDistX(), 0, m.getDistZ())).getType());
 			}
 
@@ -43,7 +41,7 @@ public class SpawnManagers {
 
 			System.out.println(" ");
 
-			if(api.getDebug()){
+			if(AVC.debug){
 				System.out.println(l.getWorld().getBlockAt(l.add(m.getDistX(), 0, m.getDistZ())).getType());
 				System.out.println(v.getName());
 				System.out.println(v.getLocation());

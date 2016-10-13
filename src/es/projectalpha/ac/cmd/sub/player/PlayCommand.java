@@ -10,6 +10,7 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
+import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.AVCAPI;
 import es.projectalpha.ac.achievements.Achievements;
 import es.projectalpha.ac.api.AttackSpeedAPI;
@@ -98,7 +99,7 @@ public class PlayCommand {
 			for(int k = 0; k < 5; k++){
 				Block b = p.getWorld().getBlockAt(p.getLocation().clone().add(0, -k, 0));
 
-				if(api.getDebug()){
+				if(AVC.debug){
 					System.out.println(Messages.parseLoc(b.getLocation()) + " " + b.getType());
 				}
 
@@ -130,7 +131,7 @@ public class PlayCommand {
 			for(int k = 0; k < 4; k++){
 				Block b = p.getWorld().getBlockAt(p.getLocation().clone().add(0, -k, 0));
 
-				if(api.getDebug()){
+				if(AVC.debug){
 					System.out.println(Messages.parseLoc(b.getLocation()) + " " + b.getType());
 				}
 

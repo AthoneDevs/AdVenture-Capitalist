@@ -12,8 +12,6 @@ import es.projectalpha.ac.shops.ShopsCore;
 
 public class AVCAPI {
 
-	private AVC plugin = AVC.plugin; // IDK why...
-
 	private Game game = new Game();
 	private Money c = new Money();
 	private Angels a = new Angels();
@@ -26,7 +24,8 @@ public class AVCAPI {
 	private MySQL mysql;
 	private Data data;
 
-	private boolean debug;
+	public AVCAPI(){
+	}
 
 	public void loadAPIs(){
 		game = new Game();
@@ -81,22 +80,5 @@ public class AVCAPI {
 
 	public Data getData(){
 		return this.data;
-	}
-
-	public boolean getDebug(){
-		return debug;
-	}
-
-	public void setDebug(boolean debug){
-		this.debug = debug;
-	}
-
-	public AVC getPlugin(){
-		return this.plugin;
-	}
-
-	@Deprecated
-	public void setPlugin(AVC plugin){
-		this.plugin = plugin;
 	}
 }
