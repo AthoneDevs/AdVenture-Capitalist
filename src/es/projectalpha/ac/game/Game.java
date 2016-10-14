@@ -34,6 +34,12 @@ public class Game {
 	public void startTimer(){
 		api = new AVCAPI();
 
+		//Test
+		System.out.println(playing.toString());
+		System.out.println(progressBar.toString());
+		System.out.println(holos.toString());
+		//
+
 		for(Player p : playing){
 
 			//Destroy Hologram

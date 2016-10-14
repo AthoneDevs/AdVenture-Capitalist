@@ -32,11 +32,26 @@ public class ShopsCore {
 		List<String> playersNames = Files.shops.getStringList(s.toString().toLowerCase());
 
 		if(!hasShop(p, s)){
-			p.sendMessage(Messages.notHasShop);
 			return;
 		}
 
 		playersNames.remove(p.getName());
+
+		Files.shops.set(s.toString().toLowerCase(), playersNames);
+		Files.saveFiles();
+	}
+
+	public void removePlayerShop(Player p, Shops s, Player pl){
+		List<String> playersNames = Files.shops.getStringList(s.toString().toLowerCase());
+
+		if(!hasShop(pl, s)){
+			p.sendMessage(Messages.notHasShop);
+			return;
+		}
+
+		playersNames.remove(pl.getName());
+
+		Messages.remShops(s, p, pl);
 
 		Files.shops.set(s.toString().toLowerCase(), playersNames);
 		Files.saveFiles();

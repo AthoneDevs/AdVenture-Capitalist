@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import es.projectalpha.ac.AVCAPI;
 import es.projectalpha.ac.achievements.Achievements;
 import es.projectalpha.ac.cooldowns.Cooldowns;
+import es.projectalpha.ac.managers.Managers;
 import es.projectalpha.ac.shops.Shops;
 
 public class Messages {
@@ -24,9 +25,10 @@ public class Messages {
 	public static String tpCompany = prefix + ChatColor.GREEN + "You has been teleported to your Company";
 	public static String hasManager = prefix + ChatColor.RED + "Sorry, but you have already this manager";
 	public static String hasShop = prefix + ChatColor.RED + "Sorry, but you have already this shop";
-	public static String notHasManager = prefix + ChatColor.RED + "Sorry, but you don't have this manager";
-	public static String notHasShop = prefix + ChatColor.RED + "Sorry, but you don't have this shop";
-	public static String noDatabase = prefix + ChatColor.RED + "Sorry, this player is not in the database";
+	public static String notHasManager = prefix + ChatColor.RED + "Sorry, but this person doesn't have this manager";
+	public static String notHasAchievement = prefix + ChatColor.RED + "Sorry, but this person doesn't have this achievement";
+	public static String notHasShop = prefix + ChatColor.RED + "Sorry, but this person doesn't have this shop";
+	public static String noDatabase = prefix + ChatColor.RED + "Sorry, you are not in the database";
 	public static String notEnoughMoney = prefix + ChatColor.RED + "Sorry, but you don't have enough money";
 	public static String buyManager = prefix + ChatColor.GREEN + "You have been bought the manager of " + ChatColor.YELLOW;
 	public static String buyShop = prefix + ChatColor.GREEN + "You have been bought the shop of " + ChatColor.YELLOW;
@@ -61,13 +63,27 @@ public class Messages {
 		p.sendMessage(" ");
 	}
 
-	//New Achievement
+	//Achievements
 	public static void newAchievement(Achievements at, Player p){
 		p.sendMessage(" ");
 
 		p.sendMessage(Messages.prefix + ChatColor.GREEN + "You have get a new achievement: " + ChatColor.YELLOW + at.getDispName());
 
 		p.sendMessage(" ");
+	}
+
+	public static void remAchievement(Achievements at, Player p, Player pl){
+		p.sendMessage(Messages.prefix + ChatColor.GREEN + "You have successfuly removed achievement " + ChatColor.YELLOW + at.getDispName() + ChatColor.GREEN + " to a player " + ChatColor.RED + pl.getName());
+	}
+
+	//Managers
+	public static void remManager(Managers m, Player p, Player pl){
+		p.sendMessage(Messages.prefix + ChatColor.GREEN + "You have successfuly removed manager " + ChatColor.YELLOW + m.getdataName() + ChatColor.GREEN + " to a player " + ChatColor.RED + pl.getName());
+	}
+
+	//Shops
+	public static void remShops(Shops s, Player p, Player pl){
+		p.sendMessage(Messages.prefix + ChatColor.GREEN + "You have successfuly removed shop " + ChatColor.YELLOW + s.toString().toLowerCase() + ChatColor.GREEN + " to a player " + ChatColor.RED + pl.getName());
 	}
 
 	//Location Debug

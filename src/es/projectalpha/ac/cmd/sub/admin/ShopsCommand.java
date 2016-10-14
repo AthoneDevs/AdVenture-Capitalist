@@ -47,7 +47,7 @@ public class ShopsCommand {
 
 		s = Shops.valueOf(args[3]);
 
-		api.getShops().removeShop(pl, s);
+		api.getShops().removePlayerShop(p, s, pl);
 
 		p.sendMessage(Messages.prefix + ChatColor.GREEN + "Removed " + ChatColor.RED + WordUtils.capitalizeFully(s.toString().toLowerCase()) + ChatColor.GOLD + " to " + ChatColor.AQUA + pl.getName());
 	}

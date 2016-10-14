@@ -85,7 +85,7 @@ public class ProtectWorld implements Listener {
 	public void noDamage(EntityDamageByBlockEvent e){
 		Entity en = e.getEntity();
 
-		if(en instanceof Player){
+		if(en instanceof Player || en instanceof Villager){
 			e.setCancelled(true);
 		}
 	}
@@ -99,8 +99,12 @@ public class ProtectWorld implements Listener {
 
 	@EventHandler
 	public void noSpawn(CreatureSpawnEvent e){
-		if(!(e.getEntity() instanceof Villager)){
-			if(e.getLocation().getWorld().getName().equalsIgnoreCase("avc")){
+		if(e.getLocation().getWorld().getName().equalsIgnoreCase("avc")){
+			if(e.getEntity() instanceof Villager){
+				System.out.println(e.getSpawnReason()); //Test
+				e.setCancelled(false);
+				return;
+			}else{
 				e.setCancelled(true);
 			}
 		}

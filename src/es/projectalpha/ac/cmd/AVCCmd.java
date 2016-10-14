@@ -97,7 +97,7 @@ public class AVCCmd implements CommandExecutor {
 						sc.executeGetShopsCommand(p, args);
 					}
 					if(args[0].equalsIgnoreCase("managers") && args[1].equalsIgnoreCase("get")){
-						mac.executeGetShopsCommand(p, args);
+						mac.executeGetManagersCommand(p, args);
 					}
 					if(args[0].equalsIgnoreCase("angels") && args[1].equalsIgnoreCase("get")){
 						anc.executeGetAngelsCommand(p, args);
@@ -128,10 +128,10 @@ public class AVCCmd implements CommandExecutor {
 					}
 					//Managers
 					if(args[0].equalsIgnoreCase("managers") && args[1].equalsIgnoreCase("add")){
-						mac.executeAddShopsCommand(p, args);
+						mac.executeAddManagersCommand(p, args);
 					}
 					if(args[0].equalsIgnoreCase("managers") && args[1].equalsIgnoreCase("remove")){
-						mac.executeRemoveShopsCommand(p, args);
+						mac.executeRemoveManagersCommand(p, args);
 					}
 					//Angels
 					if(args[0].equalsIgnoreCase("angels") && args[1].equalsIgnoreCase("add")){

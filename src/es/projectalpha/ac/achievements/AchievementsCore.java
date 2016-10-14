@@ -41,14 +41,30 @@ public class AchievementsCore {
 	}
 
 	public void remAchievement(Player p, Achievements a){
-		if(hasAchievement(p, a)){
-			List<String> players = Files.achie.getStringList(a.toString());
-
-			players.remove(p.getName());
-
-			Files.achie.set(a.toString(), players);
-			Files.saveFiles();
+		if(!hasAchievement(p, a)){
+			return;
 		}
+		List<String> players = Files.achie.getStringList(a.toString());
+
+		players.remove(p.getName());
+
+		Files.achie.set(a.toString(), players);
+		Files.saveFiles();
+	}
+
+	public void remPlayerAchievement(Player p, Achievements a, Player pl){
+		if(!hasAchievement(pl, a)){
+			p.sendMessage(Messages.notHasManager);
+			return;
+		}
+		List<String> players = Files.achie.getStringList(a.toString());
+
+		players.remove(pl.getName());
+
+		Messages.remAchievement(a, p, pl);
+
+		Files.achie.set(a.toString(), players);
+		Files.saveFiles();
 	}
 
 	public boolean hasAchievement(Player p, Achievements a){

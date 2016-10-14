@@ -32,11 +32,26 @@ public class ManagersCore {
 		List<String> playersNames = Files.manager.getStringList(m.getdataName());
 
 		if(!hasManager(p, m)){
-			p.sendMessage(Messages.notHasManager);
 			return;
 		}
 
 		playersNames.remove(p.getName());
+
+		Files.manager.set(m.getdataName(), playersNames);
+		Files.saveFiles();
+	}
+
+	public void removePlayerManager(Player p, Managers m, Player pl){
+		List<String> playersNames = Files.manager.getStringList(m.getdataName());
+
+		if(!hasManager(pl, m)){
+			p.sendMessage(Messages.notHasManager);
+			return;
+		}
+
+		playersNames.remove(pl.getName());
+
+		Messages.remManager(m, p, pl);
 
 		Files.manager.set(m.getdataName(), playersNames);
 		Files.saveFiles();

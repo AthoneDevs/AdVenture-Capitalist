@@ -12,14 +12,14 @@ public class ManagersCommand {
 
 	private AVCAPI api = new AVCAPI();
 
-	public void executeGetShopsCommand(Player p, String[] args){
+	public void executeGetManagersCommand(Player p, String[] args){
 		Player pl = Bukkit.getPlayer(args[2]);
 
 		p.sendMessage(Messages.prefix + ChatColor.GOLD + "Managers of " + ChatColor.AQUA + pl.getName() + ChatColor.GOLD + ":");
 		p.sendMessage(ChatColor.RED + api.getManagers().getManagersByPlayer(pl).toString().replaceAll("[", "").replaceAll("]", ""));
 	}
 
-	public void executeAddShopsCommand(Player p, String[] args){
+	public void executeAddManagersCommand(Player p, String[] args){
 		Player pl = Bukkit.getPlayer(args[2]);
 		Managers m;
 
@@ -35,7 +35,7 @@ public class ManagersCommand {
 		p.sendMessage(Messages.prefix + ChatColor.GREEN + "Added " + ChatColor.RED + m.getManagerName() + ChatColor.GOLD + " to " + ChatColor.AQUA + pl.getName());
 	}
 
-	public void executeRemoveShopsCommand(Player p, String[] args){
+	public void executeRemoveManagersCommand(Player p, String[] args){
 		Player pl = Bukkit.getPlayer(args[2]);
 		Managers m;
 
@@ -46,7 +46,7 @@ public class ManagersCommand {
 
 		m = Managers.valueOf(args[3]);
 
-		api.getManagers().removeManager(pl, m);
+		api.getManagers().removePlayerManager(p, m, pl);
 
 		p.sendMessage(Messages.prefix + ChatColor.GREEN + "Removed " + ChatColor.RED + m.getManagerName() + ChatColor.GOLD + " to " + ChatColor.AQUA + pl.getName());
 	}

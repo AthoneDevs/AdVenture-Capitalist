@@ -17,32 +17,22 @@ public class SpawnManagers {
 
 	public static void spawnManager(Location lo){
 		for(Managers m : Managers.values()){
-			Location l = lo.clone();
-
 			if(AVC.debug){
-				System.out.println(l.getWorld().getBlockAt(l.add(m.getDistX(), 0, m.getDistZ())).getType());
+				System.out.println(lo.clone().getWorld().getBlockAt(lo.clone().add(m.getDistX(), 0, m.getDistZ())).getType());
 			}
 
-			System.out.println(l.getWorld().getBlockAt(l.add(m.getDistX(), 0, m.getDistZ())).getType());
+			lo.clone().getWorld().getBlockAt(lo.clone().add(m.getDistX(), 0, m.getDistZ())).setType(Material.AIR);
 
-			l.getWorld().getBlockAt(l.add(m.getDistX(), 0, m.getDistZ())).setType(Material.AIR);
-
-			//Villager v = l.getWorld().spawn(l.add(m.getDistX(), 0, m.getDistZ()), Villager.class);
-			Villager v = (Villager) l.getWorld().spawnEntity(l.add(m.getDistX(), 0, m.getDistZ()), EntityType.VILLAGER);
+			//Villager v = lo.clone().getWorld().spawn(lo.clone().add(m.getDistX(), 0, m.getDistZ()), Villager.class);
+			Villager v = (Villager) lo.clone().getWorld().spawnEntity(lo.clone().add(m.getDistX(), 0, m.getDistZ()), EntityType.VILLAGER);
 
 			v.setCustomName(m.getManagerName());
 
-			loc.put(v, l.add(m.getDistX(), 0, m.getDistZ()));
+			loc.put(v, lo.clone().add(m.getDistX(), 0, m.getDistZ()));
 			npcs.add(v);
 
-			System.out.println(l.getWorld().getBlockAt(l.add(m.getDistX(), 0, m.getDistZ())).getType());
-			System.out.println(v.getName());
-			System.out.println(v.getLocation());
-
-			System.out.println(" ");
-
 			if(AVC.debug){
-				System.out.println(l.getWorld().getBlockAt(l.add(m.getDistX(), 0, m.getDistZ())).getType());
+				System.out.println(lo.clone().getWorld().getBlockAt(lo.clone().add(m.getDistX(), 0, m.getDistZ())).getType());
 				System.out.println(v.getName());
 				System.out.println(v.getLocation());
 

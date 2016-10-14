@@ -37,6 +37,8 @@ public class PlayerEvents implements Listener {
 
 		if(Files.cfg.getBoolean("Dedicated_Server")){
 			p.performCommand("/avc play");
+
+			//TODO: + Info
 		}
 	}
 }

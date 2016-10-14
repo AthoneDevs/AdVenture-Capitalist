@@ -49,8 +49,8 @@ public class ManagerInteract implements Listener {
 							return;
 						}
 
-						if(mc.hasManager(p, m)){
-							TitleAPI.sendTitle(p, 0, 5, 0, ChatColor.DARK_RED + "Error!", ChatColor.AQUA + "You can't click in a shop with a Manager");
+						if(!mc.hasManager(p, m)){
+							TitleAPI.sendTitle(p, 0, 5, 0, ChatColor.DARK_RED + "Error!", ChatColor.AQUA + "You don't have this Manager");
 							return;
 						}
 

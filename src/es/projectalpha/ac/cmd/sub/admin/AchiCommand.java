@@ -46,7 +46,7 @@ public class AchiCommand {
 
 		a = Achievements.valueOf(args[3]);
 
-		api.getAchievements().remAchievement(pl, a);
+		api.getAchievements().remPlayerAchievement(p, a, pl);
 
 		p.sendMessage(Messages.prefix + ChatColor.GREEN + "Added " + ChatColor.RED + a.getDispName() + ChatColor.GOLD + " to " + ChatColor.AQUA + pl.getName());
 	}
