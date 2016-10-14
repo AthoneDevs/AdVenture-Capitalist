@@ -13,7 +13,6 @@ import es.projectalpha.ac.api.fancy.HoloAPI;
 import es.projectalpha.ac.api.fancy.JsonAPI;
 import es.projectalpha.ac.api.fancy.TitleAPI;
 import es.projectalpha.ac.cooldowns.Cooldowns;
-import es.projectalpha.ac.game.Game;
 import es.projectalpha.ac.managers.Managers;
 import es.projectalpha.ac.managers.ManagersCore;
 import es.projectalpha.ac.shops.ShopsCore;
@@ -22,7 +21,6 @@ import es.projectalpha.ac.utils.Messages;
 public class ManagerInteract implements Listener {
 
 	private AVC plugin;
-	private Game game = new Game();
 	private ShopsCore sc = new ShopsCore();
 	private ManagersCore mc = new ManagersCore();
 
@@ -36,7 +34,7 @@ public class ManagerInteract implements Listener {
 		Player p = e.getPlayer();
 		Entity en = e.getRightClicked();
 
-		if(game.playing.contains(p)){
+		if(AVC.playing.contains(p)){
 			if(en instanceof Villager){
 				Villager v = (Villager) en;
 				String name = v.getName();
@@ -59,7 +57,7 @@ public class ManagerInteract implements Listener {
 							return;
 						}
 
-						game.progressBar.put(v.getLocation().add(0, 3, 0), m.getManagerName());
+						AVC.progressBar.put(v.getLocation().add(0, 3, 0), m.getManagerName());
 
 						//TODO: Better Hologram System
 
@@ -67,7 +65,7 @@ public class ManagerInteract implements Listener {
 
 						holo.display(p);
 
-						game.holos.add(holo);
+						AVC.holos.add(holo);
 
 						Cooldowns.add(p.getName(), m.getName(), (long) m.getShop().getTimer(), System.currentTimeMillis());
 					}

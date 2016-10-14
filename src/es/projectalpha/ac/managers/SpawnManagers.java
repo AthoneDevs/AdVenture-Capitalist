@@ -9,6 +9,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager;
 
 import es.projectalpha.ac.AVC;
+import es.projectalpha.ac.api.MobAPI;
 
 public class SpawnManagers {
 
@@ -27,6 +28,8 @@ public class SpawnManagers {
 			Villager v = (Villager) lo.clone().getWorld().spawnEntity(lo.clone().add(m.getDistX(), 0, m.getDistZ()), EntityType.VILLAGER);
 
 			v.setCustomName(m.getManagerName());
+
+			MobAPI.setAiEnabled(v, false);
 
 			loc.put(v, lo.clone().add(m.getDistX(), 0, m.getDistZ()));
 			npcs.add(v);

@@ -18,12 +18,10 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.achievements.Achievements;
 import es.projectalpha.ac.achievements.AchievementsCore;
-import es.projectalpha.ac.game.Game;
 
 public class ProtectWorld implements Listener {
 
 	private AVC plugin;
-	private Game game = new Game();
 	private AchievementsCore achi = new AchievementsCore();
 
 	public ProtectWorld(AVC Main){
@@ -35,7 +33,7 @@ public class ProtectWorld implements Listener {
 	public void onBreak(BlockBreakEvent e){
 		Player p = e.getPlayer();
 
-		if(game.playing.contains(p)){
+		if(AVC.playing.contains(p)){
 			e.setCancelled(true);
 			achi.addAchievement(p, Achievements.BREAK);
 		}
@@ -45,7 +43,7 @@ public class ProtectWorld implements Listener {
 	public void onPlace(BlockPlaceEvent e){
 		Player p = e.getPlayer();
 
-		if(game.playing.contains(p)){
+		if(AVC.playing.contains(p)){
 			e.setCancelled(true);
 		}
 	}
@@ -54,7 +52,7 @@ public class ProtectWorld implements Listener {
 	public void onDrop(PlayerDropItemEvent e){
 		Player p = e.getPlayer();
 
-		if(game.playing.contains(p)){
+		if(AVC.playing.contains(p)){
 			e.setCancelled(true);
 		}
 	}
@@ -65,7 +63,7 @@ public class ProtectWorld implements Listener {
 
 		if(en instanceof Player){
 			Player p = (Player) en;
-			if(game.playing.contains(p)){
+			if(AVC.playing.contains(p)){
 				e.setCancelled(true);
 			}
 		}
@@ -101,7 +99,6 @@ public class ProtectWorld implements Listener {
 	public void noSpawn(CreatureSpawnEvent e){
 		if(e.getLocation().getWorld().getName().equalsIgnoreCase("avc")){
 			if(e.getEntity() instanceof Villager){
-				System.out.println(e.getSpawnReason()); //Test
 				e.setCancelled(false);
 				return;
 			}else{

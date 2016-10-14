@@ -1,7 +1,11 @@
 package es.projectalpha.ac;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
@@ -10,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import es.projectalpha.ac.api.fancy.HoloAPI;
 import es.projectalpha.ac.avcEvents.Events;
 import es.projectalpha.ac.cmd.AVCCmd;
 import es.projectalpha.ac.cooldowns.Cooldowns;
@@ -36,6 +41,12 @@ public class AVC extends JavaPlugin {
 	public static boolean debug;
 
 	private Download download = new Download();
+
+	public static ArrayList<Player> playing = new ArrayList<Player>();
+
+	public static HashMap<Location, String> progressBar = new HashMap<Location, String>();
+
+	public static ArrayList<HoloAPI> holos = new ArrayList<HoloAPI>();
 
 	@Override
 	public void onEnable(){
@@ -131,7 +142,7 @@ public class AVC extends JavaPlugin {
 		Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.GOLD + "Saving all. . . ");
 		Bukkit.getScheduler().cancelTasks(this);
 
-		for(Player p : api.getGame().playing){
+		for(Player p : playing){
 			api.getCurrency().saveMoney(p);
 		}
 
@@ -170,12 +181,12 @@ public class AVC extends JavaPlugin {
 			public void run(){
 				Cooldowns.handleCooldowns();
 
-				for(Player p : api.getGame().playing){
+				for(Player p : playing){
 					if(Cooldowns.isCooling(p.getName(), "song")){
 						Cooldowns.coolDurMessage(p, "song");
 						return;
 					}
-					//Play Sound ResourcePackç
+					//Play Sound ResourcePack
 					p.playSound(p.getLocation(), Sound.RECORD_13, 6.0F, 6.0F);
 					Cooldowns.add(p.getName(), "song", 1800L, System.currentTimeMillis());
 				}

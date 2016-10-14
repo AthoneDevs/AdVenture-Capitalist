@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.AVCAPI;
 import es.projectalpha.ac.achievements.Achievements;
 import es.projectalpha.ac.cooldowns.Cooldowns;
@@ -98,7 +99,7 @@ public class Messages {
 	//Progress Bar
 	public static String getProgress(Player p, Location l, Shops shop){
 		int time = 0;
-		String name = api.getGame().progressBar.get(l);
+		String name = AVC.progressBar.get(l);
 
 		if(shop.getTimer() >= 100){
 			time = (int) ((Cooldowns.getRemaining(p.getName(), name) * 100) / shop.getTimer());

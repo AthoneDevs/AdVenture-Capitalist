@@ -7,16 +7,15 @@ import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
+import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.api.fancy.FireworkAPI;
 import es.projectalpha.ac.api.fancy.TitleAPI;
 import es.projectalpha.ac.files.Files;
-import es.projectalpha.ac.game.Game;
 import es.projectalpha.ac.money.Money;
 import es.projectalpha.ac.utils.Messages;
 
 public class AchievementsCore {
 
-	private Game game = new Game();
 	private Money c = new Money();
 
 	public void addAchievement(Player p, Achievements a){
@@ -94,7 +93,7 @@ public class AchievementsCore {
 	}
 
 	public void checkAchievements(){
-		for(Player p : game.playing){
+		for(Player p : AVC.playing){
 			if(c.getMoney(p) >= 5000){
 				addAchievement(p, Achievements.PC);
 			}

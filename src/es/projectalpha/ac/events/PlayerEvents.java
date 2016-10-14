@@ -26,7 +26,7 @@ public class PlayerEvents implements Listener {
 	public void onLeave(PlayerQuitEvent e){
 		Player p = e.getPlayer();
 
-		if(api.getGame().playing.contains(p)){
+		if(AVC.playing.contains(p)){
 			api.getCurrency().saveMoney(p);
 		}
 	}

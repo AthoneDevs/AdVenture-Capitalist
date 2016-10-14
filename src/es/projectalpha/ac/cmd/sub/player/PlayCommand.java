@@ -32,7 +32,7 @@ public class PlayCommand {
 	public void executePlayCommand(Player p, String[] args){
 		World world = Bukkit.getWorld("avc");
 
-		if(api.getGame().playing.contains(p)){
+		if(AVC.playing.contains(p)){
 			p.sendMessage(Messages.alreadyPlaying);
 			return;
 		}
@@ -108,7 +108,6 @@ public class PlayCommand {
 				}
 
 				if(b.getType() == Material.BEACON){
-
 					Files.locs.set("id" + id + ".x", b.getLocation().getX());
 					Files.locs.set("id" + id + ".y", b.getLocation().getY() + 1);
 					Files.locs.set("id" + id + ".z", b.getLocation().getZ());
@@ -140,9 +139,6 @@ public class PlayCommand {
 				}
 
 				if(b.getType() == Material.BEACON){
-
-					System.out.println(Messages.parseLoc(b.getLocation()) + " " + b.getType());
-
 					Files.locs.set("id" + id + ".x", b.getLocation().getX());
 					Files.locs.set("id" + id + ".y", b.getLocation().getY() + 1);
 					Files.locs.set("id" + id + ".z", b.getLocation().getZ());
