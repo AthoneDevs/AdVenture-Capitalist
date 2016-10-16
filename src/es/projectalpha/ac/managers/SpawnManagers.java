@@ -29,7 +29,7 @@ public class SpawnManagers {
 
 			v.setCustomName(m.getManagerName());
 
-			MobAPI.setAiEnabled(v, false);
+			MobAPI.noAI(v);
 
 			loc.put(v, lo.clone().add(m.getDistX(), 0, m.getDistZ()));
 			npcs.add(v);
