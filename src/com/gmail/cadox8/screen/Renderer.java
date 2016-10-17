@@ -1,4 +1,4 @@
-package com.gmail.cadox8.screen.data;
+package com.gmail.cadox8.screen;
 
 import java.util.ArrayList;
 import java.util.List;

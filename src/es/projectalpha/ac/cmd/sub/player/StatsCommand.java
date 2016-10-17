@@ -2,7 +2,7 @@ package es.projectalpha.ac.cmd.sub.player;
 
 import org.bukkit.entity.Player;
 
-import com.gmail.cadox8.screen.data.Screen;
+import com.gmail.cadox8.screen.Screen;
 
 public class StatsCommand {
 
