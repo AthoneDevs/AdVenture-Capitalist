@@ -1,9 +1,8 @@
 package es.projectalpha.ac.money;
 
-import java.util.HashMap;
-
 import org.bukkit.entity.Player;
 
+import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.utils.NumberUtils;
 
@@ -11,8 +10,6 @@ public class Money {
 
 	public String moneyName = "Dollars";
 	public String moneySymbol = "$";
-
-	public HashMap<Player, String> runningCurrency = new HashMap<Player, String>();
 
 	public boolean existPlayer(Player p){
 		if(Files.players.contains(p.getName())){
@@ -23,13 +20,13 @@ public class Money {
 
 	public void addMoney(Player p, double amount){
 		if(existPlayer(p)){
-			runningCurrency.put(p, parseMoney(getMoney(p) + amount));
+			AVC.runningCurrency.put(p, parseMoney(getMoney(p) + amount));
 		}
 	}
 
 	public void removeMoney(Player p, double amount){
 		if(existPlayer(p)){
-			runningCurrency.put(p, parseMoney(getMoney(p) - amount));
+			AVC.runningCurrency.put(p, parseMoney(getMoney(p) - amount));
 		}
 	}
 
@@ -43,12 +40,12 @@ public class Money {
 
 	public void loadMoney(Player p){
 		if(existPlayer(p)){
-			runningCurrency.put(p, parseMoney(Files.players.getDouble(p.getName() + ".money")));
+			AVC.runningCurrency.put(p, parseMoney(Files.players.getDouble(p.getName() + ".money")));
 		}
 	}
 
 	public void newPlayerMoney(Player p){
-		runningCurrency.put(p, parseMoney(0));
+		addMoney(p, 0);
 		saveMoney(p);
 	}
 
@@ -57,10 +54,10 @@ public class Money {
 	}
 
 	public double getMoney(Player p){
-		String currency = runningCurrency.get(p);
+		String currency = AVC.runningCurrency.get(p);
 		String[] subString;
 
-		if(!runningCurrency.containsKey(p)){
+		if(!AVC.runningCurrency.containsKey(p)){
 			return 0;
 		}
 

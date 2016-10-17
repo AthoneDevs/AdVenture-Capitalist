@@ -34,10 +34,14 @@ public class ManagerInteract implements Listener {
 		Player p = e.getPlayer();
 		Entity en = e.getRightClicked();
 
+		System.out.println(AVC.playing.toString());
+		System.out.println(en);
+		System.out.println(en.getCustomName());
+
 		if(AVC.playing.contains(p)){
 			if(en instanceof Villager){
 				Villager v = (Villager) en;
-				String name = v.getName();
+				String name = v.getCustomName();
 
 				for(Managers m : Managers.values()){
 					if(name.equalsIgnoreCase(m.getManagerName())){

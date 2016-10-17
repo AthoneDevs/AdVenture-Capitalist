@@ -48,6 +48,8 @@ public class AVC extends JavaPlugin {
 
 	public static ArrayList<HoloAPI> holos = new ArrayList<HoloAPI>();
 
+	public static HashMap<Player, String> runningCurrency = new HashMap<Player, String>();
+
 	@Override
 	public void onEnable(){
 		Bukkit.getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "========================");

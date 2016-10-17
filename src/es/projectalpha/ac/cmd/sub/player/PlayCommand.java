@@ -18,7 +18,6 @@ import es.projectalpha.ac.api.fancy.ActionBarAPI;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.managers.SpawnManagers;
 import es.projectalpha.ac.shops.Shops;
-import es.projectalpha.ac.tutorial.Tutorial;
 import es.projectalpha.ac.utils.Messages;
 import es.projectalpha.ac.utils.Randoms;
 import es.projectalpha.ac.world.Schematic;
@@ -27,7 +26,6 @@ public class PlayCommand {
 
 	private AVCAPI api = new AVCAPI();
 	private Randoms r = new Randoms();
-	private Tutorial tutorial = new Tutorial();
 
 	public void executePlayCommand(Player p, String[] args){
 		World world = Bukkit.getWorld("avc");
@@ -75,8 +73,7 @@ public class PlayCommand {
 		api.getShops().addShop(p, Shops.LEMONADE);
 		api.getAngels().startGame(p);
 
-		p.getInventory().setItem(4, tutorial.getBookTutorial());
-		//api.getCurrency().newPlayerMoney(p); //INFO: If game doesn't load, remove this
+		api.getCurrency().newPlayerMoney(p); //INFO: If game doesn't load, remove this
 
 		Messages.sendMapInfo(p);
 
