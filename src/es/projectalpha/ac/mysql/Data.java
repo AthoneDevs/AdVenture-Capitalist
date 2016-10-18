@@ -11,8 +11,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import es.projectalpha.ac.AVCAPI;
-import es.projectalpha.ac.money.Money;
 import es.projectalpha.ac.utils.Messages;
+import es.projectalpha.ac.utils.MoneyUtils;
 
 public class Data {
 
@@ -20,22 +20,21 @@ public class Data {
 
 	private String tableName = "avc_data";
 
-	private Money c = new Money();
 	private AVCAPI api = new AVCAPI();
 
 	public boolean hasAccount(UUID p){
 		this.conn = api.getMySQL().getConnection();
-		try {
+		try{
 
 			String sql = "SELECT `player` FROM `" + this.tableName + "` WHERE `player` = ?";
 			PreparedStatement preparedUpdateStatement = this.conn.prepareStatement(sql);
 			preparedUpdateStatement.setString(1, p.toString());
 
 			ResultSet result = preparedUpdateStatement.executeQuery();
-			if (result.next()) {
+			if(result.next()){
 				return true;
 			}
-		} catch (SQLException e) {
+		}catch(SQLException e){
 			Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.RED + "Error: " + e.getMessage());
 		}
 		return false;
@@ -43,29 +42,29 @@ public class Data {
 
 	public boolean createAccount(UUID uuid, Player p){
 		this.conn = api.getMySQL().getConnection();
-		try {
+		try{
 
 			String sql = "INSERT INTO `" + this.tableName + "`(`player_uuid`, `player_name`, `money`) " + "VALUES(?, ?, ?, ?, ?)";
 			PreparedStatement preparedStatement = this.conn.prepareStatement(sql);
 
 			preparedStatement.setString(1, uuid.toString());
 			preparedStatement.setString(2, p.getName());
-			preparedStatement.setString(3, c.getSMoney(p));
+			preparedStatement.setString(3, MoneyUtils.getSMoney(p));
 
 			preparedStatement.executeUpdate();
 			return true;
-		} catch (SQLException e) {
+		}catch(SQLException e){
 			Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.RED + "Error: " + e.getMessage());
 		}
 		return false;
 	}
 
 	public boolean setMoney(UUID uuid, Player p, String money){
-		if (!hasAccount(uuid)) {
+		if(!hasAccount(uuid)){
 			createAccount(uuid, p);
 		}
 		this.conn = api.getMySQL().getConnection();
-		try {
+		try{
 
 			String updateSqlExp = "UPDATE `" + this.tableName + "` " + "SET `player_name` = ?" + ", `money` = ?" + " WHERE `player_uuid` = ?";
 			PreparedStatement preparedUpdateStatement = this.conn.prepareStatement(updateSqlExp);
@@ -75,28 +74,28 @@ public class Data {
 
 			preparedUpdateStatement.executeUpdate();
 			return true;
-		} catch (SQLException e) {
+		}catch(SQLException e){
 			Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.RED + "Error: " + e.getMessage());
 		}
 		return false;
 	}
 
 	public String getMoney(UUID uuid){
-		if (!hasAccount(uuid)) {
+		if(!hasAccount(uuid)){
 			createAccount(uuid, null);
 		}
 		this.conn = api.getMySQL().getConnection();
-		try {
+		try{
 
 			String sql = "SELECT `money` FROM `" + this.tableName + "` WHERE `player_uuid` = ?";
 
 			PreparedStatement preparedUpdateStatement = this.conn.prepareStatement(sql);
 			preparedUpdateStatement.setString(1, uuid.toString());
 			ResultSet result = preparedUpdateStatement.executeQuery();
-			if (result.next()) {
+			if(result.next()){
 				return result.getString("money");
 			}
-		} catch (SQLException e) {
+		}catch(SQLException e){
 			Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.RED + "Error: " + e.getMessage());
 		}
 		return null;

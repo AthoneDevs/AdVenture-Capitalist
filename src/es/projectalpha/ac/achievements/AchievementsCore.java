@@ -11,12 +11,10 @@ import es.projectalpha.ac.AVC;
 import es.projectalpha.ac.api.fancy.FireworkAPI;
 import es.projectalpha.ac.api.fancy.TitleAPI;
 import es.projectalpha.ac.files.Files;
-import es.projectalpha.ac.money.Money;
 import es.projectalpha.ac.utils.Messages;
+import es.projectalpha.ac.utils.MoneyUtils;
 
 public class AchievementsCore {
-
-	private Money c = new Money();
 
 	public void addAchievement(Player p, Achievements a){
 		if(hasAchievement(p, a)){
@@ -94,7 +92,7 @@ public class AchievementsCore {
 
 	public void checkAchievements(){
 		for(Player p : AVC.playing){
-			if(c.getMoney(p) >= 5000){
+			if(MoneyUtils.getMoney(p) >= 5000){
 				addAchievement(p, Achievements.PC);
 			}
 		}

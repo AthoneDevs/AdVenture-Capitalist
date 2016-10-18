@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.money.Money;
 import es.projectalpha.ac.utils.Messages;
+import es.projectalpha.ac.utils.MoneyUtils;
 
 public class ManagersCore {
 
@@ -63,7 +64,7 @@ public class ManagersCore {
 			return;
 		}
 
-		if(c.getMoney(p) < m.getPrice()){
+		if(MoneyUtils.getMoney(p) < m.getPrice()){
 			p.sendMessage(Messages.notEnoughMoney);
 			return;
 		}

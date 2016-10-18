@@ -2,6 +2,7 @@ package es.projectalpha.ac.utils;
 
 public class NumberUtils {
 
+	//Double
 	public static double getMillions(String amount){
 		return Double.parseDouble(amount) * 1000000;
 	}
@@ -14,6 +15,7 @@ public class NumberUtils {
 		return getBillions(amount) * 1000;
 	}
 
+	//String
 	public static String getMillions(double amount){
 		double money = amount / 100000;
 		return String.valueOf(money) + " Million";
@@ -31,18 +33,19 @@ public class NumberUtils {
 
 	}
 
-	public static boolean isInt(String s){
+	//Data
+	public static boolean isDouble(String s){
 		try{
-			Integer.parseInt(s);
+			Double.parseDouble(s);
 		}catch(NumberFormatException e){
 			return false;
 		}
 		return true;
 	}
 
-	public static boolean isDouble(String s){
+	public static boolean isInt(String s){
 		try{
-			Double.parseDouble(s);
+			Integer.parseInt(s);
 		}catch(NumberFormatException e){
 			return false;
 		}

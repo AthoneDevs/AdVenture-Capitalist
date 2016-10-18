@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 
 import es.projectalpha.ac.AVCAPI;
 import es.projectalpha.ac.utils.Messages;
+import es.projectalpha.ac.utils.MoneyUtils;
 import es.projectalpha.ac.utils.NumberUtils;
 
 public class MoneyCommand {
@@ -15,7 +16,7 @@ public class MoneyCommand {
 	public void executeGetMoneyCommand(Player p, String[] args){
 		Player pl = Bukkit.getPlayer(args[2]);
 
-		p.sendMessage(Messages.prefix + ChatColor.GOLD + "Money of " + ChatColor.AQUA + pl.getName() + ChatColor.GOLD + ": " + ChatColor.RED + api.getCurrency().getSMoney(pl));
+		p.sendMessage(Messages.prefix + ChatColor.GOLD + "Money of " + ChatColor.AQUA + pl.getName() + ChatColor.GOLD + ": " + ChatColor.RED + MoneyUtils.getSMoney(pl));
 	}
 
 	public void executeAddMoneyCommand(Player p, String[] args){

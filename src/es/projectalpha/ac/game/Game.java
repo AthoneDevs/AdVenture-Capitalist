@@ -17,6 +17,7 @@ import es.projectalpha.ac.files.Files;
 import es.projectalpha.ac.managers.Managers;
 import es.projectalpha.ac.managers.SpawnManagers;
 import es.projectalpha.ac.utils.Messages;
+import es.projectalpha.ac.utils.MoneyUtils;
 
 public class Game {
 
@@ -42,14 +43,14 @@ public class Game {
 
 			Location l = new Location(Bukkit.getWorld("ac"), x, y + 3, z);
 
-			HoloAPI holo = new HoloAPI(l, "$ " + api.getCurrency().getMoney(p));
+			HoloAPI holo = new HoloAPI(l, "$ " + MoneyUtils.getMoney(p));
 			holo.display(p);
 
 			AVC.holos.add(holo);
 
 			//Check if Enough Money
 			for(Managers m : Managers.values()){
-				if(api.getCurrency().getMoney(p) >= m.getPrice()){
+				if(MoneyUtils.getMoney(p) >= m.getPrice()){
 					BossBarAPI.sendMessageToPlayerRecurring(ChatColor.GREEN + "You can buy " + ChatColor.RED + m.getName() + ChatColor.GREEN + " manager", 8, BarColor.WHITE, BarStyle.SOLID, p);
 				}
 

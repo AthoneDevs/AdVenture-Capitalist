@@ -7,6 +7,7 @@ import es.projectalpha.ac.money.Money;
 import es.projectalpha.ac.shops.Shops;
 import es.projectalpha.ac.shops.ShopsCore;
 import es.projectalpha.ac.utils.Messages;
+import es.projectalpha.ac.utils.MoneyUtils;
 
 public class ModifiersCore {
 
@@ -14,7 +15,7 @@ public class ModifiersCore {
 	private Money c = new Money();
 
 	public void buyItem(Shops s, int amount, Player p){
-		if(c.getMoney(p) < (s.getBuyBase() * (Math.pow(s.getCoefficient(), (amount - 1))))){
+		if(MoneyUtils.getMoney(p) < (s.getBuyBase() * (Math.pow(s.getCoefficient(), (amount - 1))))){
 			p.sendMessage(Messages.notEnoughMoney);
 			return;
 		}
