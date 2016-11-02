@@ -31,7 +31,7 @@ public class Game {
 
 			//Destroy Hologram
 			for(HoloAPI holo : AVC.holos){
-				holo.destroy(p);
+				holo.remove();
 			}
 
 			//Show Money
@@ -44,7 +44,7 @@ public class Game {
 			Location l = new Location(Bukkit.getWorld("ac"), x, y + 3, z);
 
 			HoloAPI holo = new HoloAPI(l, "$ " + MoneyUtils.getMoney(p));
-			holo.display(p);
+			holo.displayTo(p);
 
 			AVC.holos.add(holo);
 
@@ -66,7 +66,7 @@ public class Game {
 
 							HoloAPI pro = new HoloAPI(npc.getLocation().add(0, 3, 0), Messages.getProgress(p, npc.getLocation().add(0, 3, 0), m.getShop()));
 
-							pro.display(p);
+							pro.displayTo(p);
 
 							AVC.holos.add(pro);
 						}

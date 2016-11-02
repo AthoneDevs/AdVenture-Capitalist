@@ -1,156 +1,240 @@
 package es.projectalpha.ac.api.fancy;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 
 public class HoloAPI {
 
-	private List<Object> destroyCache;
-	private List<Object> spawnCache;
-	private List<UUID> players;
-	private List<String> lines;
-	private Location loc;
-
-	private static final double ABS = 0.23D;
-	private static String path;
 	private static String version;
+	private static Class<?> craftWorld, entityClass, nmsWorld, armorStand, entityLiving, spawnPacket;
 
-	private static Class<?> armorStand;
-	private static Class<?> worldClass;
-	private static Class<?> nmsEntity;
-	private static Class<?> craftWorld;
-	private static Class<?> packetClass;
-	private static Class<?> entityLivingClass;
-	private static Constructor<?> armorStandConstructor;
+	static{
+		version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3] + ".";
 
-	private static Class<?> destroyPacketClass;
-	private static Constructor<?> destroyPacketConstructor;
-
-	private static Class<?> nmsPacket;
-
-	static {
-		path = Bukkit.getServer().getClass().getPackage().getName();
-		version = path.substring(path.lastIndexOf(".") + 1, path.length());
-
-		try {
-			armorStand = Class.forName("net.minecraft.server." + version + ".EntityArmorStand");
-			worldClass = Class.forName("net.minecraft.server." + version + ".World");
-			nmsEntity = Class.forName("net.minecraft.server." + version + ".Entity");
-			craftWorld = Class.forName("org.bukkit.craftbukkit." + version + ".CraftWorld");
-			packetClass = Class.forName("net.minecraft.server." + version + ".PacketPlayOutSpawnEntityLiving");
-			entityLivingClass = Class.forName("net.minecraft.server." + version + ".EntityLiving");
-			armorStandConstructor = armorStand.getConstructor(new Class[] { worldClass });
-
-			destroyPacketClass = Class.forName("net.minecraft.server." + version + ".PacketPlayOutEntityDestroy");
-			destroyPacketConstructor = destroyPacketClass.getConstructor(int[].class);
-
-			nmsPacket = Class.forName("net.minecraft.server." + version + ".Packet");
-		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException ex) {
-			System.err.println("Error - Classes not initialized!");
+		try{
+			craftWorld = Class.forName("org.bukkit.craftbukkit." + version + "CraftWorld");
+			entityClass = Class.forName("net.minecraft.server." + version + "Entity");
+			nmsWorld = Class.forName("net.minecraft.server." + version + "World");
+			armorStand = Class.forName("net.minecraft.server." + version + "EntityArmorStand");
+			entityLiving = Class.forName("net.minecraft.server." + version + "EntityLiving");
+			spawnPacket = Class.forName("net.minecraft.server." + version + "PacketPlayOutSpawnEntityLiving");
+			Class.forName("net.minecraft.server." + version + "PacketPlayOutEntityDestroy");
+		}catch(Exception ex){
 			ex.printStackTrace();
 		}
 	}
 
-	public HoloAPI(Location loc, String... lines){
-		this(loc, Arrays.asList(lines));
+	private Location location;
+	private List<String> lines = new ArrayList<String>();
+	private List<Integer> ids = new ArrayList<Integer>();
+	private List<Object> entities = new ArrayList<Object>();
+	private double offset = 0.23D;
+
+	public HoloAPI(Location location, String... text){
+		this.location = location;
+		addLine(text);
 	}
 
-	public HoloAPI(Location loc, List<String> lines){
-		this.lines = lines;
-		this.loc = loc;
-		this.players = new ArrayList<>();
-		this.spawnCache = new ArrayList<>();
-		this.destroyCache = new ArrayList<>();
+	public HoloAPI(String... text){
+		this(null, text);
+	}
 
-		// Init
-		Location displayLoc = loc.clone().add(0, (ABS * lines.size()) - 1.97D, 0);
-		for (int i = 0; i < lines.size(); i++) {
-			Object packet = this.getPacket(this.loc.getWorld(), displayLoc.getX(), displayLoc.getY(), displayLoc.getZ(), this.lines.get(i));
-			this.spawnCache.add(packet);
-			try {
-				Field field = packetClass.getDeclaredField("a");
-				field.setAccessible(true);
-				this.destroyCache.add(this.getDestroyPacket(new int[] { (int) field.get(packet) }));
-			} catch (Exception ex) {
-				ex.printStackTrace();
+	public static String getVersion(){
+		return version;
+	}
+
+	public void addLine(String... text){
+		lines.addAll(Arrays.asList(text));
+		update();
+	}
+
+	public List<String> getLines(){
+		return lines;
+	}
+
+	public void setLines(String... text){
+		lines = Arrays.asList(text);
+		update();
+	}
+
+	public Location getLocation(){
+		return location;
+	}
+
+	public void setLocation(Location location){
+		this.location = location;
+		update();
+	}
+
+	public void teleport(Location loc){
+		update();
+	}
+
+	public void displayTo(Player... players){
+		Location current = location.clone().add(0, (offset * lines.size()) - 1.97D, 0);
+
+		for(String str : lines){
+			Object[] packet = getCreatePacket(location, ChatColor.translateAlternateColorCodes('&', str));
+			ids.add((Integer) packet[1]);
+
+			for(Player player : players){
+				sendPacket(player, packet[0]);
 			}
-			displayLoc.add(0, ABS * (-1), 0);
+
+			current.subtract(0, offset, 0);
 		}
 	}
 
-	public boolean display(Player p){
-		for (int i = 0; i < spawnCache.size(); i++) {
-			this.sendPacket(p, spawnCache.get(i));
+	public void removeFrom(Player... players){
+		Object packet = null;
+
+		for(int id : ids){
+			packet = getRemovePacket(id);
 		}
 
-		this.players.add(p.getUniqueId());
-		return true;
-	}
-
-	public boolean destroy(Player p){
-		if (this.players.contains(p.getUniqueId())) {
-			for (int i = 0; i < this.destroyCache.size(); i++) {
-				this.sendPacket(p, this.destroyCache.get(i));
+		for(Player player : players){
+			if(packet != null){
+				sendPacket(player, packet);
 			}
-			this.players.remove(p.getUniqueId());
-			return true;
 		}
-		return false;
 	}
 
-	private Object getPacket(World w, double x, double y, double z, String text){
-		try {
-			Object craftWorldObj = craftWorld.cast(w);
-			Method getHandleMethod = craftWorldObj.getClass().getMethod("getHandle", new Class<?>[0]);
-			Object entityObject = armorStandConstructor.newInstance(new Object[] { getHandleMethod.invoke(craftWorldObj, new Object[0]) });
-			Method setCustomName = entityObject.getClass().getMethod("setCustomName", new Class<?>[] { String.class });
-			setCustomName.invoke(entityObject, new Object[] { text });
-			Method setCustomNameVisible = nmsEntity.getMethod("setCustomNameVisible", new Class[] { boolean.class });
-			setCustomNameVisible.invoke(entityObject, new Object[] { true });
-			Method setGravity = entityObject.getClass().getMethod("setGravity", new Class<?>[] { boolean.class });
-			setGravity.invoke(entityObject, new Object[] { false });
-			Method setLocation = entityObject.getClass().getMethod("setLocation", new Class<?>[] { double.class, double.class, double.class, float.class, float.class });
-			setLocation.invoke(entityObject, new Object[] { x, y, z, 0.0F, 0.0F });
-			Method setInvisible = entityObject.getClass().getMethod("setInvisible", new Class<?>[] { boolean.class });
-			setInvisible.invoke(entityObject, new Object[] { true });
-			Constructor<?> cw = packetClass.getConstructor(new Class<?>[] { entityLivingClass });
-			Object packetObject = cw.newInstance(new Object[] { entityObject });
-			return packetObject;
-		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
+	public void spawn(){
+		Location current = location.clone().add(0, (offset * lines.size()) - 1.97D, 0).add(0, offset, 0);
+
+		for(String str : lines){
+			spawnHologram(ChatColor.translateAlternateColorCodes('&', str), current.subtract(0, offset, 0));
 		}
-		return null;
 	}
 
-	private Object getDestroyPacket(int... id){
-		try {
-			return destroyPacketConstructor.newInstance(id);
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
+	private void spawnHologram(String text, Location location){
+		try{
+			// The ArmorStand
+			Object craftWorld = HoloAPI.craftWorld.cast(location.getWorld());
+			Object entityObject = armorStand.getConstructor(nmsWorld).newInstance(HoloAPI.craftWorld.getMethod("getHandle").invoke(craftWorld));
+
+			configureHologram(entityObject, text, location);
+
+			HoloAPI.craftWorld.getMethod("addEntity", entityClass, CreatureSpawnEvent.SpawnReason.class).invoke(craftWorld, entityObject, CreatureSpawnEvent.SpawnReason.CUSTOM);
+
+			entities.add(entityObject);
+		}catch(Exception ex){
+			ex.printStackTrace();
 		}
-		return null;
 	}
 
-	private void sendPacket(Player p, Object packet){
-		try {
-			Method getHandle = p.getClass().getMethod("getHandle");
-			Object entityPlayer = getHandle.invoke(p);
-			Object pConnection = entityPlayer.getClass().getField("playerConnection").get(entityPlayer);
-			Method sendMethod = pConnection.getClass().getMethod("sendPacket", new Class[] { nmsPacket });
-			sendMethod.invoke(pConnection, new Object[] { packet });
-		} catch (Exception e) {
-			e.printStackTrace();
+	public void remove(){
+		for(Object ent : entities){
+			removeEntity(ent);
 		}
 	}
+
+	private void removeEntity(Object entity){
+		try{
+			Object craftWorld = HoloAPI.craftWorld.cast(location.getWorld());
+
+			nmsWorld.getMethod("removeEntity", entityClass).invoke(HoloAPI.craftWorld.getMethod("getHandle").invoke(craftWorld), entity);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+	}
+
+	private Object[] getCreatePacket(Location location, String text){
+		try{
+			// The ArmorStand
+			Object entityObject = armorStand.getConstructor(nmsWorld).newInstance(craftWorld.getMethod("getHandle").invoke(craftWorld.cast(location.getWorld())));
+			Object id = entityObject.getClass().getMethod("getId").invoke(entityObject);
+
+			configureHologram(entityObject, text, location);
+
+			// Return the packet, and the entity id so we can later remove it.
+			return new Object[] { spawnPacket.getConstructor(entityLiving).newInstance(entityObject), id };
+		}catch(Exception ex){
+			ex.printStackTrace();
+			return null;
+		}
+	}
+
+	private Object getRemovePacket(int id){
+		try{
+			Class<?> packet = Class.forName("net.minecraft.server." + version + "PacketPlayOutEntityDestroy");
+			return packet.getConstructor(int[].class).newInstance(new int[] { id });
+		}catch(Exception ex){
+			ex.printStackTrace();
+			return null;
+		}
+	}
+
+	public void update(){
+		try{
+			if(!entities.isEmpty()){ // spawned as an actual entity, moving is ezpz.
+
+				for(int i = 0; i < entities.size(); i++){
+					Object ent = entities.get(i);
+
+					if(i > lines.size() - 1){
+						removeEntity(ent);
+					}
+				}
+
+				Location current = location.clone().add(0, (offset * lines.size()) - 1.97D, 0);
+
+				for(int i = 0; i < lines.size(); i++){
+					String text = ChatColor.translateAlternateColorCodes('&', lines.get(i));
+
+					if(i >= entities.size()){
+						spawnHologram(text, current);
+					}else{
+						configureHologram(entities.get(i), text, current);
+					}
+
+					current.subtract(0, offset, 0);
+				}
+
+			}else{ // TODO allow the user to update packet holograms
+
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+	}
+
+	private void configureHologram(Object entityObject, String text, Location location) throws Exception{
+		// Methods for modifying the properties
+		Method setCustomName = entityObject.getClass().getMethod("setCustomName", String.class);
+		Method setCustomNameVisible = entityObject.getClass().getMethod("setCustomNameVisible", boolean.class);
+		Method setNoGravity = entityObject.getClass().getMethod("setNoGravity", boolean.class); // Previously setGravity(boolean) prior to 1.10
+		Method setLocation = entityObject.getClass().getMethod("setLocation", double.class, double.class, double.class, float.class, float.class);
+		Method setInvisible = entityObject.getClass().getMethod("setInvisible", boolean.class);
+
+		// Setting the properties
+		setCustomName.invoke(entityObject, text);
+		setCustomNameVisible.invoke(entityObject, true);
+		setNoGravity.invoke(entityObject, true);
+		setLocation.invoke(entityObject, location.getX(), location.getY(), location.getZ(), 0.0F, 0.0F);
+		setInvisible.invoke(entityObject, true);
+	}
+
+	private void sendPacket(Player player, Object packet){
+		try{
+			if(packet == null){
+				return;
+			}
+
+			Object entityPlayer = player.getClass().getMethod("getHandle").invoke(player);
+			Object connection = entityPlayer.getClass().getField("playerConnection").get(entityPlayer);
+			connection.getClass().getMethod("sendPacket", Class.forName("net.minecraft.server." + version + "Packet")).invoke(connection, packet);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+	}
+
 }

@@ -67,7 +67,7 @@ public class ManagerInteract implements Listener {
 
 						HoloAPI holo = new HoloAPI(v.getLocation().add(0, 3, 0), Messages.getProgress(p, v.getLocation().add(0, 3, 0), m.getShop()));
 
-						holo.display(p);
+						holo.displayTo(p);
 
 						AVC.holos.add(holo);
 
