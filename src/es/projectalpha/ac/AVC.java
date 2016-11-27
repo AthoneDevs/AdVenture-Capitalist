@@ -89,7 +89,7 @@ public class AVC extends JavaPlugin {
 			WorldCreator wc = new WorldCreator("avc");
 
 			wc.generator(getDefaultWorldGenerator("avc", "avc"));
-			wc.environment(Environment.NORMAL);
+			wc.environment(Environment.THE_END);
 			wc.generateStructures(false);
 
 			Bukkit.createWorld(wc);
