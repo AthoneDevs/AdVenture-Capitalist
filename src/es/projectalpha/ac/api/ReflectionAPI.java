@@ -1,13 +1,13 @@
 package es.projectalpha.ac.api;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
-
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 
 public class ReflectionAPI {
 	private static HashMap<Class<? extends Entity>, Method> handles = new HashMap<Class<? extends Entity>, Method>();
@@ -21,7 +21,7 @@ public class ReflectionAPI {
 		return "";
 	}
 
-	public static Class<?> getNmsClass(String name){
+	public static Class<?> getNMSClass(String name){
 		String version = getVersion();
 		String className = "net.minecraft.server." + version + name;
 		Class<?> clazz = null;

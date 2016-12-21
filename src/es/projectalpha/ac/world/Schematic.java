@@ -1,10 +1,5 @@
 package es.projectalpha.ac.world;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.bukkit.Location;
-
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.Vector;
@@ -12,6 +7,10 @@ import com.sk89q.worldedit.bukkit.BukkitUtil;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.data.DataException;
 import com.sk89q.worldedit.schematic.SchematicFormat;
+import org.bukkit.Location;
+
+import java.io.File;
+import java.io.IOException;
 
 @SuppressWarnings("deprecation")
 public class Schematic {
@@ -29,6 +28,5 @@ public class Schematic {
 		} catch (MaxChangedBlocksException | DataException | IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 }
