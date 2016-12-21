@@ -7,7 +7,7 @@ This is a fan version of the popular game made by boredom of two programmers.
 Updates are done ASAP. 
 
 Track the project on [Trello](https://trello.com/b/iovuT7LK "Trello's Board") <br>
-See the API [here](http://projects.cadox8.ga/avc/ "AVC API") <br>
+See the API [here](http://projects.cadox8.ga/avc/index.html "AVC API") <br>
 Check the Wiki [here](https://github.com/ProjectAlphaES/AdVenture-Capitalist/wiki "Wiki") <br>
 Download the plugin [here](https://github.com/ProjectAlphaES/AdVenture-Capitalist/releases "Downloads") <br>
 
