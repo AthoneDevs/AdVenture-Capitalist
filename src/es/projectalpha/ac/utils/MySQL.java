@@ -10,9 +10,9 @@ import java.sql.*;
 import java.util.UUID;
 
 /**
- * Objeto para conexiones de MySQL
+ * MySQL
  *
- * @author Huskehhh base original, Cadox8 actualización y metodos
+ * @author Huskehhh base original, Cadox8 update, Cadiducho first update
  */
 public class MySQL {
 
