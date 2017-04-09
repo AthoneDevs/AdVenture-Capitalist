@@ -1,14 +1,10 @@
 package es.projectalpha.ac.utils;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import es.projectalpha.ac.AVC;
+
+import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
-
-import es.projectalpha.ac.files.Files;
 
 public class Download {
 
@@ -26,11 +22,9 @@ public class Download {
 			byte[] buffer = new byte[4096];
 			int n = -1;
 
-			OutputStream output = new FileOutputStream(new File(Files.fileSchema, fileName));
+			OutputStream output = new FileOutputStream(new File(AVC.getInstance().getFiles().getFUtils(), fileName));
 			while((n = input.read(buffer)) != -1){
-				if(n > 0){
-					output.write(buffer, 0, n);
-				}
+				if(n > 0) output.write(buffer, 0, n);
 			}
 			output.close();
 		}catch(IOException e){

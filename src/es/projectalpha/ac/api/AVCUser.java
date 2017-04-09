@@ -1,30 +1,35 @@
-package es.projectalpha.ac;
+package es.projectalpha.ac.api;
 
-import es.projectalpha.ac.api.ReflectionAPI;
+import es.projectalpha.ac.AVC;
+import es.projectalpha.ac.utils.ReflectionAPI;
+import es.projectalpha.ac.utils.Utils;
+import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.UUID;
 
-public class AVCPlayer {
+public class AVCUser {
+
+    private final AVC plugin = AVC.getInstance();
 
     @Getter private final UUID uuid;
+    @Getter @Setter private UserData userData;
 
-    private static final AVC plugin = AVC.getInstance();
-
-    public AVCPlayer(OfflinePlayer p) {
+    public AVCUser(OfflinePlayer p) {
         this(p.getUniqueId());
     }
 
-    public AVCPlayer(UUID id) {
+    public AVCUser(UUID id) {
         uuid = id;
     }
 
-    public void save() {
-    }
+
 
     public OfflinePlayer getOfflinePlayer() {
         return plugin.getServer().getOfflinePlayer(uuid);
@@ -42,12 +47,10 @@ public class AVCPlayer {
         return getOfflinePlayer().isOnline();
     }
 
-    public void sendMessage(String str) {
-        plugin.getServer().getScheduler().runTask(plugin, () -> {
-            if (isOnline()) {
-                getPlayer().sendMessage(str);
-            }
-        });
+
+
+    public void sendMessage(String msg) {
+        if (isOnline()) getPlayer().sendMessage(Utils.colorize(msg));
     }
 
     //Reflection
@@ -65,4 +68,13 @@ public class AVCPlayer {
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchFieldException | InstantiationException ex) {}
     }
 
+    public void setAttackSpeed(double speed){
+        getPlayer().getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(speed);
+    }
+
+
+    @Data
+    public static class UserData {
+        @Getter @Setter private double money;
+    }
 }

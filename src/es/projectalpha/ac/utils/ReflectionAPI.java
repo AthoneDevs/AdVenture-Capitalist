@@ -1,4 +1,4 @@
-package es.projectalpha.ac.api;
+package es.projectalpha.ac.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;

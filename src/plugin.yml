@@ -1,7 +1,7 @@
-name: AdVenture-Capitalist
+name: ${project.artifactId}
 main: es.projectalpha.ac.AVC
-version: 0.6.6
-authors: [cadox8, Wikijito7]
+version: ${project.version}
+author: cadox8
 
 commands:
    avc:
