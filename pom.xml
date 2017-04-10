@@ -30,7 +30,7 @@
         </repository>
         <repository>
             <id>sk89q-repo-we</id>
-            <url>http://maven.sk89q.com/artifactory/repo/com/sk89q/worldedit/</url>
+            <url>http://maven.sk89q.com/artifactory/repo/</url>
         </repository>
     </repositories>
     <dependencies>
