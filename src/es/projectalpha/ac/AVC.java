@@ -1,10 +1,12 @@
 package es.projectalpha.ac;
 
+import es.projectalpha.ac.events.PlayerEvents;
 import es.projectalpha.ac.utils.Files;
 import es.projectalpha.ac.utils.MySQL;
 import es.projectalpha.ac.world.Generator;
 import lombok.Getter;
 import org.bukkit.generator.ChunkGenerator;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.Connection;
@@ -16,18 +18,26 @@ public class AVC extends JavaPlugin {
 
     @Getter private MySQL mysql = null;
     private Connection connection = null;
+
 	@Getter private Files files;
 
 	public void onEnable(){
 	    instance = this;
 
 	    register();
+	    registerEvents();
 		loadMySQL();
 	}
 
 	private void register(){
 	    files = new Files(instance);
         files.setupFiles();
+    }
+
+    private void registerEvents(){
+        PluginManager pm = getServer().getPluginManager();
+
+        pm.registerEvents(new PlayerEvents(instance), instance);
     }
 
     private void loadMySQL(){
@@ -44,6 +54,12 @@ public class AVC extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
         }
     }
+
+
+
+
+
+
 
 
 	//For Multiverse, the Plugin or Bukkit Settings
