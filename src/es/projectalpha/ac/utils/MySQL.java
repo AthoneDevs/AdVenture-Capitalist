@@ -76,7 +76,7 @@ public class MySQL {
             AVCUser.UserData data = u.getUserData();
             try {
                 PreparedStatement statementDatos = openConnection().prepareStatement("UPDATE `avc_data` SET `money`=? WHERE `uuid`=?");
-                statementDatos.setDouble(1, u.getUserData().getMoney());
+                statementDatos.setDouble(1, data.getMoney());
                 statementDatos.setString(2, u.getUuid().toString());
                 statementDatos.executeUpdate();
             } catch (Exception ex) {

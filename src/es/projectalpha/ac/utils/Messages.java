@@ -2,7 +2,8 @@ package es.projectalpha.ac.utils;
 
 import org.bukkit.ChatColor;
 
-public class Messages {
+public final class Messages {
 
-    public static String prefix = ChatColor.GRAY + " || " + ChatColor.RED + "AVC" + ChatColor.GRAY + " || ";
+    public static String PREFIX = ChatColor.GRAY + " || " + ChatColor.RED + "AVC" + ChatColor.GRAY + " || ";
+    public static String CURRENCY = "$";
 }

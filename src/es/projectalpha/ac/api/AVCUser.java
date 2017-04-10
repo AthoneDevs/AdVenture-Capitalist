@@ -30,6 +30,12 @@ public class AVCUser {
     }
 
 
+    public void save(){
+        plugin.getMysql().saveUser(this);
+
+        setUserData(plugin.getMysql().loadUserData(getUuid()));
+    }
+
 
     public OfflinePlayer getOfflinePlayer() {
         return plugin.getServer().getOfflinePlayer(uuid);

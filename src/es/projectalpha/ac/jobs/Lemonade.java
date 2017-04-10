@@ -1,11 +1,10 @@
 package es.projectalpha.ac.jobs;
 
-public class LemonadeShop extends Job {
+public class Lemonade extends Job {
 
-    public LemonadeShop(){
-        super("Lemonade Stand", 0);
+    public Lemonade(int level){
+        super("Lemonade Stand", 0, level);
 
-        setLevel(1);
         setProductionReward(1);
         setProductionTime(0.6);
 
