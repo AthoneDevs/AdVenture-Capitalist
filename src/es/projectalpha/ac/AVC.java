@@ -1,6 +1,8 @@
 package es.projectalpha.ac;
 
+import es.projectalpha.ac.api.AVCServer;
 import es.projectalpha.ac.events.PlayerEvents;
+import es.projectalpha.ac.jobs.JobManager;
 import es.projectalpha.ac.utils.Files;
 import es.projectalpha.ac.utils.MySQL;
 import es.projectalpha.ac.world.Generator;
@@ -20,6 +22,8 @@ public class AVC extends JavaPlugin {
     private Connection connection = null;
 
 	@Getter private Files files;
+	@Getter private AVCServer avcServer;
+    @Getter private JobManager jobManager;
 
 	public void onEnable(){
 	    instance = this;
@@ -32,6 +36,8 @@ public class AVC extends JavaPlugin {
 	private void register(){
 	    files = new Files(instance);
         files.setupFiles();
+        avcServer = new AVCServer();
+        jobManager = new JobManager();
     }
 
     private void registerEvents(){

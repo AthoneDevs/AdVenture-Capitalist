@@ -2,6 +2,7 @@ package es.projectalpha.ac.jobs;
 
 import es.projectalpha.ac.api.AVCEco;
 import es.projectalpha.ac.api.AVCUser;
+import es.projectalpha.ac.managers.Manager;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,6 +23,10 @@ public class Job {
 
     @Getter @Setter private double upgradeBase;  //Money to upgrade to next level
 
+    @Getter @Setter private Manager manager; //Manager who controls the job (when hired)
+
+    @Getter @Setter private boolean working; //Checks if it's producting
+
     /**
      * Info: to upgrade shop to level 2, it costs the base * coefficient
      */
@@ -37,10 +42,20 @@ public class Job {
         setCoefficient(0);
 
         setUpgradeBase(getCost());
+
+        setManager(null);
+
+        setWorking(false);
     }
 
     public void pay(AVCUser u){
+        if (!isWorking()) return;
         new AVCEco(u).addMoney(getProductionReward() * level);
+        setWorking(false);
+
+        if (manager != null && manager.isHired()){
+            activeJob();
+        }
     }
 
     public void upgrade(AVCUser u){
@@ -49,6 +64,10 @@ public class Job {
             setLevel(getLevel() + 1);
             eco.remMoney(getUpgradeBase() * getCoefficient());
         }
+    }
+
+    public void activeJob(){
+        setWorking(true);
     }
 
 

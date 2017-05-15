@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -58,6 +59,12 @@ public class AVCUser {
     public void sendMessage(String msg) {
         if (isOnline()) getPlayer().sendMessage(Utils.colorize(msg));
     }
+
+    public void openInventory(Inventory inv){
+        getPlayer().closeInventory();
+        getPlayer().openInventory(inv);
+    }
+
 
     //Reflection
     public void sendActionBar(String msg) {

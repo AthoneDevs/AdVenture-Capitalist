@@ -1,4 +1,6 @@
-package es.projectalpha.ac.jobs;
+package es.projectalpha.ac.jobs.list;
+
+import es.projectalpha.ac.jobs.Job;
 
 public class Shrimp extends Job {
 
