@@ -28,23 +28,13 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
-        <repository>
-            <id>sk89q-repo-we</id>
-            <url>http://maven.sk89q.com/artifactory/repo/</url>
-        </repository>
     </repositories>
     <dependencies>
         <!-- Spigot Repo -->
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.11-R0.1-SNAPSHOT</version>
-        </dependency>
-        <!-- WorldEdit Repo -->
-        <dependency>
-            <groupId>com.sk89q</groupId>
-            <artifactId>worldedit</artifactId>
-            <version>6.0.0-SNAPSHOT</version>
+            <version>1.12.2-R0.1-SNAPSHOT</version>
         </dependency>
         <!-- MySQL Repo -->
         <dependency>

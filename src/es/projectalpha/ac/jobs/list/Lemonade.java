@@ -4,8 +4,8 @@ import es.projectalpha.ac.jobs.Job;
 
 public class Lemonade extends Job {
 
-    public Lemonade(int level){
-        super("Lemonade Stand", 0, level);
+    public Lemonade(){
+        super("Lemonade Stand", 0);
 
         setProductionReward(1);
         setProductionTime(0.6);

@@ -4,8 +4,8 @@ import es.projectalpha.ac.jobs.Job;
 
 public class Movie extends Job {
 
-    public Movie(int level){
-        super("Movie Studio", 179159040, level);
+    public Movie(){
+        super("Movie Studio", 179159040);
 
         setProductionReward(89579520);
         setProductionTime(1536); //25:36

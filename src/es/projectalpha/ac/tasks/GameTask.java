@@ -1,6 +1,7 @@
 package es.projectalpha.ac.tasks;
 
 import es.projectalpha.ac.AVC;
+import es.projectalpha.ac.api.AVCServer;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class GameTask extends BukkitRunnable {
@@ -12,7 +13,7 @@ public class GameTask extends BukkitRunnable {
     }
 
     public void run(){
-        plugin.getAvcServer().getUsers().forEach(u -> {
+        AVCServer.users.forEach(u -> {
 
         });
     }

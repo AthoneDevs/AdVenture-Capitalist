@@ -4,8 +4,8 @@ import es.projectalpha.ac.jobs.Job;
 
 public class Donut extends Job {
 
-    public Donut(int level){
-        super("Donut Shop", 103680, level);
+    public Donut(){
+        super("Donut Shop", 103680);
 
         setProductionReward(51840);
         setProductionTime(24);

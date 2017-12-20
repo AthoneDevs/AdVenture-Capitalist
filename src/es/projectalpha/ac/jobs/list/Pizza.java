@@ -4,8 +4,8 @@ import es.projectalpha.ac.jobs.Job;
 
 public class Pizza extends Job {
 
-    public Pizza(int level){
-        super("Pizza Delivery", 8640, level);
+    public Pizza(){
+        super("Pizza Delivery", 8640);
 
         setProductionReward(4320);
         setProductionTime(12);

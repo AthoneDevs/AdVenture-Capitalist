@@ -4,8 +4,8 @@ import es.projectalpha.ac.jobs.Job;
 
 public class Car extends Job {
 
-    public Car(int level){
-        super("Car Wash", 720, level);
+    public Car(){
+        super("Car Wash", 720);
 
         setProductionReward(540);
         setProductionTime(6);

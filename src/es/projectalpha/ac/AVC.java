@@ -1,16 +1,13 @@
 package es.projectalpha.ac;
 
-import es.projectalpha.ac.api.AVCServer;
 import es.projectalpha.ac.events.PlayerEvents;
 import es.projectalpha.ac.jobs.JobManager;
-import es.projectalpha.ac.utils.Files;
 import es.projectalpha.ac.utils.MySQL;
-import es.projectalpha.ac.world.Generator;
 import lombok.Getter;
-import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -21,22 +18,27 @@ public class AVC extends JavaPlugin {
     @Getter private MySQL mysql = null;
     private Connection connection = null;
 
-	@Getter private Files files;
-	@Getter private AVCServer avcServer;
     @Getter private JobManager jobManager;
 
 	public void onEnable(){
 	    instance = this;
 
+        File fConf = new File(getDataFolder(), "config.yml");
+
+        if (!fConf.exists()) {
+            try {
+                getConfig().options().copyDefaults(true);
+                saveConfig();
+            } catch (Exception e) {}
+        }
+
+        loadMySQL();
+
 	    register();
 	    registerEvents();
-		loadMySQL();
 	}
 
 	private void register(){
-	    files = new Files(instance);
-        files.setupFiles();
-        avcServer = new AVCServer();
         jobManager = new JobManager();
     }
 
@@ -60,18 +62,4 @@ public class AVC extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
         }
     }
-
-
-
-
-
-
-
-
-	//For Multiverse, the Plugin or Bukkit Settings
-	//Do not try to load a world with this, leave the plugin works...
-	@Override
-	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id){
-		return new Generator();
-	}
 }

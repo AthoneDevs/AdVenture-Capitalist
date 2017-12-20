@@ -47,7 +47,7 @@ public class MySQL {
 
         Class.forName("com.mysql.jdbc.Driver");
         connection = DriverManager.getConnection("jdbc:mysql://"
-                + this.hostname + ":" + this.port + "/" + this.database + "?autoReconnect=true", this.user, this.password);
+                + this.hostname + ":" + this.port + "/" + this.database + "?autoReconnect=true&&allowMultiQueries=true", this.user, this.password);
         return connection;
     }
 
@@ -55,15 +55,65 @@ public class MySQL {
     public void setupTable(Player p) {
         AVC.getInstance().getServer().getScheduler().runTaskAsynchronously(AVC.getInstance(), () -> {
             try {
-                PreparedStatement statement = openConnection().prepareStatement("SELECT `id` FROM `avc_data` WHERE `uuid` = ?");
+                PreparedStatement statement = openConnection().prepareStatement("SELECT `id` FROM `users` WHERE `uuid` = ?");
                 statement.setString(1, p.getUniqueId().toString());
                 ResultSet rs = statement.executeQuery();
-                if (!rs.next()) { //No hay filas encontradas, insertar nuevos datos
-                    PreparedStatement inserDatos = openConnection().prepareStatement("INSERT INTO `avc_data` (`uuid`, `name`, `money`) VALUES (?, ?, ?)");
-                    inserDatos.setString(1, p.getUniqueId().toString());
-                    inserDatos.setString(2, p.getName());
-                    inserDatos.setDouble(3, 0);
-                    inserDatos.executeUpdate();
+
+                if (!rs.next()) {
+                    PreparedStatement insertData = openConnection().prepareStatement("INSERT INTO `users` (`uuid`, `name`, `money`) VALUES (?, ?, ?)");
+                    insertData.setString(1, p.getUniqueId().toString());
+                    insertData.setString(2, p.getName());
+                    insertData.setDouble(3, 0);
+                    insertData.executeUpdate();
+
+
+                    // Testing...
+                    PreparedStatement insetAll = openConnection().prepareStatement("INSERT INTO `lemonade` (`uuid`) VALUES (?); INSERT INTO `bank` (`uuid`) VALUES (?);" +
+                            "INSERT INTO `car` (`uuid`) VALUES (?); INSERT INTO `donut` (`uuid`) VALUES (?); INSERT INTO `hockey` (`uuid`) VALUES (?);" +
+                            "INSERT INTO `movie` (`uuid`) VALUES (?); INSERT INTO `news` (`uuid`) VALUES (?); INSERT INTO `oil` (`uuid`) VALUES (?);" +
+                            "INSERT INTO `pizza` (`uuid`) VALUES (?); INSERT INTO `shrimp` (`uuid`) VALUES (?)");
+                    insetAll.setString(1, p.getUniqueId().toString());
+                    insetAll.executeUpdate();
+
+/*                    PreparedStatement insertLemonade = openConnection().prepareStatement("INSERT INTO `lemonade` (`uuid`) VALUES (?)");
+                    insertLemonade.setString(1, p.getUniqueId().toString());
+                    insertLemonade.executeUpdate();
+
+                    PreparedStatement insertBank = openConnection().prepareStatement("INSERT INTO `bank` (`uuid`) VALUES (?)");
+                    insertBank.setString(1, p.getUniqueId().toString());
+                    insertBank.executeUpdate();
+
+                    PreparedStatement insertCar = openConnection().prepareStatement("INSERT INTO `car` (`uuid`) VALUES (?)");
+                    insertCar.setString(1, p.getUniqueId().toString());
+                    insertCar.executeUpdate();
+
+                    PreparedStatement insertDonut = openConnection().prepareStatement("INSERT INTO `donut` (`uuid`) VALUES (?)");
+                    insertDonut.setString(1, p.getUniqueId().toString());
+                    insertDonut.executeUpdate();
+
+                    PreparedStatement insertHockey = openConnection().prepareStatement("INSERT INTO `hockey` (`uuid`) VALUES (?)");
+                    insertHockey.setString(1, p.getUniqueId().toString());
+                    insertHockey.executeUpdate();
+
+                    PreparedStatement insertMovie = openConnection().prepareStatement("INSERT INTO `movie` (`uuid`) VALUES (?)");
+                    insertMovie.setString(1, p.getUniqueId().toString());
+                    insertMovie.executeUpdate();
+
+                    PreparedStatement insertNews = openConnection().prepareStatement("INSERT INTO `news` (`uuid`) VALUES (?)");
+                    insertNews.setString(1, p.getUniqueId().toString());
+                    insertNews.executeUpdate();
+
+                    PreparedStatement insertOil = openConnection().prepareStatement("INSERT INTO `oil` (`uuid`) VALUES (?)");
+                    insertOil.setString(1, p.getUniqueId().toString());
+                    insertOil.executeUpdate();
+
+                    PreparedStatement insertPizza = openConnection().prepareStatement("INSERT INTO `pizza` (`uuid`) VALUES (?)");
+                    insertPizza.setString(1, p.getUniqueId().toString());
+                    insertPizza.executeUpdate();
+
+                    PreparedStatement insertShrimp = openConnection().prepareStatement("INSERT INTO `shrimp` (`uuid`) VALUES (?)");
+                    insertShrimp.setString(1, p.getUniqueId().toString());
+                    insertShrimp.executeUpdate();*/
                 }
             } catch (SQLException | ClassNotFoundException ex) {
                 ex.printStackTrace();
@@ -75,10 +125,12 @@ public class MySQL {
         AVC.getInstance().getServer().getScheduler().runTaskAsynchronously(AVC.getInstance(), () -> {
             AVCUser.UserData data = u.getUserData();
             try {
-                PreparedStatement statementDatos = openConnection().prepareStatement("UPDATE `avc_data` SET `money`=? WHERE `uuid`=?");
-                statementDatos.setDouble(1, data.getMoney());
-                statementDatos.setString(2, u.getUuid().toString());
-                statementDatos.executeUpdate();
+                PreparedStatement statementData = openConnection().prepareStatement("UPDATE `users` SET `money`=? WHERE `uuid`=?");
+                statementData.setDouble(1, data.getMoney());
+                statementData.setString(2, u.getUuid().toString());
+                statementData.executeUpdate();
+
+
             } catch (Exception ex) {
                 System.err.println("Error while saving data of " + u.getName());
                 ex.printStackTrace();
@@ -89,7 +141,7 @@ public class MySQL {
     public AVCUser.UserData loadUserData(UUID id) {
         AVCUser.UserData data = new AVCUser.UserData();
         try {
-            PreparedStatement statementDatos = openConnection().prepareStatement("SELECT `money` FROM `avc_data` WHERE `uuid` = ?");
+            PreparedStatement statementDatos = openConnection().prepareStatement("SELECT `money` FROM `users` WHERE `uuid` = ?");
             statementDatos.setString(1, id.toString());
             ResultSet rsDatos = statementDatos.executeQuery();
 

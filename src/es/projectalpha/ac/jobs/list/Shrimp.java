@@ -4,8 +4,8 @@ import es.projectalpha.ac.jobs.Job;
 
 public class Shrimp extends Job {
 
-    public Shrimp(int level){
-        super("Shrimp Boat", 1244160, level);
+    public Shrimp(){
+        super("Shrimp Boat", 1244160);
 
         setLevel(0);
         setProductionReward(622080);
