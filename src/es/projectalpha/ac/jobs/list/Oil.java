@@ -4,8 +4,8 @@ import es.projectalpha.ac.jobs.Job;
 
 public class Oil extends Job {
 
-    public Oil(int level){
-        super("Oil Company", 25798901760D, level);
+    public Oil(){
+        super("Oil Company", 25798901760D);
 
         setProductionReward(29668737024D);
         setProductionTime(36864); //10:14:24

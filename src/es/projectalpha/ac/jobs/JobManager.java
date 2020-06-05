@@ -1,55 +1,24 @@
 package es.projectalpha.ac.jobs;
 
-import es.projectalpha.ac.api.AVCUser;
+import es.projectalpha.ac.excs.JobNotLoadedException;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class JobManager {
 
-    @Getter private HashMap<AVCUser, List<Job>> jobsPerUser;
+    @Getter private ArrayList<Job> jobs;
 
-    public JobManager(){
-        jobsPerUser = new HashMap<>();
+    @Getter @Setter private final int MAX_JOBS = 10;
+
+    public JobManager() {
+        jobs = new ArrayList<>();
     }
 
-    //Storage Utils
-    public void addJobToUser(AVCUser user, Job... jobs){
-        if (!existUser(user)) jobsPerUser.put(user, new ArrayList<>());
-        List<Job> list = getUserJobs(user);
-        for (Job job : jobs){
-            if (!list.contains(job)) list.add(job);
-        }
-        jobsPerUser.put(user, list);
-    }
+    public void registerJobs(Job... job) throws JobNotLoadedException {
+        for (Job j : job) if (!jobs.contains(j)) jobs.add(j);
 
-    public void removeJobToUser(AVCUser user, Job... jobs){
-        if (!existUser(user)) return;
-        List<Job> list = getUserJobs(user);
-        for (Job job : jobs){
-            if (list.contains(job)) list.remove(job);
-        }
-        if (list.isEmpty()) {
-            removeUser(user);
-            return;
-        }
-        jobsPerUser.put(user, list);
-    }
-
-    public void removeUser(AVCUser user){
-        if (existUser(user)) {
-            jobsPerUser.remove(user);
-            removeUser(user); //Security
-        }
-    }
-
-    public List<Job> getUserJobs(AVCUser user){
-        return jobsPerUser.get(user);
-    }
-
-    public boolean existUser(AVCUser user){
-        return jobsPerUser.containsKey(user);
+        if (jobs.size() != MAX_JOBS) throw new JobNotLoadedException();
     }
 }

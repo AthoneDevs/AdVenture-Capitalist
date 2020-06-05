@@ -4,12 +4,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
 public class ReflectionAPI {
+
 	private static HashMap<Class<? extends Entity>, Method> handles = new HashMap<Class<? extends Entity>, Method>();
 	private static Field player_connection = null;
 	private static Method player_sendPacket = null;
@@ -77,4 +79,20 @@ public class ReflectionAPI {
 			ex.printStackTrace();
 		}
 	}
+
+
+    //Reflection
+    public static void sendActionBar(Player p, String msg) {
+        if (p == null) return;
+        try {
+            Constructor<?> constructor = ReflectionAPI.getNMSClass("PacketPlayOutChat").getConstructor(ReflectionAPI.getNMSClass("IChatBaseComponent"), byte.class);
+
+            Object icbc = ReflectionAPI.getNMSClass("IChatBaseComponent").getDeclaredClasses()[0].getMethod("a", String.class).invoke(null, "{\"text\":\"" + msg + "\"}");
+            Object packet = constructor.newInstance(icbc, (byte) 2);
+            Object entityPlayer= p.getClass().getMethod("getHandle").invoke(p);
+            Object playerConnection = entityPlayer.getClass().getField("playerConnection").get(entityPlayer);
+
+            playerConnection.getClass().getMethod("sendPacket", ReflectionAPI.getNMSClass("Packet")).invoke(playerConnection, packet);
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchFieldException | InstantiationException ex) {}
+    }
 }

@@ -25,17 +25,17 @@ public class Job {
 
     @Getter @Setter private Manager manager; //Manager who controls the job (when hired)
 
-    @Getter @Setter private boolean working; //Checks if it's producting
+    @Setter private boolean working; //Checks if it's producting
 
     /**
      * Info: to upgrade shop to level 2, it costs the base * coefficient
      */
 
-    public Job(String name, double cost, int level){
+    public Job(String name, double cost){
         this.name = name;
         this.cost = cost;
 
-        setLevel(level);
+        setLevel(0);
         setProductionTime(0);
         setProductionReward(getCost());
 
@@ -70,6 +70,10 @@ public class Job {
         setWorking(true);
     }
 
+
+    public boolean isWorking() {
+        return working && level != 0;
+    }
 
 
     public double ajustTime(){

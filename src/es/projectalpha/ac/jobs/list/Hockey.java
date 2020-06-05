@@ -4,8 +4,8 @@ import es.projectalpha.ac.jobs.Job;
 
 public class Hockey extends Job {
 
-    public Hockey(int level){
-        super("Hockey Team", 14929920, level);
+    public Hockey(){
+        super("Hockey Team", 14929920);
 
         setProductionReward(7464960);
         setProductionTime(384); //6:24

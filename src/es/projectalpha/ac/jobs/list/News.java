@@ -4,8 +4,8 @@ import es.projectalpha.ac.jobs.Job;
 
 public class News extends Job {
 
-    public News(int level){
-        super("Newspaper Delivery", 60, level);
+    public News(){
+        super("Newspaper Delivery", 60);
 
         setProductionReward(getCost());
         setProductionTime(3);
